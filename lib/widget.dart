@@ -16,23 +16,24 @@ class Textformfields {
         SizedBox(
             width: 350,
             child: TextFormField(
+                scrollPadding: const EdgeInsets.all(5),
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColor.lightnavi,
+                  fillColor: Colors.indigo.withOpacity(0.2),
                   icon: Icon(icon, color: Colors.amber, size: 45),
                   labelStyle: const TextStyle(color: Colors.white),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: Colors.white)),
+                      borderSide: const BorderSide(color: AppColor.blue)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2)),
+                          const BorderSide(color: AppColor.blue, width: 2)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide:
-                          const BorderSide(color: Colors.indigo, width: 2)),
+                          const BorderSide(color: Colors.white, width: 2)),
                 )))
       ])
     ]);
@@ -53,11 +54,12 @@ class Textformfields {
         SizedBox(
             width: 350,
             child: TextFormField(
+                scrollPadding: const EdgeInsets.all(5),
                 style: const TextStyle(color: Colors.white),
                 obscureText: obscure,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColor.lightnavi,
+                  fillColor: Colors.indigo.withOpacity(0.2),
                   icon: Icon(icon,
                       color: Colors.amber,
                       size: 45,
@@ -73,15 +75,15 @@ class Textformfields {
                           : const Icon(Icons.visibility, color: Colors.amber)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: Colors.white)),
+                      borderSide: const BorderSide(color: Colors.blue)),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2)),
+                          const BorderSide(color: AppColor.blue, width: 2)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: const BorderSide(
-                        color: Colors.indigo,
+                        color: Colors.white,
                         width: 2,
                       )),
                 )))
@@ -95,8 +97,8 @@ class Button {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
       child: Container(
-        width: 250,
-        height: 70,
+        width: 200,
+        height: 50,
         decoration: BoxDecoration(
             color: Colors.amber,
             borderRadius: BorderRadius.circular(20),

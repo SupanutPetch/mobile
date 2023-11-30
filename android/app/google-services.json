@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600804380370",
+    "project_id": "project-final-4beda",
+    "storage_bucket": "project-final-4beda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600804380370:android:dc489e6e0e2ebe80c7a70b",
+        "android_client_info": {
+          "package_name": "com.flutterthailand.project_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFWANVB5ulInPJqQT4zu-1fHURC_B1WdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
