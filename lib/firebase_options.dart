@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '600804380370',
     projectId: 'project-final-4beda',
     storageBucket: 'project-final-4beda.appspot.com',
-    iosClientId: '600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com',
+    iosClientId:
+        '600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com',
     iosBundleId: 'com.flutterthailand.projectMobile',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '600804380370',
     projectId: 'project-final-4beda',
     storageBucket: 'project-final-4beda.appspot.com',
-    iosClientId: '600804380370-ss8cg8sfsmr7285vjl0p3lbh0mhjscua.apps.googleusercontent.com',
+    iosClientId:
+        '600804380370-ss8cg8sfsmr7285vjl0p3lbh0mhjscua.apps.googleusercontent.com',
     iosBundleId: 'com.flutterthailand.projectMobile.RunnerTests',
   );
 }

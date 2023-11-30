@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mobile/view/bottombar.dart';
+import 'package:project_mobile/view/dashboard_page.dart';
 import 'package:project_mobile/widget.dart';
 import '../controller/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
@@ -13,39 +15,37 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          toolbarHeight: 30,
-          backgroundColor: Colors.transparent,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            child: Container(
-              margin: const EdgeInsets.only(left: 2),
-              child: const Icon(FontAwesomeIcons.chevronLeft,
-                  size: 20, color: Colors.amber),
-            ),
-            onTap: () => Get.back(),
-          ),
-        ),
-        backgroundColor: AppColor.lightnavi,
+        appBar: WidgetAll.appbar(),
+        backgroundColor: AppColor.background,
         body: SafeArea(
-            child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: 600,
+                decoration: BoxDecoration(
+                    color: AppColor.cream,
+                    border: Border.all(color: AppColor.black, width: 2),
+                    borderRadius: BorderRadius.circular(30)),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 2.0, horizontal: 2.0),
+                  padding: const EdgeInsets.all(5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Sign In",
-                          style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 30),
-                      Textformfields.fieldBlank("Email", Icons.account_circle),
+                      const Icon(
+                        FontAwesomeIcons.personRunning,
+                        size: 80,
+                        color: AppColor.darknavi,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text("Sigin In", style: Font.base30B),
+                      const Text("Sign In to Continue", style: Font.base20B),
+                      const SizedBox(height: 20),
+                      Textformfields.fieldBlank("Email", Icons.account_circle,
+                          loginController.emailTextController),
                       const SizedBox(height: 10),
                       GetX<LoginController>(
                           init: LoginController(),
@@ -55,31 +55,29 @@ class LoginPage extends StatelessWidget {
                                 "Password",
                                 FontAwesomeIcons.key,
                                 _.obscure.value,
-                                () => _.showPassword());
+                                () => _.showPassword(),
+                                loginController.passwordTextController);
                           }),
                       const SizedBox(height: 30),
                       Button.buttonSave(
-                          "Sign In",
-                          const Icon(Icons.login,
-                              color: AppColor.black, weight: 2),
-                          () => loginController.signInwithEmail()),
+                          "Sign In", () => Get.to(() => BottomBar())),
                       Row(
                         children: [
                           Expanded(
                               child: Container(
                                   margin: const EdgeInsets.only(
-                                      left: 50.0, right: 20.0),
+                                      left: 50.0, right: 10.0),
                                   child: const Divider(
-                                      color: AppColor.lightred,
+                                      color: Colors.red,
                                       height: 36,
                                       thickness: 2))),
-                          const Text("OR", style: Font.white16),
+                          const Text("OR", style: Font.base16B),
                           Expanded(
                               child: Container(
                                   margin: const EdgeInsets.only(
-                                      left: 20.0, right: 50.0),
+                                      left: 10.0, right: 50.0),
                                   child: const Divider(
-                                      color: AppColor.lightred,
+                                      color: Colors.red,
                                       height: 36,
                                       thickness: 2)))
                         ],
@@ -89,27 +87,30 @@ class LoginPage extends StatelessWidget {
                         children: [
                           Center(
                               child: socialButton(
-                            FontAwesomeIcons.google,
-                            () => loginController.signInWithGoogle(),
-                            "g",
-                          )),
+                                  FontAwesomeIcons.google,
+                                  () => loginController.signInWithGoogle(),
+                                  "g")),
                           const SizedBox(width: 20),
                           socialButton(FontAwesomeIcons.facebookF, () {}, "F"),
                         ],
                       )
                     ],
                   ),
-                ))));
+                ),
+              ),
+            ),
+          ],
+        )));
   }
 
   Widget socialButton(IconData icon, var function, String text) {
     return FloatingActionButton(
       heroTag: text,
-      backgroundColor: Colors.amber,
+      backgroundColor: AppColor.custard,
       onPressed: () => function(),
       child: Icon(
         icon,
-        color: AppColor.lightnavi,
+        color: AppColor.darknavi,
       ),
     );
   }

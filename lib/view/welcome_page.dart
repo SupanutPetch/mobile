@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
+import 'package:flutter/material.dart';
 import 'package:project_mobile/constant/font.dart';
+import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/view/login_page.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project_mobile/view/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -10,35 +11,36 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.lightnavi,
+      backgroundColor: AppColor.background,
       body: SafeArea(
-          child: Form(
-              child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Spacer(),
-            const Text(
-              "Welcome Back",
-              style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            const Text(
-              'It’s never too early or too late to work towards being the healthiest you',
-              style: Font.white18,
-            ),
-            const SizedBox(height: 5),
-            button(
-              "Sign In",
-              () => Get.to(() => LoginPage()),
-            ),
-            button("Sign Up", () => Get.to(() => const RegisterPage())),
-          ],
-        ),
-      ))),
+        child: Form(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              const Text(
+                "Welcome Back",
+                style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              const Text(
+                'It’s never too early or too late to work towards being the healthiest you',
+                style: Font.white18,
+              ),
+              const SizedBox(height: 5),
+              button(
+                "Sign In",
+                () => Get.to(() => LoginPage()),
+              ),
+              button("Sign Up", () => Get.to(() => RegisterPage())),
+            ],
+          ),
+        )),
+      ),
     );
   }
 

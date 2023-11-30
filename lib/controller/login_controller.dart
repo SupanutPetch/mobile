@@ -4,22 +4,33 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
+  String? email;
+  String? password;
   RxBool obscure = true.obs;
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
-  String email = "";
-  String password = "";
+  final repeatpassTextController = TextEditingController();
 
   showPassword() {
     obscure.value = !obscure.value;
     update();
   }
 
-  signInwithEmail() {
-    auth
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((date) => () {});
+  signInwithEmail() async {
+    if (emailTextController.text.isNotEmpty &&
+        passwordTextController.text.isNotEmpty) {
+      {
+        await auth
+            .signInWithEmailAndPassword(
+                email: emailTextController.text.trim(),
+                password: passwordTextController.text.trim())
+            .then((value) {
+          if (value.user!.emailVerified) {}
+        });
+      }
+    }
   }
 
   signInWithGoogle() async {}
