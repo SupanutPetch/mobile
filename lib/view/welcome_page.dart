@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/view/login_page.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project_mobile/view/register_page.dart';
+import 'package:project_mobile/widget.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -32,27 +32,15 @@ class WelcomePage extends StatelessWidget {
                 style: Font.white18,
               ),
               const SizedBox(height: 5),
-              button(
+              Button.button(
                 "Sign In",
                 () => Get.to(() => LoginPage()),
               ),
-              button("Sign Up", () => Get.to(() => RegisterPage())),
+              Button.button("Sign Up", () => Get.to(() => RegisterPage())),
             ],
           ),
         )),
       ),
-    );
-  }
-
-  Widget button(String buttonName, dynamic function) {
-    return Center(
-      child: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent),
-          onPressed: () => function(),
-          child: Text(
-            buttonName,
-            style: Font.white18,
-          )),
     );
   }
 }

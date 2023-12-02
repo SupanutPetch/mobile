@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mobile/view/bottombar.dart';
-import 'package:project_mobile/view/dashboard_page.dart';
 import 'package:project_mobile/widget.dart';
 import '../controller/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
@@ -59,7 +58,7 @@ class LoginPage extends StatelessWidget {
                                 loginController.passwordTextController);
                           }),
                       const SizedBox(height: 30),
-                      Button.buttonSave(
+                      Button.buttonLong(
                           "Sign In", () => Get.to(() => BottomBar())),
                       Row(
                         children: [
@@ -91,7 +90,7 @@ class LoginPage extends StatelessWidget {
                                   () => loginController.signInWithGoogle(),
                                   "g")),
                           const SizedBox(width: 20),
-                          socialButton(FontAwesomeIcons.facebookF, () {}, "F"),
+                          socialButton(FontAwesomeIcons.facebook, () {}, "F"),
                         ],
                       )
                     ],
@@ -110,7 +109,7 @@ class LoginPage extends StatelessWidget {
       onPressed: () => function(),
       child: Icon(
         icon,
-        color: AppColor.darknavi,
+        color: AppColor.white,
       ),
     );
   }

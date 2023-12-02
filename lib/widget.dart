@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
+import 'package:project_mobile/constant/font.dart';
 
 class Textformfields {
   static Widget fieldBlank(String title, IconData icon,
@@ -96,7 +97,7 @@ class Textformfields {
 }
 
 class Button {
-  static buttonSave(String label, var save) {
+  static Widget buttonLong(String label, var save) {
     return Container(
       width: 200,
       height: 50,
@@ -126,6 +127,18 @@ class Button {
       ),
     );
   }
+
+  static Widget button(String buttonName, dynamic function) {
+    return Center(
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: AppColor.custard),
+          onPressed: () => function(),
+          child: Text(
+            buttonName,
+            style: Font.white18B,
+          )),
+    );
+  }
 }
 
 class WidgetAll {
@@ -133,7 +146,7 @@ class WidgetAll {
     return AppBar(
       automaticallyImplyLeading: false,
       elevation: 0,
-      toolbarHeight: 30,
+      toolbarHeight: 50,
       backgroundColor: Colors.transparent,
       leading: InkWell(
         splashColor: Colors.transparent,

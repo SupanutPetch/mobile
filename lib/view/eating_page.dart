@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
+import 'package:project_mobile/constant/color.dart';
 
-import '../widget.dart';
-
-class DashBoardPage extends StatelessWidget {
-  const DashBoardPage({super.key});
+class EatingPage extends StatelessWidget {
+  const EatingPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetAll.appbar(),
       backgroundColor: AppColor.background,
       body: SafeArea(
           child: Column(
@@ -17,12 +14,12 @@ class DashBoardPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Center(
-            child: Text("Dashboard", style: Font.white30B),
+            child: Text("Eating", style: Font.white30B),
           ),
           Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 50),
               child: Container(
-                height: 600,
+                height: 500,
                 width: 380,
                 decoration: BoxDecoration(
                     border: Border.all(width: 2),
@@ -32,7 +29,7 @@ class DashBoardPage extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Calories", style: Font.base20B)],
+                    children: [Text("Eating", style: Font.base20B)],
                   ),
                 ),
               ))

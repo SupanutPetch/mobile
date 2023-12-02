@@ -23,15 +23,14 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
-                height: 700,
+                height: 600,
                 decoration: BoxDecoration(
                     color: AppColor.cream,
                     border: Border.all(color: AppColor.black, width: 2),
                     borderRadius: BorderRadius.circular(30)),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: ListView(
                     children: [
                       const Icon(
                         FontAwesomeIcons.personRunning,
@@ -77,7 +76,7 @@ class RegisterPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      Button.buttonSave("Sign Up", () {}),
+                      Button.buttonLong("Sign Up", () {}),
                     ],
                   ),
                 ),
