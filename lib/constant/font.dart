@@ -24,4 +24,6 @@ class Font {
       color: AppColor.text, fontSize: 20, fontWeight: FontWeight.bold);
   static const TextStyle base30B = TextStyle(
       color: AppColor.text, fontSize: 30, fontWeight: FontWeight.bold);
+  static TextStyle red16 =
+      TextStyle(color: Colors.red.withOpacity(0.8), fontSize: 16);
 }

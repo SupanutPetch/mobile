@@ -4,7 +4,7 @@ import 'package:project_mobile/constant/font.dart';
 import '../widget.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/setting/settingmenu_controller.dart';
+import 'package:project_mobile/setting/settingmenu_controller.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});

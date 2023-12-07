@@ -14,9 +14,9 @@ class BottomBarController extends GetxController {
   final List<Widget> pages = [
     const ExercisePage(),
     const EatingPage(),
-    const HomePage(),
+    HomePage(),
     const GoalPage(),
-    const ProfilePage()
+    ProfilePage()
   ].obs;
 
   void changePage(int index) {
