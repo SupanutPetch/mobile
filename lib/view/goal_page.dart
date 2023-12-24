@@ -1,7 +1,9 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
+import 'package:project_mobile/widget.dart';
 
 class GoalPage extends StatelessWidget {
   const GoalPage({super.key});
@@ -26,11 +28,27 @@ class GoalPage extends StatelessWidget {
                           border: Border.all(width: 2),
                           color: AppColor.cream,
                           borderRadius: BorderRadius.circular(30)),
-                      child: const Padding(
-                          padding: EdgeInsets.all(8.0),
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [Text("Calories", style: Font.base20B)],
+                            children: [
+                              const Text("Calories", style: Font.base20B),
+                              const Spacer(),
+                              Center(
+                                child: WidgetAll.dataTarget(
+                                    "Goal / Day", "data", "เป้าหมายต่อวัน"),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  WidgetAll.dataTarget(
+                                      "BMR(kcal)", "data", "เผาผลาญในแต่ละวัน"),
+                                  WidgetAll.dataTarget(
+                                      "BMI", "data", "ดัชนีมวลกาย")
+                                ],
+                              ),
+                            ],
                           ))))
             ])));
   }

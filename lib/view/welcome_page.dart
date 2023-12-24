@@ -7,6 +7,7 @@ import 'package:project_mobile/controller/welcome_controller.dart';
 import 'package:project_mobile/view/login_page.dart';
 import 'package:project_mobile/view/register_page.dart';
 import 'package:project_mobile/widget.dart';
+import 'package:sizer/sizer.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
@@ -20,23 +21,24 @@ class WelcomePage extends StatelessWidget {
           CarouselSlider(
               items: controller.imgList
                   .map((item) => Column(
-                      children: [Image.network(item, fit: BoxFit.fitHeight)]))
+                      mainAxisSize: MainAxisSize.max,
+                      children: [Image.network(item, fit: BoxFit.cover)]))
                   .toList(),
               options: CarouselOptions(
-                  autoPlay: true, height: 2000, viewportFraction: 2)),
+                  autoPlay: true, height: 100.h, viewportFraction: 1.3)),
           Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("Welcome Back",
+                Text("Welcome Back",
                     style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 5.h,
                         fontWeight: FontWeight.bold,
                         color: Colors.white)),
                 const Text(
                     'It’s never too early or too late to work towards being the healthiest you',
                     style: Font.white18B),
-                const SizedBox(height: 5),
+                SizedBox(height: 0.5.h),
                 Button.button("Sign In", () => Get.to(() => LoginPage())),
                 Button.button("Sign Up", () => Get.to(() => RegisterPage())),
               ]),

@@ -12,11 +12,13 @@ class LoginController extends GetxController {
   String? password;
   RxBool obscure = true.obs;
   final auth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final repeatpassTextController = TextEditingController();
   final formkey = GlobalKey<FormState>();
+  GoogleSignInAccount? googleUser;
+  GoogleSignInAuthentication? googleAuth;
+  final GoogleSignIn googleSigIn = GoogleSignIn();
 
   showPassword() {
     obscure.value = !obscure.value;
@@ -74,5 +76,15 @@ class LoginController extends GetxController {
     }
   }
 
-  signInWithGoogle() async {}
+  signInWithGoogle() async {
+    googleUser = await GoogleSignIn().signIn();
+    googleAuth = await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    Get.to(const BottomBar());
+  }
 }

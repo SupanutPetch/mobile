@@ -72,7 +72,10 @@ class RegisterPage extends StatelessWidget {
                                 children: [
                                   const Text("birthday :  ",
                                       style: Font.base20B),
-                                  WidgetAll.boxDateForPick(),
+                                  WidgetAll.boxDateForPick(
+                                      () => Get.find<RegisterController>()
+                                          .pickDate(),
+                                      controller.selectedDate())
                                 ],
                               ),
                               const SizedBox(height: 20),

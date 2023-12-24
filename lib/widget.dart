@@ -213,15 +213,7 @@ class WidgetAll {
             ])));
   }
 
-  static pickDate() async {
-    return await showDatePicker(
-        context: Get.context!,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1950),
-        lastDate: DateTime(2500));
-  }
-
-  static Widget boxDateForPick() {
+  static Widget boxDateForPick(Function function, DateTime dateTime) {
     return InkWell(
       child: Container(
           height: 50,
@@ -231,15 +223,44 @@ class WidgetAll {
               border: Border.all(width: 2),
               borderRadius: BorderRadius.circular(20)),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(DateFormat.yMd().format(DateTime.now()), style: Font.base16B),
+            Text(DateFormat.yMd().format(dateTime), style: Font.base16B),
             const Icon(FontAwesomeIcons.cakeCandles,
                 size: 20,
                 color: AppColor.custard,
                 shadows: [Shadow(offset: Offset(1, 1))])
           ])),
       onTap: () {
-        pickDate();
+        function();
       },
+    );
+  }
+
+  static Widget dataTarget(String title, String detail, String description) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 100,
+            width: 150,
+            decoration: BoxDecoration(
+                border: Border.all(width: 2, color: AppColor.darknavi),
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(title, style: Font.base16B),
+                const SizedBox(height: 20),
+                Text(detail, style: Font.base16)
+              ],
+            ),
+          ),
+        ),
+        Text(
+          description,
+          style: Font.base16,
+        )
+      ],
     );
   }
 }

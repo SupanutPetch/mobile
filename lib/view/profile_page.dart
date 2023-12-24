@@ -54,18 +54,18 @@ class ProfilePage extends StatelessWidget {
                             dataUser("age :", "24"),
                             dataUser("Gender :", "Man"),
                             Row(children: [
-                              dataTarget(
+                              WidgetAll.dataTarget(
                                   "BMR(kcal)", "data", "เผาผลาญในแต่ละวัน"),
                               const Spacer(),
-                              dataTarget(
+                              WidgetAll.dataTarget(
                                   "TEDD(kcal)", "data", "เผาผลาญเมื่อทำกิจกรรม")
                             ]),
                             const SizedBox(height: 15),
                             Row(children: [
-                              dataTarget(
+                              WidgetAll.dataTarget(
                                   "Goal / Day", "data", "เป้าหมายต่อวัน"),
                               const Spacer(),
-                              dataTarget("BMI", "data", "ดัชนีมวลกาย")
+                              WidgetAll.dataTarget("BMI", "data", "ดัชนีมวลกาย")
                             ]),
                             const SizedBox(height: 10),
                             Row(
@@ -98,35 +98,6 @@ class ProfilePage extends StatelessWidget {
               style: Font.base18,
             ))),
         const SizedBox(height: 40)
-      ],
-    );
-  }
-
-  Widget dataTarget(String title, String detail, String description) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 100,
-            width: 150,
-            decoration: BoxDecoration(
-                border: Border.all(width: 2, color: AppColor.darknavi),
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(title, style: Font.base16B),
-                const SizedBox(height: 20),
-                Text(detail, style: Font.base16)
-              ],
-            ),
-          ),
-        ),
-        Text(
-          description,
-          style: Font.base16,
-        )
       ],
     );
   }
