@@ -42,11 +42,9 @@ class ResetPassPage extends StatelessWidget {
                             "Email",
                             FontAwesomeIcons.envelope,
                             contrller.emailTextController,
-                            false,
                             AppColor.darknavi),
                         const SizedBox(height: 10),
-                        Button.button(
-                            "Sent to mail", () => Get.to(() => LoginPage()))
+                        Button.button("Sent to mail", () => Get.back())
                       ])))
         ])));
   }

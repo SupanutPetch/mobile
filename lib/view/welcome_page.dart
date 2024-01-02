@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +22,15 @@ class WelcomePage extends StatelessWidget {
         body: Stack(children: [
           CarouselSlider(
               items: controller.imgList
-                  .map((item) => Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [Image.network(item, fit: BoxFit.cover)]))
+                  .map((item) =>
+                      Column(mainAxisSize: MainAxisSize.max, children: [
+                        Image.network(item, fit: BoxFit.cover, height: 100.h)
+                      ]))
                   .toList(),
               options: CarouselOptions(
-                  autoPlay: true, height: 100.h, viewportFraction: 1.3)),
+                  autoPlay: true,
+                  height: 100.h,
+                  viewportFraction: Platform.isIOS ? 2 : 1.3)),
           Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,

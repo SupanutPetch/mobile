@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mobile/widget.dart';
+import 'package:sizer/sizer.dart';
 import '../controller/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
@@ -14,6 +15,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         backgroundColor: AppColor.background,
         body: SafeArea(
@@ -25,7 +27,7 @@ class LoginPage extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.all(10),
                       child: Container(
-                          height: 630,
+                          height: 80.h,
                           decoration: BoxDecoration(
                               color: AppColor.cream,
                               border:
@@ -39,7 +41,7 @@ class LoginPage extends StatelessWidget {
                                   const Icon(FontAwesomeIcons.personRunning,
                                       size: 80, color: AppColor.darknavi),
                                   const SizedBox(height: 10),
-                                  const Text("Sigin In", style: Font.base30B),
+                                  const Text("Sign In", style: Font.base30B),
                                   const Text("Sign In to Continue",
                                       style: Font.base20B),
                                   const SizedBox(height: 20),
@@ -47,7 +49,6 @@ class LoginPage extends StatelessWidget {
                                       "Email",
                                       FontAwesomeIcons.userTie,
                                       loginController.emailTextController,
-                                      false,
                                       AppColor.darknavi),
                                   const SizedBox(height: 10),
                                   GetX<LoginController>(
@@ -118,7 +119,7 @@ class LoginPage extends StatelessWidget {
                                         TextButton(
                                             onPressed: () =>
                                                 Get.to(() => RegisterPage()),
-                                            child: Text("Sigup",
+                                            child: Text("SignUp",
                                                 style: Font.red16))
                                       ])
                                 ]),

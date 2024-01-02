@@ -7,12 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Textformfields {
-  static Widget fieldBlank(
-      String title,
-      IconData icon,
-      TextEditingController textEditingController,
-      bool obscure,
-      Color iconcolor) {
+  static Widget fieldBlank(String title, IconData icon,
+      TextEditingController textEditingController, Color iconcolor) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Padding(padding: EdgeInsets.only(left: 75)),
       const SizedBox(height: 5),
@@ -20,7 +16,6 @@ class Textformfields {
         SizedBox(
             width: 300,
             child: TextFormField(
-                obscureText: obscure,
                 validator: (String? value) =>
                     value!.isEmpty ? "Please fill out information" : null,
                 onSaved: (value) => value!.isNotEmpty
@@ -96,7 +91,11 @@ class Textformfields {
                           ? const Icon(Icons.visibility_off,
                               color: AppColor.black)
                           : const Icon(Icons.visibility,
-                              color: AppColor.custard)),
+                              color: AppColor.custard,
+                              shadows: [
+                                  Shadow(
+                                      offset: Offset(1, 1), color: Colors.black)
+                                ])),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: const BorderSide(color: Colors.black)),

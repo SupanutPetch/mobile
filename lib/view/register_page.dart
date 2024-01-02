@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mobile/widget.dart';
+import 'package:sizer/sizer.dart';
 import '../controller/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
@@ -13,6 +14,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         appBar: WidgetAll.appbar(),
         backgroundColor: AppColor.background,
@@ -24,7 +26,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.all(10),
                   child: Container(
-                      height: 600,
+                      height: 80.h,
                       decoration: BoxDecoration(
                           color: AppColor.cream,
                           border: Border.all(color: AppColor.black, width: 2),
@@ -46,7 +48,6 @@ class RegisterPage extends StatelessWidget {
                                   "Email",
                                   Icons.account_circle,
                                   controller.emailTextController,
-                                  false,
                                   AppColor.darknavi),
                               const SizedBox(height: 20),
                               GetX<LoginController>(
@@ -65,17 +66,16 @@ class RegisterPage extends StatelessWidget {
                                   "Repeat Password",
                                   FontAwesomeIcons.key,
                                   controller.repeatpassTextController,
-                                  true,
                                   AppColor.custard),
                               const SizedBox(height: 20),
                               Row(
                                 children: [
                                   const Text("birthday :  ",
                                       style: Font.base20B),
-                                  WidgetAll.boxDateForPick(
+                                  Obx(() => WidgetAll.boxDateForPick(
                                       () => Get.find<RegisterController>()
-                                          .pickDate(),
-                                      controller.selectedDate())
+                                          .showCupertinoModalPopup(context),
+                                      controller.selectedDate()))
                                 ],
                               ),
                               const SizedBox(height: 20),

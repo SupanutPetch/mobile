@@ -9,6 +9,6 @@ class ProfileController extends GetxController {
   siginout() async {
     await auth.signOut();
     Get.to(() => LoginPage());
-    Get.close(0);
+    Get.close(1);
   }
 }
