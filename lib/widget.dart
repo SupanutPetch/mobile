@@ -5,6 +5,7 @@ import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:sizer/sizer.dart';
 
 class Textformfields {
   static Widget fieldBlank(String title, IconData icon,
@@ -14,100 +15,121 @@ class Textformfields {
       const SizedBox(height: 5),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(
-            width: 300,
-            child: TextFormField(
-                validator: (String? value) =>
-                    value!.isEmpty ? "Please fill out information" : null,
-                onSaved: (value) => value!.isNotEmpty
-                    ? textEditingController.text = value.trim()
-                    : null,
-                controller: textEditingController,
-                scrollPadding: const EdgeInsets.all(1),
-                style: Font.base16B,
-                decoration: InputDecoration(
-                  hintText: title,
-                  filled: true,
-                  fillColor: Colors.indigo.withOpacity(0.2),
-                  prefixIcon: Icon(
-                    icon,
-                    color: iconcolor,
-                    size: 35,
-                    shadows: const [
-                      Shadow(color: AppColor.black, offset: Offset(1, 1))
-                    ],
-                  ),
-                  labelStyle: const TextStyle(color: Colors.white),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: AppColor.black)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          const BorderSide(color: AppColor.black, width: 2)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 2)),
-                )))
+            width: 95.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Email", style: Font.white16),
+                TextFormField(
+                    validator: (String? value) =>
+                        value!.isEmpty ? "Please fill out information" : null,
+                    onSaved: (value) => value!.isNotEmpty
+                        ? textEditingController.text = value.trim()
+                        : null,
+                    controller: textEditingController,
+                    scrollPadding: const EdgeInsets.all(1),
+                    style: Font.black16B,
+                    decoration: InputDecoration(
+                      hintText: title,
+                      filled: true,
+                      fillColor: AppColor.platinum,
+                      prefixIcon: Icon(
+                        icon,
+                        color: iconcolor,
+                        size: 35,
+                        shadows: const [
+                          Shadow(
+                              color: AppColor.green,
+                              offset: Offset(2, 2),
+                              blurRadius: 1)
+                        ],
+                      ),
+                      labelStyle: const TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: AppColor.platinum)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2)),
+                    )),
+              ],
+            ))
       ])
     ]);
   }
 
   static Widget fieldPassWord(
-    String title,
-    IconData icon,
-    bool obscure,
-    Function function,
-    TextEditingController textEditingController,
-  ) {
+      String title,
+      IconData icon,
+      bool obscure,
+      Function function,
+      TextEditingController textEditingController,
+      bool showicon) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Padding(padding: EdgeInsets.only(left: 75)),
       const SizedBox(height: 5),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(
-            width: 300,
-            child: TextFormField(
-                onSaved: (value) => value!.isNotEmpty
-                    ? textEditingController.text = value.trim()
-                    : null,
-                controller: textEditingController,
-                scrollPadding: const EdgeInsets.all(5),
-                style: Font.base18B,
-                obscureText: obscure,
-                decoration: InputDecoration(
-                  hintText: title,
-                  filled: true,
-                  fillColor: Colors.indigo.withOpacity(0.2),
-                  prefixIcon: Icon(icon,
-                      color: AppColor.custard,
-                      size: 35,
-                      shadows: const [
-                        Shadow(offset: Offset(1, 1), color: Colors.black)
-                      ]),
-                  labelStyle: const TextStyle(color: Colors.white),
-                  suffixIcon: IconButton(
-                      onPressed: () => function(),
-                      icon: obscure
-                          ? const Icon(Icons.visibility_off,
-                              color: AppColor.black)
-                          : const Icon(Icons.visibility,
-                              color: AppColor.custard,
-                              shadows: [
-                                  Shadow(
-                                      offset: Offset(1, 1), color: Colors.black)
-                                ])),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: Colors.black)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          const BorderSide(color: AppColor.black, width: 2)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 2)),
-                )))
+            width: 95.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Password", style: Font.white16),
+                TextFormField(
+                    onSaved: (value) => value!.isNotEmpty
+                        ? textEditingController.text = value.trim()
+                        : null,
+                    controller: textEditingController,
+                    scrollPadding: const EdgeInsets.all(5),
+                    style: Font.black18B,
+                    obscureText: obscure,
+                    obscuringCharacter: "*",
+                    decoration: InputDecoration(
+                      hintText: title,
+                      filled: true,
+                      fillColor: AppColor.platinum,
+                      prefixIcon: Icon(icon,
+                          color: AppColor.orange,
+                          size: 35,
+                          shadows: const [
+                            Shadow(offset: Offset(2, 2), color: AppColor.green)
+                          ]),
+                      labelStyle: const TextStyle(color: Colors.white),
+                      suffixIcon: showicon
+                          ? IconButton(
+                              onPressed: () => function(),
+                              icon: obscure
+                                  ? const Icon(Icons.visibility_off,
+                                      color: AppColor.black)
+                                  : const Icon(Icons.visibility,
+                                      color: AppColor.orange,
+                                      shadows: [
+                                          Shadow(
+                                              offset: Offset(1, 1),
+                                              color: Colors.black)
+                                        ]))
+                          : null,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: AppColor.platinum)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2)),
+                    )),
+              ],
+            ))
       ])
     ]);
   }
@@ -116,10 +138,10 @@ class Textformfields {
 class Button {
   static Widget buttonLong(String label, var save) {
     return Container(
-      width: 200,
-      height: 50,
+      width: 50.w,
+      height: 7.h,
       decoration: BoxDecoration(
-          color: AppColor.darknavi,
+          color: AppColor.green,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(width: 2)),
       child: ElevatedButton(
@@ -130,7 +152,7 @@ class Button {
         onPressed: save,
         child: Text(label,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppColor.black,
               fontWeight: FontWeight.bold,
               fontSize: 25,
               shadows: [Shadow(blurRadius: 2, color: Colors.white)],
@@ -141,7 +163,7 @@ class Button {
 
   static Widget button(String buttonName, dynamic function) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: AppColor.custard),
+        style: ElevatedButton.styleFrom(backgroundColor: AppColor.orange),
         onPressed: () => function(),
         child: Text(
           buttonName,
@@ -163,7 +185,7 @@ class WidgetAll {
           child: Container(
               margin: const EdgeInsets.only(left: 2),
               child: const Icon(FontAwesomeIcons.chevronLeft,
-                  size: 25, color: AppColor.custard)),
+                  size: 25, color: AppColor.orange)),
           onTap: () => Get.back()),
     );
   }
@@ -171,17 +193,16 @@ class WidgetAll {
   static Widget dialogWithButton(
       IconData icon, String detail, Function function, String labelButton) {
     return AlertDialog(
-        backgroundColor: AppColor.darknavi,
+        backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Icon(icon, color: AppColor.custard, size: 50),
+        title: Icon(icon, color: AppColor.orange, size: 50),
         content: Text(detail, style: Font.white18),
         actionsAlignment: MainAxisAlignment.center,
         actions: [
           ElevatedButton(
               onPressed: () => function(),
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: AppColor.custard),
-              child: Text(labelButton, style: Font.base16B))
+              style: ElevatedButton.styleFrom(backgroundColor: AppColor.green),
+              child: Text(labelButton, style: Font.black16))
         ]);
   }
 
@@ -189,7 +210,7 @@ class WidgetAll {
     return Builder(builder: (context) {
       Future.delayed(const Duration(seconds: 1), () => Get.back());
       return AlertDialog(
-        backgroundColor: AppColor.darknavi,
+        backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Icon(icon, color: iconcolor, size: 50),
         content: Text(detail, style: Font.white18),
@@ -207,25 +228,25 @@ class WidgetAll {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
               LoadingAnimationWidget.fallingDot(
-                  color: AppColor.custard, size: 100),
+                  color: AppColor.orange, size: 100),
               const Text("loading...", style: Font.white18B)
             ])));
   }
 
-  static Widget boxDateForPick(Function function, DateTime dateTime) {
+  static Widget boxDateForPick(dynamic function, DateTime dateTime) {
     return InkWell(
       child: Container(
           height: 50,
           width: 150,
           decoration: BoxDecoration(
-              color: Colors.indigo.withOpacity(0.2),
+              color: AppColor.platinum,
               border: Border.all(width: 2),
               borderRadius: BorderRadius.circular(20)),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(DateFormat.yMd().format(dateTime), style: Font.base16B),
+            Text(DateFormat.yMd().format(dateTime), style: Font.black16B),
             const Icon(FontAwesomeIcons.cakeCandles,
                 size: 20,
-                color: AppColor.custard,
+                color: AppColor.orange,
                 shadows: [Shadow(offset: Offset(1, 1))])
           ])),
       onTap: () {
@@ -243,21 +264,19 @@ class WidgetAll {
             height: 100,
             width: 150,
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: AppColor.darknavi),
+                border: Border.all(width: 2, color: AppColor.green),
                 borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(title, style: Font.base16B),
-                const SizedBox(height: 20),
-                Text(detail, style: Font.base16)
-              ],
-            ),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(title, style: Font.black16B),
+              const SizedBox(height: 20),
+              Text(detail, style: Font.black16)
+            ]),
           ),
         ),
         Text(
           description,
-          style: Font.base16,
+          style: Font.black16,
         )
       ],
     );

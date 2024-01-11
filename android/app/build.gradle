@@ -32,7 +32,8 @@ android {
     namespace "com.flutterthailand.project_mobile"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
-
+    multiDexEnabled true
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

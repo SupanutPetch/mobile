@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:project_mobile/view/bottombar.dart';
+import 'package:project_mobile/view/home/bottombar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_mobile/model/user_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginController extends GetxController {
-  String? email;
-  String? password;
+  RxList<UserModel> userData = <UserModel>[].obs;
   RxBool obscure = true.obs;
   final auth = FirebaseAuth.instance;
   final emailTextController = TextEditingController();
@@ -19,6 +20,7 @@ class LoginController extends GetxController {
   GoogleSignInAccount? googleUser;
   GoogleSignInAuthentication? googleAuth;
   final GoogleSignIn googleSigIn = GoogleSignIn();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   showPassword() {
     obscure.value = !obscure.value;
@@ -39,9 +41,10 @@ class LoginController extends GetxController {
             Get.back();
             Get.close(0);
           }
+          getAccountData();
           Get.to(() => const BottomBar());
           Get.dialog(WidgetAll.dialog(FontAwesomeIcons.check,
-              "Welcome ${auth.currentUser?.email}", Colors.green));
+              "Welcome ${auth.currentUser!.email}", Colors.green));
         });
       } on FirebaseAuthException catch (error) {
         Get.isDialogOpen! ? Get.back() : null;
@@ -86,5 +89,29 @@ class LoginController extends GetxController {
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     Get.to(const BottomBar());
+  }
+
+  getAccountData() async {
+    DocumentSnapshot userExists =
+        await firestore.collection('UserData').doc(auth.currentUser!.uid).get();
+    if (userExists.exists) {
+      Map<String, dynamic> data = userExists.data() as Map<String, dynamic>;
+      userData.add(UserModel(
+          userID: data['userID'],
+          userEmail: data["userEmail"],
+          userName: data["userName"],
+          userBirthDay: data["userBirthDay"],
+          userGender: data["userGender"],
+          userImageURL: data["userImageURL"]));
+    } else {
+      await firestore.collection("UserData").doc(auth.currentUser!.uid).set({
+        'userID': auth.currentUser!.uid,
+        'userEmail': auth.currentUser!.email,
+        'userName': auth.currentUser!.displayName,
+        'userBirthDay': "",
+        'userGender': "",
+        'userImageURL': auth.currentUser!.photoURL
+      });
+    }
   }
 }

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/controller/welcome_controller.dart';
-import 'package:project_mobile/view/login_page.dart';
-import 'package:project_mobile/view/register_page.dart';
+import 'package:project_mobile/view/auth/login_page.dart';
+import 'package:project_mobile/view/auth/register_page.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,7 +18,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.background,
+        backgroundColor: AppColor.black,
         body: Stack(children: [
           CarouselSlider(
               items: controller.imgList

@@ -1,55 +1,50 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
+import 'package:project_mobile/constant/color.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterController extends GetxController {
   RxInt selectedRadio = 0.obs;
+  RxBool obscure = true.obs;
   Rx<DateTime> selectedDate = Rx<DateTime>(DateTime.now());
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final repeatpassTextController = TextEditingController();
   final calendarTextController = TextEditingController();
 
-  void setSelectedRadio(int value) {
+  void setSelectedGender(int value) {
     selectedRadio.value = value;
   }
 
-  void selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate.value,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (picked != null && picked != selectedDate.value) {
-      selectedDate(picked);
-    }
+  showPassword() {
+    obscure.value = !obscure.value;
+    update();
   }
 
-  showCupertinoModalPopup(BuildContext context) {
-    Get.defaultDialog(
-      
-      title: 'Cupertino Modal Popup',
-      content: CupertinoDatePicker(
-        mode: CupertinoDatePickerMode.date,
-        initialDateTime: DateTime.now(),
-        onDateTimeChanged: (DateTime newDate) {},
-      ),
-      confirm: ElevatedButton(
-        onPressed: () {
-          Get.back();
-        },
-        child: const Text('OK'),
-      ),
-      cancel: ElevatedButton(
-        onPressed: () {
-          // Handle cancel action
-          Get.back(); // Close the modal
-        },
-        child: const Text('Cancel'),
-      ),
+  void selectDate(BuildContext context) async {
+    await showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).copyWith().size.height * 0.25,
+          decoration: const BoxDecoration(color: AppColor.platinum),
+          child: Column(
+            children: [
+              Expanded(
+                  child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: selectedDate.value,
+                onDateTimeChanged: (DateTime newDate) {
+                  selectedDate.value = newDate;
+                },
+              )),
+              CupertinoButton(
+                  child: const Text("Done"), onPressed: () => Get.back()),
+            ],
+          ),
+        );
+      },
     );
   }
 }

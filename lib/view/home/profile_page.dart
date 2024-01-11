@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appbarProfile(),
-        backgroundColor: AppColor.background,
+        backgroundColor: AppColor.black,
         body: (Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class ProfilePage extends StatelessWidget {
                       height: 580,
                       decoration: BoxDecoration(
                           border: Border.all(width: 2),
-                          color: AppColor.cream,
+                          color: AppColor.platinum,
                           borderRadius: BorderRadius.circular(30)),
                       child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -46,8 +46,7 @@ class ProfilePage extends StatelessWidget {
                                         // radius: 50))),
                                         // ??
                                         const Icon(Icons.account_circle_sharp,
-                                            size: 100,
-                                            color: AppColor.background))),
+                                            size: 100, color: AppColor.black))),
                             const SizedBox(height: 30),
                             dataUser("User :", "เพดเหน่ย"),
                             dataUser("Email", "test@mail.com"),
@@ -86,7 +85,7 @@ class ProfilePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(title, style: Font.base20B),
+        Text(title, style: Font.black20B),
         Container(
             width: 200,
             decoration: const BoxDecoration(
@@ -95,7 +94,7 @@ class ProfilePage extends StatelessWidget {
             child: Center(
                 child: Text(
               detail,
-              style: Font.base18,
+              style: Font.black18,
             ))),
         const SizedBox(height: 40)
       ],
@@ -114,7 +113,7 @@ class ProfilePage extends StatelessWidget {
         child: Container(
             margin: const EdgeInsets.only(left: 2),
             child:
-                const Icon(Icons.settings, size: 25, color: AppColor.custard)),
+                const Icon(Icons.settings, size: 25, color: AppColor.orange)),
         onTap: () => Get.to(() => SettingPage()),
       ),
     );

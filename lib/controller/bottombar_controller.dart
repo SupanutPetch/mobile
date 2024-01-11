@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/view/eating_page.dart';
-import 'package:project_mobile/view/exercise_page.dart';
-import 'package:project_mobile/view/goal_Page.dart';
-import 'package:project_mobile/view/home_page.dart';
-import 'package:project_mobile/view/profile_page.dart';
+import 'package:project_mobile/view/home/meals_page.dart';
+import 'package:project_mobile/view/home/exercise_page.dart';
+
+import 'package:project_mobile/view/home/home_page.dart';
+import 'package:project_mobile/view/home/profile_page.dart';
+import '../view/home/goal_page.dart';
 
 class BottomBarController extends GetxController {
   var selectedIndex = 2.obs;
@@ -13,7 +14,7 @@ class BottomBarController extends GetxController {
 
   final List<Widget> pages = [
     const ExercisePage(),
-    const EatingPage(),
+    const MealsPage(),
     HomePage(),
     const GoalPage(),
     ProfilePage()

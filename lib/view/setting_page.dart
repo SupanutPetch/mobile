@@ -13,7 +13,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: WidgetAll.appbar(),
-        backgroundColor: AppColor.background,
+        backgroundColor: AppColor.black,
         body: Obx(() => ListView.builder(
             itemCount: controller.titles.length,
             itemBuilder: ((context, index) {
@@ -21,14 +21,14 @@ class SettingPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: AppColor.cream,
-                      border: Border.all(width: 2, color: AppColor.custard),
+                      color: AppColor.platinum,
+                      border: Border.all(width: 2, color: AppColor.orange),
                       borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
                     leading: Icon(controller.icon[index]),
-                    iconColor: AppColor.background,
+                    iconColor: AppColor.black,
                     title: Text(controller.titles[index]),
-                    titleTextStyle: Font.base18B,
+                    titleTextStyle: Font.black18B,
                     onTap: () => controller.tabMenu(controller.titles[index]),
                   ),
                 ),

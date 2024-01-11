@@ -7,7 +7,7 @@ class ExercisePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.background,
+        backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -21,13 +21,13 @@ class ExercisePage extends StatelessWidget {
                       width: 380,
                       decoration: BoxDecoration(
                           border: Border.all(width: 2),
-                          color: AppColor.cream,
+                          color: AppColor.platinum,
                           borderRadius: BorderRadius.circular(30)),
                       child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [Text("Calories", style: Font.base20B)],
+                            children: [Text("Calories", style: Font.black20B)],
                           ))))
             ])));
   }

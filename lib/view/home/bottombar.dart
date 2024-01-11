@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/controller/bottombar_controller.dart';
+import 'package:sizer/sizer.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -15,9 +16,9 @@ class BottomBar extends StatelessWidget {
         body: Obx(() => controller.pages[controller.selectedIndex.value]),
         bottomNavigationBar: Obx(() => BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
-                backgroundColor: AppColor.background,
-                selectedItemColor: AppColor.custard,
-                selectedLabelStyle: Font.base16B,
+                backgroundColor: AppColor.black,
+                selectedItemColor: AppColor.orange,
+                selectedLabelStyle: Font.black16B,
                 unselectedItemColor: AppColor.white,
                 elevation: 0,
                 showUnselectedLabels: false,
@@ -27,7 +28,11 @@ class BottomBar extends StatelessWidget {
                   BottomNavigationBarItem(
                       icon: Icon(FontAwesomeIcons.dumbbell), label: 'Exercise'),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.restaurant_menu), label: 'Eating'),
+                      icon: Icon(Icons.fastfood_outlined),
+                      activeIcon: Icon(
+                        Icons.fastfood,
+                      ),
+                      label: 'Eating'),
                   BottomNavigationBarItem(
                       icon: Icon(FontAwesomeIcons.houseChimney), label: 'Home'),
                   BottomNavigationBarItem(

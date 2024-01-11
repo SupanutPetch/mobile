@@ -10,7 +10,7 @@ class GoalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.background,
+        backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,14 +26,14 @@ class GoalPage extends StatelessWidget {
                       width: 380,
                       decoration: BoxDecoration(
                           border: Border.all(width: 2),
-                          color: AppColor.cream,
+                          color: AppColor.platinum,
                           borderRadius: BorderRadius.circular(30)),
                       child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text("Calories", style: Font.base20B),
+                              const Text("Calories", style: Font.black20B),
                               const Spacer(),
                               Center(
                                 child: WidgetAll.dataTarget(
