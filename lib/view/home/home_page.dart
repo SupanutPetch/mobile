@@ -1,10 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
+import 'package:project_mobile/controller/basic_controller.dart';
 import 'package:project_mobile/controller/home_controller.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,41 +32,49 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  Row(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      controller.auth.currentUser?.photoURL != null
-                          ? CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "${controller.auth.currentUser?.photoURL}"))
-                          : Icon(
-                              Icons.account_circle,
-                              color: AppColor.orange,
-                              size: 15.w,
-                            ),
-                      SizedBox(width: 3.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            "Welcome Back".tr,
-                            style: Font.white16B,
-                          ),
-                          Text(
-                            "${controller.auth.currentUser!.email}",
-                            style: Font.white16B,
+                          UserData.userData[0].userImageURL != null &&
+                                  UserData.userData
+                                      .elementAt(0)
+                                      .userID!
+                                      .contains(
+                                          controller.auth.currentUser!.uid)
+                              ? CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      "${UserData.userData[0].userImageURL}"))
+                              : Icon(
+                                  Icons.account_circle,
+                                  color: AppColor.orange,
+                                  size: 15.w,
+                                ),
+                          SizedBox(width: 3.w),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Welcome Back".tr,
+                                style: Font.white16B,
+                              ),
+                              Text(
+                                "${UserData.userData[0].userName}",
+                                style: Font.white16B,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 5.h),
-                  cardData(controller.foodImage ?? "", "Eating food",
-                      "Calories today"),
-                  SizedBox(height: 5.h),
-                  cardData(controller.exerciseImage ?? "", "exercise",
-                      "Metabolism today")
-                ]))));
+                      SizedBox(height: 5.h),
+                      const Text("Daily Target", style: Font.white20B),
+                      cardData(controller.foodImage ?? "", "Eating food",
+                          "Calories today"),
+                      SizedBox(height: 5.h),
+                      cardData(controller.exerciseImage ?? "", "exercise",
+                          "Metabolism today")
+                    ]))));
   }
 
   Widget cardData(String imageURL, String title, String detail) {

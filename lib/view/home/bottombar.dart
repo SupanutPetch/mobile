@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/controller/bottombar_controller.dart';
-import 'package:sizer/sizer.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});

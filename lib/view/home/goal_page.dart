@@ -12,44 +12,7 @@ class GoalPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.black,
         body: SafeArea(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-              const Center(
-                child: Text("Goal", style: Font.white30B),
-              ),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 50),
-                  child: Container(
-                      height: 500,
-                      width: 380,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2),
-                          color: AppColor.platinum,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Calories", style: Font.black20B),
-                              const Spacer(),
-                              Center(
-                                child: WidgetAll.dataTarget(
-                                    "Goal / Day", "data", "เป้าหมายต่อวัน"),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  WidgetAll.dataTarget(
-                                      "BMR(kcal)", "data", "เผาผลาญในแต่ละวัน"),
-                                  WidgetAll.dataTarget(
-                                      "BMI", "data", "ดัชนีมวลกาย")
-                                ],
-                              ),
-                            ],
-                          ))))
-            ])));
+          child: Column(),
+        ));
   }
 }

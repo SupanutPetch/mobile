@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
-import '../../controller/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +19,7 @@ class RegisterPage extends StatelessWidget {
         appBar: WidgetAll.appbar(),
         backgroundColor: AppColor.black,
         body: SafeArea(
-            child: Column(children: [
+            child: ListView(children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child:
@@ -28,6 +27,8 @@ class RegisterPage extends StatelessWidget {
               Image.asset("lib/asset/iconapp.jpg", scale: 0.15.h),
               const Center(
                   child: Text("Sign Up to Continue", style: Font.white30B)),
+              Textformfields.fieldBlank("UserName", FontAwesomeIcons.user,
+                  controller.userNameTextController, AppColor.orange),
               Textformfields.fieldBlank("Email", FontAwesomeIcons.envelope,
                   controller.emailTextController, AppColor.orange),
               GetX<RegisterController>(
@@ -78,7 +79,7 @@ class RegisterPage extends StatelessWidget {
               ]),
               SizedBox(height: 1.h),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => controller.signUp(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColor.green,
                 ),

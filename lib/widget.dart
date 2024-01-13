@@ -139,7 +139,7 @@ class Button {
   static Widget buttonLong(String label, var save) {
     return Container(
       width: 50.w,
-      height: 7.h,
+      height: 6.h,
       decoration: BoxDecoration(
           color: AppColor.green,
           borderRadius: BorderRadius.circular(20),

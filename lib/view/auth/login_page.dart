@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                             _.obscure.value,
                             () => _.showPassword(),
                             loginController.passwordTextController,
-                            false);
+                            true);
                       }),
                   TextButton(
                       onPressed: () => Get.to(() => ResetPassPage()),

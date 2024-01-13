@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:project_mobile/controller/basic_controller.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,7 +28,7 @@ class LoginController extends GetxController {
     update();
   }
 
-  signInWithEmail() async {
+  void signInWithEmail() async {
     if (emailTextController.text.isNotEmpty &&
         passwordTextController.text.isNotEmpty) {
       Get.dialog(WidgetAll.loading());
@@ -37,14 +38,15 @@ class LoginController extends GetxController {
                 email: emailTextController.text.trim(),
                 password: passwordTextController.text.trim())
             .then((user) {
+          UserData.getdata();
           if (Get.isDialogOpen!) {
             Get.back();
             Get.close(0);
           }
-          getAccountData();
           Get.to(() => const BottomBar());
           Get.dialog(WidgetAll.dialog(FontAwesomeIcons.check,
-              "Welcome ${auth.currentUser!.email}", Colors.green));
+              "Welcome ${UserData.userData[0].userEmail}", Colors.green));
+          update();
         });
       } on FirebaseAuthException catch (error) {
         Get.isDialogOpen! ? Get.back() : null;
@@ -95,14 +97,7 @@ class LoginController extends GetxController {
     DocumentSnapshot userExists =
         await firestore.collection('UserData').doc(auth.currentUser!.uid).get();
     if (userExists.exists) {
-      Map<String, dynamic> data = userExists.data() as Map<String, dynamic>;
-      userData.add(UserModel(
-          userID: data['userID'],
-          userEmail: data["userEmail"],
-          userName: data["userName"],
-          userBirthDay: data["userBirthDay"],
-          userGender: data["userGender"],
-          userImageURL: data["userImageURL"]));
+      await UserData.getdata();
     } else {
       await firestore.collection("UserData").doc(auth.currentUser!.uid).set({
         'userID': auth.currentUser!.uid,
@@ -110,7 +105,8 @@ class LoginController extends GetxController {
         'userName': auth.currentUser!.displayName,
         'userBirthDay': "",
         'userGender': "",
-        'userImageURL': auth.currentUser!.photoURL
+        'userImageURL': auth.currentUser!.photoURL,
+        'userType': "n"
       });
     }
   }
