@@ -13,15 +13,15 @@ class ProfileController extends GetxController {
   }
 
   chackDataUser() async {
-    if (UserData.userData.isEmpty) {
-      await UserData.getdata();
+    if (GetData.userData.isEmpty) {
+      await GetData.getdata();
       update();
     }
   }
 
   siginout() async {
     Get.close(0);
-
+    GetData.userData.clear();
     await auth.signOut();
     Get.to(() => LoginPage());
   }

@@ -8,6 +8,7 @@ class UserModel {
   final String? userType;
   final String? userHigh;
   final String? userWeight;
+  final String? userActivity;
 
   UserModel(
       {required this.userID,
@@ -18,7 +19,8 @@ class UserModel {
       required this.userImageURL,
       required this.userType,
       required this.userHigh,
-      required this.userWeight});
+      required this.userWeight,
+      required this.userActivity});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -30,7 +32,8 @@ class UserModel {
         userImageURL: json["userImageURL"] ?? "",
         userType: json["userType"] ?? "n",
         userHigh: json["userHigh"] ?? "",
-        userWeight: json["userWeight"] ?? "");
+        userWeight: json["userWeight"] ?? "",
+        userActivity: json["userActivity"] ?? "");
   }
   Map<String, dynamic> toJson() => {
         "userID": userID,
@@ -42,5 +45,6 @@ class UserModel {
         "userType": userType,
         "userhigh": userHigh,
         "userWeight": userWeight,
+        "userActivity": userActivity
       };
 }

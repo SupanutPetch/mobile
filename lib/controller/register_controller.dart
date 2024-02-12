@@ -45,7 +45,9 @@ class RegisterController extends GetxController {
             });
           }
         });
-      } on FirebaseAuthException catch (error) {}
+      } on FirebaseAuthException catch (error) {
+        debugPrint(error.toString());
+      }
     }
   }
 

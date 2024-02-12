@@ -13,21 +13,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 4.h,
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.notifications_none_outlined,
-                  size: 3.5.h,
-                  color: AppColor.white,
-                )),
-            SizedBox(width: 4.w)
-          ],
-        ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            toolbarHeight: 4.h,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.notifications_none_outlined,
+                      size: 3.5.h, color: AppColor.white)),
+              SizedBox(width: 4.w)
+            ]),
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Padding(
@@ -35,38 +31,22 @@ class HomePage extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          UserData.userData[0].userImageURL != null &&
-                                  UserData.userData
-                                      .elementAt(0)
-                                      .userID!
-                                      .contains(
-                                          controller.auth.currentUser!.uid)
-                              ? CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "${UserData.userData[0].userImageURL}"))
-                              : Icon(
-                                  Icons.account_circle,
-                                  color: AppColor.orange,
-                                  size: 15.w,
-                                ),
-                          SizedBox(width: 3.w),
-                          Column(
+                      Row(children: [
+                        GetData.userData[0].userImageURL != null
+                            ? CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "${GetData.userData[0].userImageURL}"))
+                            : Icon(Icons.account_circle,
+                                color: AppColor.orange, size: 15.w),
+                        SizedBox(width: 3.w),
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Welcome Back".tr,
-                                style: Font.white16B,
-                              ),
-                              Text(
-                                "${UserData.userData[0].userName}",
-                                style: Font.white16B,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              Text("Welcome Back".tr, style: Font.white16B),
+                              Text(GetData.userData[0].userName ?? "Unknow",
+                                  style: Font.white16B)
+                            ])
+                      ]),
                       SizedBox(height: 5.h),
                       const Text("Daily Target", style: Font.white20B),
                       cardData(controller.foodImage ?? "", "Eating food",
@@ -79,44 +59,31 @@ class HomePage extends StatelessWidget {
 
   Widget cardData(String imageURL, String title, String detail) {
     return Card(
-      color: AppColor.platinum,
-      clipBehavior: Clip.hardEdge,
-      child: InkWell(
-        onTap: () {
-          debugPrint('Card tapped.');
-        },
-        child: SizedBox(
-          width: 90.w,
-          height: 20.h,
-          child: Row(
-            children: [
-              SizedBox(
-                height: 100.h,
-                width: 30.w,
-                child: Image.network(
-                  imageURL,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(width: 2.w),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Font.black18B,
-                  ),
-                  Text(
-                    detail,
-                    style: Font.black16,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+        color: AppColor.platinum,
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+            onTap: () {
+              debugPrint('Card tapped.');
+            },
+            child: SizedBox(
+                width: 90.w,
+                height: 20.h,
+                child: Row(children: [
+                  SizedBox(
+                      height: 100.h,
+                      width: 30.w,
+                      child: Image.network(
+                        imageURL,
+                        fit: BoxFit.cover,
+                      )),
+                  SizedBox(width: 2.w),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title, style: Font.black18B),
+                        Text(detail, style: Font.black16)
+                      ])
+                ]))));
   }
 }

@@ -20,13 +20,13 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: AppColor.black,
         body: Column(children: [
           Row(children: [
-            UserData.userData[0].userImageURL != null
+            GetData.userData[0].userImageURL != null
                 ? SizedBox(
                     height: 11.h,
                     width: 25.w,
                     child: CircleAvatar(
                       backgroundImage:
-                          NetworkImage("${UserData.userData[0].userImageURL}"),
+                          NetworkImage("${GetData.userData[0].userImageURL}"),
                     ),
                   )
                 : Icon(
@@ -38,10 +38,10 @@ class ProfilePage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                UserData.userData[0].userName != null &&
-                        UserData.userData[0].userName != ""
+                GetData.userData[0].userName != null &&
+                        GetData.userData[0].userName != ""
                     ? Text(
-                        "${UserData.userData[0].userName}",
+                        "${GetData.userData[0].userName}",
                         style: Font.white16,
                       )
                     : const Text(
@@ -49,13 +49,13 @@ class ProfilePage extends StatelessWidget {
                         style: Font.white16,
                       ),
                 Text(
-                  "${UserData.userData[0].userEmail}",
+                  "${GetData.userData[0].userEmail}",
                   style: Font.white16B,
                 ),
               ],
             ),
           ]),
-          Button.buttonLong("Edit Profile", () => UserData.userData.clear()),
+          Button.buttonLong("Edit Profile", () => GetData.userData.clear()),
           const Spacer(),
           ListTile(
             title: const Text(

@@ -47,6 +47,9 @@ dependencies:
   flutter_rounded_date_picker: ^3.0.4
   time_picker_spinner_pop_up: ^1.3.0
   cloud_firestore: ^4.13.6
+  firebase_storage: ^11.6.0
+  barcode_scanner: ^3.6.2
+  mobile_scanner: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +60,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

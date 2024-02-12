@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:sizer/sizer.dart';
 
 class GoalPage extends StatelessWidget {
   const GoalPage({super.key});
@@ -12,7 +11,20 @@ class GoalPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.black,
         body: SafeArea(
-          child: Column(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Container(
+                  height: 70.h,
+                  width: 90.w,
+                  decoration: BoxDecoration(
+                      color: AppColor.platinum,
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+              )
+            ],
+          ),
         ));
   }
 }

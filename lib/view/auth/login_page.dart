@@ -22,51 +22,41 @@ class LoginPage extends StatelessWidget {
             key: loginController.formkey,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Image.asset(
-                "lib/asset/iconapp.jpg",
-                scale: 0.15.h,
-              ),
+              Image.asset("lib/asset/iconapp.jpg", scale: 0.15.h),
               const Text("Sign In to your account", style: Font.white30B),
               SizedBox(height: 2.h),
               Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Textformfields.fieldBlank(
-                        "Email",
-                        FontAwesomeIcons.envelope,
-                        loginController.emailTextController,
-                        AppColor.orange),
-                  ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GetX<LoginController>(
-                      init: LoginController(),
-                      initState: (_) {},
-                      builder: (_) {
-                        return Textformfields.fieldPassWord(
-                            "Password",
-                            FontAwesomeIcons.lock,
-                            _.obscure.value,
-                            () => _.showPassword(),
-                            loginController.passwordTextController,
-                            true);
-                      }),
-                  TextButton(
-                      onPressed: () => Get.to(() => ResetPassPage()),
-                      child: const Text(
-                        "forgot Password?",
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Textformfields.fieldBlank(
+                            "Email",
+                            FontAwesomeIcons.envelope,
+                            loginController.emailTextController,
+                            AppColor.orange)
+                      ])),
+              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                GetX<LoginController>(
+                    init: LoginController(),
+                    initState: (_) {},
+                    builder: (_) {
+                      return Textformfields.fieldPassWord(
+                          "Password",
+                          FontAwesomeIcons.lock,
+                          _.obscure.value,
+                          () => _.showPassword(),
+                          loginController.passwordTextController,
+                          true);
+                    }),
+                TextButton(
+                    onPressed: () => Get.to(() => ResetPassPage()),
+                    child: const Text("forgot Password?",
                         style: TextStyle(
                             color: AppColor.orange,
                             fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      )),
-                ],
-              ),
+                            fontWeight: FontWeight.bold)))
+              ]),
               const SizedBox(height: 5),
               Button.buttonLong(
                   "Sign In", () => loginController.signInWithEmail()),
@@ -85,10 +75,12 @@ class LoginPage extends StatelessWidget {
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Center(
-                    child: socialButton(FontAwesomeIcons.google,
-                        () => loginController.signInWithGoogle(), "g")),
-                const SizedBox(width: 20),
-                socialButton(FontAwesomeIcons.facebook, () {}, "F")
+                    child: SizedBox(
+                        width: 40.w,
+                        child: socialButton(FontAwesomeIcons.google,
+                            () => loginController.signInWithGoogle(), "g"))),
+                // const SizedBox(width: 20),
+                // socialButton(FontAwesomeIcons.facebook, () {}, "F")
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 const Text("Don't have an account?", style: Font.white18),
@@ -108,9 +100,10 @@ class LoginPage extends StatelessWidget {
         heroTag: text,
         backgroundColor: AppColor.orange,
         onPressed: () => function(),
-        child: Icon(
-          icon,
-          color: AppColor.black,
-        ));
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(icon, color: AppColor.black),
+          SizedBox(width: 1.w),
+          const Text("Gogle Account", style: Font.black16B)
+        ]));
   }
 }

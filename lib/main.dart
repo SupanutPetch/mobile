@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mobile/view/home/exercise_page.dart';
+import 'package:project_mobile/view/home/meals_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:project_mobile/constant/color.dart';
@@ -26,6 +28,11 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
               primaryColor: AppColor.black),
+          initialRoute: "/",
+          getPages: [
+            GetPage(name: "/MealsPage", page: () => const MealsPage()),
+            GetPage(name: "/ExercisePage", page: () => const ExercisePage()),
+          ],
           home: WelcomePage());
     });
   }

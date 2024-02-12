@@ -23,8 +23,8 @@ class BottomBarController extends GetxController with StateMixin {
   }
 
   void chackDataUser() async {
-    if (UserData.userData.isEmpty) {
-      await UserData.getdata();
+    if (GetData.userData.isEmpty) {
+      await GetData.getdata();
       update();
     }
   }

@@ -37,15 +37,15 @@ class LoginController extends GetxController {
             .signInWithEmailAndPassword(
                 email: emailTextController.text.trim(),
                 password: passwordTextController.text.trim())
-            .then((user) {
-          UserData.getdata();
+            .then((user) async {
+          await GetData.getdata();
           if (Get.isDialogOpen!) {
             Get.back();
             Get.close(0);
           }
           Get.to(() => const BottomBar());
           Get.dialog(WidgetAll.dialog(FontAwesomeIcons.check,
-              "Welcome ${UserData.userData[0].userEmail}", Colors.green));
+              "Welcome ${GetData.userData.last.userEmail}", Colors.green));
           update();
         });
       } on FirebaseAuthException catch (error) {
@@ -97,7 +97,7 @@ class LoginController extends GetxController {
     DocumentSnapshot userExists =
         await firestore.collection('UserData').doc(auth.currentUser!.uid).get();
     if (userExists.exists) {
-      await UserData.getdata();
+      await GetData.getdata();
     } else {
       await firestore.collection("UserData").doc(auth.currentUser!.uid).set({
         'userID': auth.currentUser!.uid,

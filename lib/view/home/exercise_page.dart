@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
+import 'package:project_mobile/view/exercise/listposes_page.dart';
+import 'package:project_mobile/widget.dart';
+import 'package:sizer/sizer.dart';
 
 class ExercisePage extends StatelessWidget {
   const ExercisePage({super.key});
@@ -11,24 +16,23 @@ class ExercisePage extends StatelessWidget {
         body: SafeArea(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              const Center(child: Text("Exercise", style: Font.white30B)),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 50),
-                  child: Container(
-                      height: 500,
-                      width: 380,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2),
-                          color: AppColor.platinum,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [Text("Calories", style: Font.black20B)],
-                          ))))
+              Center(child: goalData()),
+              const Spacer(),
+              Button.buttonwithicon("Add Exercise",
+                  () => Get.to(() => const ListPoses()), FontAwesomeIcons.plus)
             ])));
+  }
+
+  Widget goalData() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Container(
+          height: 25.h,
+          width: 85.w,
+          decoration: BoxDecoration(
+              color: AppColor.platinum,
+              borderRadius: BorderRadius.circular(20))),
+    );
   }
 }

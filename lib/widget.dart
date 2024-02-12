@@ -154,7 +154,7 @@ class Button {
             style: const TextStyle(
               color: AppColor.black,
               fontWeight: FontWeight.bold,
-              fontSize: 25,
+              fontSize: 20,
               shadows: [Shadow(blurRadius: 2, color: Colors.white)],
             )),
       ),
@@ -168,6 +168,21 @@ class Button {
         child: Text(
           buttonName,
           style: Font.white18B,
+        ));
+  }
+
+  static Widget buttonwithicon(
+      String buttonName, dynamic function, IconData icon) {
+    return ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(backgroundColor: AppColor.orange),
+        onPressed: () => function(),
+        icon: Icon(
+          icon,
+          color: AppColor.black,
+        ),
+        label: Text(
+          buttonName,
+          style: Font.white20B,
         ));
   }
 }
