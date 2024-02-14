@@ -5,6 +5,7 @@ import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/controller/exercise_controller.dart';
 import 'package:project_mobile/model/exercise_mobel.dart';
+import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class ListPoses extends StatelessWidget {
@@ -55,7 +56,7 @@ class ListPoses extends StatelessWidget {
     return ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return Row(children: [
+          return Column(children: [
             SizedBox(
               width: 45.w,
               child: Card(
@@ -69,15 +70,16 @@ class ListPoses extends StatelessWidget {
                         children: [
                           Image.network(list[index].imgExercise!,
                               width: 40.w, height: 10.h),
-                          Text("ชื่อท่า : ${list[index].nameExercise!}",
+                          Text("ชื่อท่า: ${list[index].nameExercise!}",
                               style: Font.black16),
                           Text(
-                              "ระยะเวลา / จำนวนครั้ง : ${list[index].setORtimeExercise!}",
+                              "ระยะเวลา / จำนวนครั้ง: ${list[index].setORtimeExercise!}",
                               style: Font.black16)
                         ]),
                     subtitle: Column(children: [
-                      Text("แคลอรี่ : ${list[index].calExercise!}",
+                      Text("แคลอรี่: ${list[index].calExercise!}",
                           style: Font.black16),
+                      Button.button("Add", () {})
                     ]),
                   )),
             )

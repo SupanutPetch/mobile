@@ -38,6 +38,9 @@ class LoginController extends GetxController {
                 email: emailTextController.text.trim(),
                 password: passwordTextController.text.trim())
             .then((user) async {
+          if (GetData.userData.isNotEmpty) {
+            GetData.userData.clear();
+          }
           await GetData.getdata();
           if (Get.isDialogOpen!) {
             Get.back();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/view/exercise/listposes_page.dart';
 import 'package:project_mobile/widget.dart';

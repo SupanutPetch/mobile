@@ -44,8 +44,8 @@ class WelcomePage extends StatelessWidget {
                     'It’s never too early or too late to work towards being the healthiest you',
                     style: Font.white18B),
                 SizedBox(height: 0.5.h),
-                Button.button("Sign In", () => Get.to(() => LoginPage())),
-                Button.button("Sign Up", () => Get.to(() => RegisterPage())),
+                Button.button("Sign In", () => Get.off(() => LoginPage())),
+                Button.button("Sign Up", () => Get.off(() => RegisterPage())),
               ]),
         ]));
   }

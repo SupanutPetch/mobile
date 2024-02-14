@@ -40,16 +40,14 @@ class ScanFood extends StatelessWidget {
             },
           ),
           Center(
-            child: Container(
-              width: Get.width * 0.5,
-              height: Get.width * 0.5,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(color: Colors.white38, width: 4.0),
-                borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-              ),
-            ),
-          ),
+              child: Container(
+                  width: Get.width * 0.5,
+                  height: Get.width * 0.5,
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.white38, width: 4.0),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(24.0)))))
         ]));
   }
 }

@@ -28,6 +28,7 @@ class ListFoodController extends GetxController with StateMixin {
       if (food.foodName!.toLowerCase().contains(query.toLowerCase()) ||
           food.foodCategory!.toLowerCase().contains(query.toLowerCase())) {
         searchData.add(food);
+        update();
       }
     }
   }

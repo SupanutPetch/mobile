@@ -16,34 +16,31 @@ class Textformfields {
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(
             width: 95.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Email", style: Font.white16),
-                TextFormField(
-                    validator: (String? value) =>
-                        value!.isEmpty ? "Please fill out information" : null,
-                    onSaved: (value) => value!.isNotEmpty
-                        ? textEditingController.text = value.trim()
-                        : null,
-                    controller: textEditingController,
-                    scrollPadding: const EdgeInsets.all(1),
-                    style: Font.black16B,
-                    decoration: InputDecoration(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Text("Email", style: Font.white16),
+              TextFormField(
+                  validator: (String? value) =>
+                      value!.isEmpty ? "Please fill out information" : null,
+                  onSaved: (value) => value!.isNotEmpty
+                      ? textEditingController.text = value.trim()
+                      : null,
+                  controller: textEditingController,
+                  scrollPadding: const EdgeInsets.all(1),
+                  style: Font.black16B,
+                  decoration: InputDecoration(
                       hintText: title,
                       filled: true,
                       fillColor: AppColor.platinum,
-                      prefixIcon: Icon(
-                        icon,
-                        color: iconcolor,
-                        size: 35,
-                        shadows: const [
-                          Shadow(
-                              color: AppColor.green,
-                              offset: Offset(2, 2),
-                              blurRadius: 1)
-                        ],
-                      ),
+                      prefixIcon: Icon(icon,
+                          color: iconcolor,
+                          size: 35,
+                          shadows: const [
+                            Shadow(
+                                color: AppColor.green,
+                                offset: Offset(2, 2),
+                                blurRadius: 1)
+                          ]),
                       labelStyle: const TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -56,10 +53,8 @@ class Textformfields {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                              color: AppColor.platinum, width: 2)),
-                    )),
-              ],
-            ))
+                              color: AppColor.platinum, width: 2)))),
+            ]))
       ])
     ]);
   }
@@ -77,60 +72,86 @@ class Textformfields {
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(
             width: 95.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Password", style: Font.white16),
-                TextFormField(
-                    onSaved: (value) => value!.isNotEmpty
-                        ? textEditingController.text = value.trim()
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Text("Password", style: Font.white16),
+              TextFormField(
+                  onSaved: (value) => value!.isNotEmpty
+                      ? textEditingController.text = value.trim()
+                      : null,
+                  controller: textEditingController,
+                  scrollPadding: const EdgeInsets.all(5),
+                  style: Font.black18B,
+                  obscureText: obscure,
+                  obscuringCharacter: "*",
+                  decoration: InputDecoration(
+                    hintText: title,
+                    filled: true,
+                    fillColor: AppColor.platinum,
+                    prefixIcon: Icon(icon,
+                        color: AppColor.orange,
+                        size: 35,
+                        shadows: const [
+                          Shadow(offset: Offset(2, 2), color: AppColor.green)
+                        ]),
+                    labelStyle: const TextStyle(color: Colors.white),
+                    suffixIcon: showicon
+                        ? IconButton(
+                            onPressed: () => function(),
+                            icon: obscure
+                                ? const Icon(Icons.visibility_off,
+                                    color: AppColor.black)
+                                : const Icon(Icons.visibility,
+                                    color: AppColor.orange,
+                                    shadows: [
+                                        Shadow(
+                                            offset: Offset(1, 1),
+                                            color: Colors.black)
+                                      ]))
                         : null,
-                    controller: textEditingController,
-                    scrollPadding: const EdgeInsets.all(5),
-                    style: Font.black18B,
-                    obscureText: obscure,
-                    obscuringCharacter: "*",
-                    decoration: InputDecoration(
-                      hintText: title,
-                      filled: true,
-                      fillColor: AppColor.platinum,
-                      prefixIcon: Icon(icon,
-                          color: AppColor.orange,
-                          size: 35,
-                          shadows: const [
-                            Shadow(offset: Offset(2, 2), color: AppColor.green)
-                          ]),
-                      labelStyle: const TextStyle(color: Colors.white),
-                      suffixIcon: showicon
-                          ? IconButton(
-                              onPressed: () => function(),
-                              icon: obscure
-                                  ? const Icon(Icons.visibility_off,
-                                      color: AppColor.black)
-                                  : const Icon(Icons.visibility,
-                                      color: AppColor.orange,
-                                      shadows: [
-                                          Shadow(
-                                              offset: Offset(1, 1),
-                                              color: Colors.black)
-                                        ]))
-                          : null,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide:
-                              const BorderSide(color: AppColor.platinum)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(
-                              color: AppColor.platinum, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(
-                              color: AppColor.platinum, width: 2)),
-                    )),
-              ],
-            ))
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(color: AppColor.platinum)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                            color: AppColor.platinum, width: 2)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                            color: AppColor.platinum, width: 2)),
+                  ))
+            ]))
       ])
+    ]);
+  }
+
+  static Widget shotTextField(String titel, TextStyle textStyle,
+      TextEditingController textEditingController) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(titel, style: textStyle),
+      Container(
+          height: 5.h,
+          width: 30.w,
+          decoration: BoxDecoration(
+              color: AppColor.platinum,
+              borderRadius: BorderRadius.circular(20)),
+          child: TextFormField(
+              controller: textEditingController,
+              scrollPadding: const EdgeInsets.all(10),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(color: AppColor.platinum)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide:
+                        const BorderSide(color: AppColor.platinum, width: 2)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide:
+                        const BorderSide(color: AppColor.platinum, width: 2)),
+              )))
     ]);
   }
 }
@@ -138,27 +159,25 @@ class Textformfields {
 class Button {
   static Widget buttonLong(String label, var save) {
     return Container(
-      width: 50.w,
-      height: 6.h,
-      decoration: BoxDecoration(
-          color: AppColor.green,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 2)),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            disabledBackgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        onPressed: save,
-        child: Text(label,
-            style: const TextStyle(
-              color: AppColor.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              shadows: [Shadow(blurRadius: 2, color: Colors.white)],
-            )),
-      ),
-    );
+        width: 50.w,
+        height: 6.h,
+        decoration: BoxDecoration(
+            color: AppColor.green,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: 2)),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                disabledBackgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent),
+            onPressed: save,
+            child: Text(label,
+                style: const TextStyle(
+                  color: AppColor.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  shadows: [Shadow(blurRadius: 2, color: Colors.white)],
+                ))));
   }
 
   static Widget button(String buttonName, dynamic function) {
@@ -271,29 +290,54 @@ class WidgetAll {
   }
 
   static Widget dataTarget(String title, String detail, String description) {
-    return Column(
-      children: [
-        Padding(
+    return Column(children: [
+      Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            height: 100,
-            width: 150,
-            decoration: BoxDecoration(
-                border: Border.all(width: 2, color: AppColor.green),
-                borderRadius: BorderRadius.circular(20)),
+              height: 100,
+              width: 150,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: AppColor.green),
+                  borderRadius: BorderRadius.circular(20)),
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Text(title, style: Font.black16B),
+                const SizedBox(height: 20),
+                Text(detail, style: Font.black16)
+              ]))),
+      Text(description, style: Font.black16)
+    ]);
+  }
+
+  static Widget calculateGoal(TextEditingController hight,
+      TextEditingController weight, Widget dropdown, dynamic function) {
+    return AlertDialog(
+        backgroundColor: AppColor.black,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: SizedBox(
+            height: 50.h,
+            width: 50.h,
             child:
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(title, style: Font.black16B),
-              const SizedBox(height: 20),
-              Text(detail, style: Font.black16)
-            ]),
-          ),
-        ),
-        Text(
-          description,
-          style: Font.black16,
-        )
-      ],
-    );
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                        onPressed: () => Get.back(),
+                        icon: const Icon(FontAwesomeIcons.xmark,
+                            color: Colors.red))
+                  ]),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                Textformfields.shotTextField(
+                    "Hight (cm.)", Font.white16, hight),
+                Textformfields.shotTextField(
+                    "Weight (kg.)", Font.white16, weight),
+              ]),
+              SizedBox(height: 2.h),
+              dropdown,
+              const Spacer(),
+              Center(child: Button.button("Calcuater", () => function()))
+            ])));
   }
 }

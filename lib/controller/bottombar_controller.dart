@@ -13,22 +13,6 @@ class BottomBarController extends GetxController with StateMixin {
   static const TextStyle fontBottomBar =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
 
-  @override
-  void onInit() async {
-    change(null, status: RxStatus.loading());
-    chackDataUser();
-    change(null, status: RxStatus.success());
-    super.onInit();
-    update();
-  }
-
-  void chackDataUser() async {
-    if (GetData.userData.isEmpty) {
-      await GetData.getdata();
-      update();
-    }
-  }
-
   void changePage(int index) {
     selectedIndex.value = index;
   }
@@ -37,7 +21,7 @@ class BottomBarController extends GetxController with StateMixin {
     const ExercisePage(),
     const MealsPage(),
     HomePage(),
-    const GoalPage(),
+    GoalPage(),
     ProfilePage()
   ].obs;
 }

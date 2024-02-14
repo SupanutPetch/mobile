@@ -32,10 +32,13 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        GetData.userData[0].userImageURL != null
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    "${GetData.userData[0].userImageURL}"))
+                        GetData.userData[0].userImageURL!.isNotEmpty
+                            ? SizedBox(
+                                height: 11.h,
+                                width: 25.w,
+                                child: Obx(() => CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        GetData.userData[0].userImageURL!))))
                             : Icon(Icons.account_circle,
                                 color: AppColor.orange, size: 15.w),
                         SizedBox(width: 3.w),

@@ -1,18 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mobile/controller/basic_controller.dart';
+import 'package:project_mobile/view/home/bottombar.dart';
 import 'package:project_mobile/view/home/exercise_page.dart';
 import 'package:project_mobile/view/home/meals_page.dart';
+import 'package:project_mobile/view/welcome/welcome_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/firebase_options.dart';
-import 'package:project_mobile/view/welcome/welcome_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (FirebaseAuth.instance.currentUser != null &&
+      FirebaseAuth.instance.currentUser!.uid.isNotEmpty) {
+    await GetData.getdata();
+  }
   runApp(const MyApp());
 }
 
@@ -33,7 +38,16 @@ class MyApp extends StatelessWidget {
             GetPage(name: "/MealsPage", page: () => const MealsPage()),
             GetPage(name: "/ExercisePage", page: () => const ExercisePage()),
           ],
-          home: WelcomePage());
+          home: FutureBuilder(
+              future: Future.value(FirebaseAuth.instance.currentUser != null &&
+                  FirebaseAuth.instance.currentUser!.uid.isNotEmpty),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data == true) {
+                  return const BottomBar();
+                } else {
+                  return WelcomePage();
+                }
+              }));
     });
   }
 }

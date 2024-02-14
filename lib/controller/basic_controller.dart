@@ -29,4 +29,8 @@ class GetData extends GetxController {
       userData.refresh();
     }
   }
+
+  void updateUserData(List<UserModel> newData) {
+    userData.assignAll(newData);
+  }
 }

@@ -10,7 +10,7 @@ import 'package:project_mobile/widget.dart';
 class RegisterController extends GetxController {
   RxBool obscure = true.obs;
   RxInt selectedRadio = 0.obs;
-  String gender = "";
+  String gender = "man";
   final auth = FirebaseAuth.instance;
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
@@ -23,7 +23,8 @@ class RegisterController extends GetxController {
   signUp() async {
     if (emailTextController.text.isNotEmpty &&
         checkPassword() == true &&
-        selectedDate.value != DateTime.now()) {
+        selectedDate.value != DateTime.now() &&
+        gender != "") {
       try {
         await auth
             .createUserWithEmailAndPassword(
@@ -43,6 +44,7 @@ class RegisterController extends GetxController {
               "userName": userNameTextController.text,
               "userType": "n"
             });
+            Get.back();
           }
         });
       } on FirebaseAuthException catch (error) {
@@ -65,9 +67,9 @@ class RegisterController extends GetxController {
   void setSelectedGender(int value) {
     selectedRadio.value = value;
     if (selectedRadio.value == 0) {
-      gender = "man";
+      gender = "male";
     } else {
-      gender = "woman";
+      gender = "female";
     }
   }
 
