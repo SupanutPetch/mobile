@@ -59,55 +59,6 @@ class ExerciseController extends GetxController with StateMixin {
     }).toList());
   }
 
-  // Future<void> uploadImage() async {
-  //   Get.dialog(WidgetAll.loading());
-  //   final result = await FilePicker.platform.pickFiles(type: FileType.image);
-  //   if (result != null) {
-  //     final fileBytes = result.files.single.bytes!;
-  //     String imageName = DateTime.now().millisecondsSinceEpoch.toString();
-  //     try {
-  //       await storage.ref('images/$imageName.jpg').putData(fileBytes);
-  //       String imageUrl =
-  //           await storage.ref('images/$imageName.jpg').getDownloadURL();
-  //       imagesName.value = "$imageName.jpg";
-  //       imgUrl = imageUrl;
-  //       update();
-  //       Get.isDialogOpen! ? Get.back() : null;
-  //       Get.dialog(WidgetAll.dialog(
-  //           FontAwesomeIcons.check, "Upload Image succeed", AppColor.green));
-  //     } catch (e) {
-  //       Get.isDialogOpen! ? Get.back() : null;
-  //       Get.dialog(WidgetAll.dialog(FontAwesomeIcons.xmark, "$e", Colors.red));
-  //     }
-  //   }
-  // }
-
-  // Future<void> uploadVideo() async {
-  //   Get.dialog(WidgetAll.loading());
-  //   final result = await FilePicker.platform.pickFiles(type: FileType.video);
-  //   if (result != null) {
-  //     final fileBytes = result.files.single.bytes!;
-  //     String vdoname = DateTime.now().millisecondsSinceEpoch.toString();
-  //     try {
-  //       await storage
-  //           .ref('Video/$vdoname.${result.files.single.extension}')
-  //           .putData(fileBytes);
-  //       String vdoURL = await storage
-  //           .ref('Video/$vdoname.${result.files.single.extension}')
-  //           .getDownloadURL();
-  //       videoName.value = "$vdoname.${result.files.single.extension}";
-  //       vdoUrl = vdoURL;
-  //       update();
-  //       Get.isDialogOpen! ? Get.back() : null;
-  //       Get.dialog(WidgetAll.dialog(
-  //           FontAwesomeIcons.check, "Upload Video succeed", AppColor.green));
-  //     } catch (e) {
-  //       Get.isDialogOpen! ? Get.back() : null;
-  //       Get.dialog(WidgetAll.dialog(FontAwesomeIcons.xmark, "$e", Colors.red));
-  //     }
-  //   }
-  // }
-
   addExercise() async {
     Get.dialog(WidgetAll.loading());
     if (namecontroller.text.isNotEmpty &&

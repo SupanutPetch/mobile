@@ -53,7 +53,7 @@ class Textformfields {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                              color: AppColor.platinum, width: 2)))),
+                              color: AppColor.platinum, width: 2))))
             ]))
       ])
     ]);
@@ -119,7 +119,7 @@ class Textformfields {
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                         borderSide: const BorderSide(
-                            color: AppColor.platinum, width: 2)),
+                            color: AppColor.platinum, width: 2))
                   ))
             ]))
       ])
@@ -140,18 +140,45 @@ class Textformfields {
               controller: textEditingController,
               scrollPadding: const EdgeInsets.all(10),
               decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: AppColor.platinum)),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide:
-                        const BorderSide(color: AppColor.platinum, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide:
-                        const BorderSide(color: AppColor.platinum, width: 2)),
-              )))
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(color: AppColor.platinum)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide:
+                          const BorderSide(color: AppColor.platinum, width: 2)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                          color: AppColor.platinum, width: 2)))))
+    ]);
+  }
+
+  static Widget textField(String titel, TextStyle textStyle,
+      TextEditingController textEditingController) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(titel, style: textStyle),
+      Container(
+          height: 5.h,
+          width: 50.w,
+          decoration: BoxDecoration(
+              color: AppColor.platinum,
+              borderRadius: BorderRadius.circular(20)),
+          child: TextFormField(
+              controller: textEditingController,
+              scrollPadding: const EdgeInsets.all(10),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(color: AppColor.platinum)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide:
+                          const BorderSide(color: AppColor.platinum, width: 2)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                          color: AppColor.platinum, width: 2)))))
     ]);
   }
 }
@@ -173,11 +200,10 @@ class Button {
             onPressed: save,
             child: Text(label,
                 style: const TextStyle(
-                  color: AppColor.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  shadows: [Shadow(blurRadius: 2, color: Colors.white)],
-                ))));
+                    color: AppColor.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    shadows: [Shadow(blurRadius: 2, color: Colors.white)]))));
   }
 
   static Widget button(String buttonName, dynamic function) {
@@ -195,10 +221,7 @@ class Button {
     return ElevatedButton.icon(
         style: ElevatedButton.styleFrom(backgroundColor: AppColor.orange),
         onPressed: () => function(),
-        icon: Icon(
-          icon,
-          color: AppColor.black,
-        ),
+        icon: Icon(icon, color: AppColor.black),
         label: Text(
           buttonName,
           style: Font.white20B,
@@ -244,12 +267,12 @@ class WidgetAll {
     return Builder(builder: (context) {
       Future.delayed(const Duration(seconds: 1), () => Get.back());
       return AlertDialog(
-        backgroundColor: AppColor.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Icon(icon, color: iconcolor, size: 50),
-        content: Text(detail, style: Font.white18),
-        actionsAlignment: MainAxisAlignment.center,
-      );
+          backgroundColor: AppColor.black,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Icon(icon, color: iconcolor, size: 50),
+          content: Text(detail, style: Font.white18),
+          actionsAlignment: MainAxisAlignment.center);
     });
   }
 
@@ -269,24 +292,23 @@ class WidgetAll {
 
   static Widget boxDateForPick(dynamic function, DateTime dateTime) {
     return InkWell(
-      child: Container(
-          height: 50,
-          width: 150,
-          decoration: BoxDecoration(
-              color: AppColor.platinum,
-              border: Border.all(width: 2),
-              borderRadius: BorderRadius.circular(20)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(DateFormat.yMd().format(dateTime), style: Font.black16B),
-            const Icon(FontAwesomeIcons.cakeCandles,
-                size: 20,
-                color: AppColor.orange,
-                shadows: [Shadow(offset: Offset(1, 1))])
-          ])),
-      onTap: () {
-        function();
-      },
-    );
+        child: Container(
+            height: 50,
+            width: 150,
+            decoration: BoxDecoration(
+                color: AppColor.platinum,
+                border: Border.all(width: 2),
+                borderRadius: BorderRadius.circular(20)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(DateFormat.yMd().format(dateTime), style: Font.black16B),
+              const Icon(FontAwesomeIcons.cakeCandles,
+                  size: 20,
+                  color: AppColor.orange,
+                  shadows: [Shadow(offset: Offset(1, 1))])
+            ])),
+        onTap: () {
+          function();
+        });
   }
 
   static Widget dataTarget(String title, String detail, String description) {
@@ -309,33 +331,47 @@ class WidgetAll {
     ]);
   }
 
-  static Widget calculateGoal(TextEditingController hight,
-      TextEditingController weight, Widget dropdown, dynamic function) {
+  static Widget calculateGoal(
+      TextEditingController hight,
+      TextEditingController weight,
+      Widget dropdown,
+      TextEditingController targetWeight,
+      TextEditingController goalDay,
+      dynamic function) {
     return AlertDialog(
         backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         content: SizedBox(
-            height: 50.h,
+            height: 55.h,
             width: 50.h,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IconButton(
-                        onPressed: () => Get.back(),
-                        icon: const Icon(FontAwesomeIcons.xmark,
-                            color: Colors.red))
-                  ]),
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                IconButton(
+                    onPressed: () => Get.back(),
+                    icon: const Icon(FontAwesomeIcons.xmark, color: Colors.red))
+              ]),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Textformfields.shotTextField(
                     "Hight (cm.)", Font.white16, hight),
                 Textformfields.shotTextField(
-                    "Weight (kg.)", Font.white16, weight),
+                    "Weight (kg.)", Font.white16, weight)
               ]),
               SizedBox(height: 2.h),
               dropdown,
+              SizedBox(height: 2.h),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                Textformfields.shotTextField(
+                    "Target weight(kg.)", Font.white16, targetWeight),
+                Textformfields.shotTextField(" GoalDay", Font.white16, goalDay)
+              ]),
+              SizedBox(height: 2.h),
+              const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Date Pick", style: Font.white16),
+                    Text("Date Pick", style: Font.white16)
+                  ]),
               const Spacer(),
               Center(child: Button.button("Calcuater", () => function()))
             ])));

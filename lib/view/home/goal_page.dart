@@ -26,20 +26,20 @@ class GoalPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: AppColor.platinum,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                    children: [
-                      chartBMI(),
-                      const Spacer(),
-                      Button.button(
-                          "Calculate Goal",
-                          () => Get.dialog(WidgetAll.calculateGoal(
-                              controller.hightController,
-                              controller.weightController,
-                              dropdown(),
-                              controller.calculate))),
-                      SizedBox(height: 2.h)
-                    ],
-                  )))
+                  child: Column(children: [
+                    chartBMI(),
+                    const Spacer(),
+                    Button.button(
+                        "Calculate Goal",
+                        () => Get.dialog(WidgetAll.calculateGoal(
+                            controller.hightController,
+                            controller.weightController,
+                            dropdown(),
+                            controller.targetWeightController,
+                            controller.goalDayController,
+                            controller.calculate))),
+                    SizedBox(height: 2.h)
+                  ])))
         ])));
   }
 
