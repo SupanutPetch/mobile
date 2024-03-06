@@ -40,12 +40,16 @@ class WelcomePage extends StatelessWidget {
                         fontSize: 5.h,
                         fontWeight: FontWeight.bold,
                         color: Colors.white)),
-                const Text(
-                    'It’s never too early or too late to work towards being the healthiest you',
-                    style: Font.white18B),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(3.w, 0, 3.w, 0),
+                  child: const Text(
+                      'It’s never too early or too late to work towards being the healthiest you',
+                      style: Font.white18B),
+                ),
                 SizedBox(height: 0.5.h),
                 Button.button("Sign In", () => Get.off(() => LoginPage())),
-                Button.button("Sign Up", () => Get.off(() => RegisterPage())),
+                Button.button("Sign Up", () => Get.to(() => RegisterPage())),
+                SizedBox(height: 3.h)
               ]),
         ]));
   }

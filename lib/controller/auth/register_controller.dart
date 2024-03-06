@@ -80,27 +80,23 @@ class RegisterController extends GetxController {
 
   void selectDate(BuildContext context) async {
     await showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).copyWith().size.height * 0.25,
-          decoration: const BoxDecoration(color: AppColor.platinum),
-          child: Column(
-            children: [
-              Expanded(
-                  child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: selectedDate.value,
-                onDateTimeChanged: (DateTime newDate) {
-                  selectedDate.value = newDate;
-                },
-              )),
-              CupertinoButton(
-                  child: const Text("Done"), onPressed: () => Get.back()),
-            ],
-          ),
-        );
-      },
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+              height: MediaQuery.of(context).copyWith().size.height * 0.25,
+              decoration: const BoxDecoration(color: AppColor.platinum),
+              child: Column(children: [
+                Expanded(
+                    child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: selectedDate.value,
+                  onDateTimeChanged: (DateTime newDate) {
+                    selectedDate.value = newDate;
+                  },
+                )),
+                CupertinoButton(
+                    child: const Text("Done"), onPressed: () => Get.back())
+              ]));
+        });
   }
 }

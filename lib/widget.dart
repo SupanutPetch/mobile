@@ -85,42 +85,42 @@ class Textformfields {
                   obscureText: obscure,
                   obscuringCharacter: "*",
                   decoration: InputDecoration(
-                    hintText: title,
-                    filled: true,
-                    fillColor: AppColor.platinum,
-                    prefixIcon: Icon(icon,
-                        color: AppColor.orange,
-                        size: 35,
-                        shadows: const [
-                          Shadow(offset: Offset(2, 2), color: AppColor.green)
-                        ]),
-                    labelStyle: const TextStyle(color: Colors.white),
-                    suffixIcon: showicon
-                        ? IconButton(
-                            onPressed: () => function(),
-                            icon: obscure
-                                ? const Icon(Icons.visibility_off,
-                                    color: AppColor.black)
-                                : const Icon(Icons.visibility,
-                                    color: AppColor.orange,
-                                    shadows: [
-                                        Shadow(
-                                            offset: Offset(1, 1),
-                                            color: Colors.black)
-                                      ]))
-                        : null,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: const BorderSide(color: AppColor.platinum)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: const BorderSide(
-                            color: AppColor.platinum, width: 2)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: const BorderSide(
-                            color: AppColor.platinum, width: 2))
-                  ))
+                      hintText: title,
+                      filled: true,
+                      fillColor: AppColor.platinum,
+                      prefixIcon: Icon(icon,
+                          color: AppColor.orange,
+                          size: 35,
+                          shadows: const [
+                            Shadow(offset: Offset(2, 2), color: AppColor.green)
+                          ]),
+                      labelStyle: const TextStyle(color: Colors.white),
+                      suffixIcon: showicon
+                          ? IconButton(
+                              onPressed: () => function(),
+                              icon: obscure
+                                  ? const Icon(Icons.visibility_off,
+                                      color: AppColor.black)
+                                  : const Icon(Icons.visibility,
+                                      color: AppColor.orange,
+                                      shadows: [
+                                          Shadow(
+                                              offset: Offset(1, 1),
+                                              color: Colors.black)
+                                        ]))
+                          : null,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: AppColor.platinum)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: AppColor.platinum, width: 2))))
             ]))
       ])
     ]);
@@ -342,7 +342,7 @@ class WidgetAll {
         backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         content: SizedBox(
-            height: 55.h,
+            height: 45.h,
             width: 50.h,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -365,13 +365,6 @@ class WidgetAll {
                     "Target weight(kg.)", Font.white16, targetWeight),
                 Textformfields.shotTextField(" GoalDay", Font.white16, goalDay)
               ]),
-              SizedBox(height: 2.h),
-              const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text("Date Pick", style: Font.white16),
-                    Text("Date Pick", style: Font.white16)
-                  ]),
               const Spacer(),
               Center(child: Button.button("Calcuater", () => function()))
             ])));

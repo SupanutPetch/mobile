@@ -1,4 +1,4 @@
-class ExerciseMobel {
+class ExerciseModel {
   final String? nameExercise;
   final String? detailExercise;
   final String? calExercise;
@@ -7,7 +7,7 @@ class ExerciseMobel {
   final String? imgExercise;
   final String? vdoExercise;
 
-  ExerciseMobel({
+  ExerciseModel({
     required this.nameExercise,
     required this.detailExercise,
     required this.calExercise,
@@ -16,8 +16,8 @@ class ExerciseMobel {
     required this.imgExercise,
     required this.vdoExercise,
   });
-  factory ExerciseMobel.fromJson(Map<String, dynamic> json) {
-    return ExerciseMobel(
+  factory ExerciseModel.fromJson(Map<String, dynamic> json) {
+    return ExerciseModel(
         nameExercise: json["nameExercise"] ?? "",
         detailExercise: json["detailExercise"] ?? "",
         calExercise: json["calExercise"] ?? "",

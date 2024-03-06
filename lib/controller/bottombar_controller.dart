@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/view/home/meals_page.dart';
+import 'package:project_mobile/view/home/homefood_page.dart';
 import 'package:project_mobile/view/home/exercise_page.dart';
 
 import 'package:project_mobile/view/home/home_page.dart';
@@ -9,17 +8,19 @@ import 'package:project_mobile/view/home/profile_page.dart';
 import '../view/home/goal_page.dart';
 
 class BottomBarController extends GetxController with StateMixin {
-  var selectedIndex = 2.obs;
+  final selectedIndex = 2.obs;
   static const TextStyle fontBottomBar =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
 
   void changePage(int index) {
-    selectedIndex.value = index;
+    if (index >= 0 && index < pages.length) {
+      selectedIndex.value = index;
+    }
   }
 
-  final List<Widget> pages = [
+  final List<Widget> pages = <Widget>[
     const ExercisePage(),
-    const MealsPage(),
+    HomeFoodPage(),
     HomePage(),
     GoalPage(),
     ProfilePage()

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/model/exercise_mobel.dart';
+import 'package:project_mobile/model/exercise_model.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class ExerciseController extends GetxController with StateMixin {
-  var exercideData = <ExerciseMobel>[].obs;
-  RxList<ExerciseMobel> searchData = <ExerciseMobel>[].obs;
+  var exercideData = <ExerciseModel>[].obs;
+  RxList<ExerciseModel> searchData = <ExerciseModel>[].obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final storage = FirebaseStorage.instance;
   final auth = FirebaseAuth.instance;
@@ -47,7 +47,7 @@ class ExerciseController extends GetxController with StateMixin {
         await firestore.collection("ExerciseData").get();
     List<DocumentSnapshot> docs = querySnapshot.docs;
     exercideData.assignAll(docs.map((data) {
-      return ExerciseMobel(
+      return ExerciseModel(
         nameExercise: data["nameExercise"],
         calExercise: data["calExercise"],
         detailExercise: data["detailExercise"],

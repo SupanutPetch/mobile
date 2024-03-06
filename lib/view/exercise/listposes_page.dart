@@ -3,13 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/exercise_controller.dart';
-import 'package:project_mobile/model/exercise_mobel.dart';
+import 'package:project_mobile/controller/exercise/exercise_controller.dart';
+import 'package:project_mobile/model/exercise_model.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
 
-class ListPoses extends StatelessWidget {
-  const ListPoses({super.key});
+class ListPosesPage extends StatelessWidget {
+  const ListPosesPage({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ExerciseController());
@@ -45,45 +45,71 @@ class ListPoses extends StatelessWidget {
                   builder: (data) {
                     return data.exercideData.isNotEmpty
                         ? data.searchData.isNotEmpty
-                            ? Obx(() => listdata(data.searchData))
-                            : Obx(() => listdata(data.exercideData))
-                        : const Center(child: Text("No Data"));
+                            ? Obx(() => listdata(data.searchData, context))
+                            : Obx(() => listdata(data.exercideData, context))
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                                const Icon(FontAwesomeIcons.dumbbell,
+                                    color: AppColor.orange),
+                                Center(
+                                    child: Text('ไม่มีท่าออกกำลังกาย',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            color: Colors.white30)))
+                              ]);
                   }))
         ])));
   }
 
-  Widget listdata(List<ExerciseMobel> list) {
-    return ListView.builder(
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return Column(children: [
-            SizedBox(
-              width: 45.w,
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.sp)),
-                  shadowColor: Colors.black,
-                  color: AppColor.platinum,
-                  child: ListTile(
-                    title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.network(list[index].imgExercise!,
-                              width: 40.w, height: 10.h),
-                          Text("ชื่อท่า: ${list[index].nameExercise!}",
-                              style: Font.black16),
-                          Text(
-                              "ระยะเวลา / จำนวนครั้ง: ${list[index].setORtimeExercise!}",
-                              style: Font.black16)
-                        ]),
-                    subtitle: Column(children: [
-                      Text("แคลอรี่: ${list[index].calExercise!}",
-                          style: Font.black16),
-                      Button.button("Add", () {})
-                    ]),
-                  )),
-            )
-          ]);
-        });
+  Widget listdata(List<ExerciseModel> list, BuildContext context) {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              return Column(children: [
+                SizedBox(
+                    height: 28.h,
+                    width: 45.w,
+                    child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.sp)),
+                        shadowColor: Colors.black,
+                        color: AppColor.platinum,
+                        child: ListTile(
+                            title: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                              Image.network(list[index].imgExercise!),
+                              Text(list[index].nameExercise!,
+                                  style: Font.black16),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 1.w),
+                                        child:
+                                            const Icon(FontAwesomeIcons.clock)),
+                                    Text(list[index].setORtimeExercise!,
+                                        style: Font.black16)
+                                  ]),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(FontAwesomeIcons.fireFlameSimple,
+                                        color: Colors.redAccent),
+                                    Text(list[index].calExercise!,
+                                        style: Font.black16)
+                                  ]),
+                              Button.button("Add", () {})
+                            ]))))
+              ]);
+            }));
   }
 }

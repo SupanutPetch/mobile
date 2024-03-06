@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mobile/controller/basic_controller.dart';
 import 'package:project_mobile/controller/profile_controller.dart';
+import 'package:project_mobile/view/notification/notisetting_page.dart';
+import 'package:project_mobile/view/report/report_page.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
@@ -17,6 +19,7 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(children: [
+          SizedBox(height: 2.h),
           Row(children: [
             GetData.userData.isNotEmpty
                 ? GetData.userData[0].userImageURL != null &&
@@ -41,35 +44,43 @@ class ProfilePage extends StatelessWidget {
               Text("${GetData.userData[0].userEmail}", style: Font.white16B)
             ])
           ]),
-          Button.buttonLong("Edit Profile", () => Get.dialog(editProfile())),
+          Button.buttonLong("แก้ไขข้อมูล", () => Get.dialog(editProfile())),
           SizedBox(height: 3.h),
-          ListTile(
-              title: const Text("Report", style: Font.white16B),
-              leading: const Icon(FontAwesomeIcons.clipboardUser,
-                  color: AppColor.orange),
-              trailing: IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios,
-                      color: AppColor.orange),
-                  onPressed: () {})),
+          InkWell(
+            child: ListTile(
+                title: const Text("รายงาน", style: Font.white16B),
+                leading: const Icon(FontAwesomeIcons.clipboardUser,
+                    color: AppColor.orange),
+                trailing: IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios,
+                        color: AppColor.orange),
+                    onPressed: () => Get.to(() => const ReportPage()))),
+            onTap: () => Get.to(() => const ReportPage()),
+          ),
           SizedBox(height: 1.h),
-          ListTile(
-              title: const Text("Notification Setting", style: Font.white16B),
-              leading:
-                  const Icon(FontAwesomeIcons.bell, color: AppColor.orange),
-              trailing: IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios,
-                      color: AppColor.orange),
-                  onPressed: () {})),
+          InkWell(
+              child: ListTile(
+                  title:
+                      const Text("ตั้งค่าการแจ้งเตือน", style: Font.white16B),
+                  leading:
+                      const Icon(FontAwesomeIcons.bell, color: AppColor.orange),
+                  trailing: IconButton(
+                      icon: const Icon(Icons.arrow_forward_ios,
+                          color: AppColor.orange),
+                      onPressed: () => Get.to(() => const NotiSettingPage()))),
+              onTap: () => Get.to(() => const NotiSettingPage())),
           const Spacer(),
-          ListTile(
-            title: const Text("Signout", style: Font.white16B),
-            leading: const Icon(FontAwesomeIcons.arrowRightFromBracket,
-                color: AppColor.orange),
-            trailing: IconButton(
-                icon:
-                    const Icon(Icons.arrow_forward_ios, color: AppColor.orange),
-                onPressed: () => controller.siginout()),
-          )
+          InkWell(
+              child: ListTile(
+                  title: const Text("ออกจากระบบ", style: Font.white16B),
+                  leading: const Icon(FontAwesomeIcons.arrowRightFromBracket,
+                      color: AppColor.orange),
+                  trailing: IconButton(
+                      icon: const Icon(Icons.arrow_forward_ios,
+                          color: AppColor.orange),
+                      onPressed: () => controller.siginout()),
+                  onTap: () => controller.siginout())),
+          SizedBox(height: 1.h)
         ])));
   }
 

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
-import '../../controller/login_controller.dart';
+import '../../controller/auth/login_controller.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/view/auth/register_page.dart';
@@ -76,11 +76,9 @@ class LoginPage extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Center(
                     child: SizedBox(
-                        width: 40.w,
+                        width: 15.w,
                         child: socialButton(FontAwesomeIcons.google,
                             () => loginController.signInWithGoogle(), "g"))),
-                // const SizedBox(width: 20),
-                // socialButton(FontAwesomeIcons.facebook, () {}, "F")
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 const Text("Don't have an account?", style: Font.white18),
@@ -102,8 +100,6 @@ class LoginPage extends StatelessWidget {
         onPressed: () => function(),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(icon, color: AppColor.black),
-          SizedBox(width: 1.w),
-          const Text("Gogle Account", style: Font.black16B)
         ]));
   }
 }

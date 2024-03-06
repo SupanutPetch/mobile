@@ -43,7 +43,7 @@ class UserModel {
         "userGender": userGender,
         "userImageURL": userImageURL,
         "userType": userType,
-        "userhigh": userHigh,
+        "userHigh": userHigh,
         "userWeight": userWeight,
         "userActivity": userActivity
       };

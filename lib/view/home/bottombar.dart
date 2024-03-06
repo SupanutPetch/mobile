@@ -7,7 +7,6 @@ import 'package:project_mobile/controller/bottombar_controller.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BottomBarController());
@@ -26,22 +25,23 @@ class BottomBar extends StatelessWidget {
                   elevation: 0,
                   showUnselectedLabels: false,
                   currentIndex: controller.selectedIndex.value,
-                  onTap: controller.changePage,
+                  onTap: (index) => controller.changePage(index),
                   items: const [
                     BottomNavigationBarItem(
                         icon: Icon(FontAwesomeIcons.dumbbell),
-                        label: 'Exercise'),
+                        label: 'เผาผลาญ'),
                     BottomNavigationBarItem(
                         icon: Icon(Icons.fastfood_outlined),
                         activeIcon: Icon(Icons.fastfood),
-                        label: 'Eating'),
+                        label: 'กินอาหาร'),
                     BottomNavigationBarItem(
                         icon: Icon(FontAwesomeIcons.houseChimney),
-                        label: 'Home'),
+                        label: 'หน้าหลัก'),
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.flag), label: 'Goal'),
+                        icon: Icon(Icons.flag), label: 'เป้าหมาย'),
                     BottomNavigationBarItem(
-                        icon: Icon(FontAwesomeIcons.userTie), label: 'Profile'),
+                        icon: Icon(FontAwesomeIcons.userTie),
+                        label: 'ผู้ใช้งาน'),
                   ]),
             )));
   }

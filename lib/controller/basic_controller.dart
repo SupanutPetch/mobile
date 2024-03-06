@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/model/food_mobel.dart';
+import 'package:project_mobile/model/caleat_model.dart';
 import 'package:project_mobile/model/user_model.dart';
 
 class GetData extends GetxController {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
   static FirebaseAuth auth = FirebaseAuth.instance;
   static RxList<UserModel> userData = <UserModel>[].obs;
-  RxList<FoodModel> foodData = <FoodModel>[].obs;
+  static RxList<CalEatModel> calEatData = <CalEatModel>[].obs;
 
   static Future getdata() async {
     DocumentSnapshot userExists =

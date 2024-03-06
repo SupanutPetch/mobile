@@ -18,21 +18,20 @@ class SettingPage extends StatelessWidget {
             itemCount: controller.titles.length,
             itemBuilder: ((context, index) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: AppColor.platinum,
-                      border: Border.all(width: 2, color: AppColor.orange),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ListTile(
-                    leading: Icon(controller.icon[index]),
-                    iconColor: AppColor.black,
-                    title: Text(controller.titles[index]),
-                    titleTextStyle: Font.black18B,
-                    onTap: () => controller.tabMenu(controller.titles[index]),
-                  ),
-                ),
-              );
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColor.platinum,
+                        border: Border.all(width: 2, color: AppColor.orange),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ListTile(
+                        leading: Icon(controller.icon[index]),
+                        iconColor: AppColor.black,
+                        title: Text(controller.titles[index]),
+                        titleTextStyle: Font.black18B,
+                        onTap: () =>
+                            controller.tabMenu(controller.titles[index])),
+                  ));
             }))));
   }
 }

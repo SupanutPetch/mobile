@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:project_mobile/controller/basic_controller.dart';
 import 'package:project_mobile/view/home/bottombar.dart';
 import 'package:project_mobile/view/home/exercise_page.dart';
-import 'package:project_mobile/view/home/meals_page.dart';
+import 'package:project_mobile/view/home/goal_page.dart';
+import 'package:project_mobile/view/home/homefood_page.dart';
+import 'package:project_mobile/view/home/profile_page.dart';
 import 'package:project_mobile/view/welcome/welcome_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,8 +37,10 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColor.black),
           initialRoute: "/",
           getPages: [
-            GetPage(name: "/MealsPage", page: () => const MealsPage()),
             GetPage(name: "/ExercisePage", page: () => const ExercisePage()),
+            GetPage(name: "/HomeFoodPage", page: () => HomeFoodPage()),
+            GetPage(name: "/GoalPage", page: () => GoalPage()),
+            GetPage(name: "/ProfilePage", page: () => ProfilePage()),
           ],
           home: FutureBuilder(
               future: Future.value(FirebaseAuth.instance.currentUser != null &&

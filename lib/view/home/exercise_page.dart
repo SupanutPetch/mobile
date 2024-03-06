@@ -18,8 +18,10 @@ class ExercisePage extends StatelessWidget {
                 children: [
               Center(child: goalData()),
               const Spacer(),
-              Button.buttonwithicon("Add Exercise",
-                  () => Get.to(() => const ListPoses()), FontAwesomeIcons.plus)
+              Button.buttonwithicon(
+                  "Add Exercise",
+                  () => Get.to(() => const ListPosesPage()),
+                  FontAwesomeIcons.plus)
             ])));
   }
 

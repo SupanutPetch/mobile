@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/resetpass_controller.dart';
+import 'package:project_mobile/controller/auth/resetpass_controller.dart';
 import 'package:project_mobile/widget.dart';
 import 'package:sizer/sizer.dart';
 

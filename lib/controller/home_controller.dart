@@ -26,4 +26,10 @@ class HomeController extends GetxController with StateMixin {
       update();
     }
   }
+
+  chackinData() async {
+    if (GetData.userData.isNotEmpty) {
+      for (var data in GetData.userData) {}
+    }
+  }
 }
