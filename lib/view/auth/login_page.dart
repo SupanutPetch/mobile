@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Image.asset("lib/asset/iconapp.jpg", scale: 0.15.h),
-              const Text("Sign In to your account", style: Font.white30B),
+              const Text("ลงชื่อเข้าใช้งานบัญชีของคุณ", style: Font.white30B),
               SizedBox(height: 2.h),
               Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Textformfields.fieldBlank(
-                            "Email",
+                            "อีเมล",
                             FontAwesomeIcons.envelope,
                             loginController.emailTextController,
                             AppColor.orange)
@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     initState: (_) {},
                     builder: (_) {
                       return Textformfields.fieldPassWord(
-                          "Password",
+                          "รหัสผ่าน",
                           FontAwesomeIcons.lock,
                           _.obscure.value,
                           () => _.showPassword(),
@@ -51,7 +51,7 @@ class LoginPage extends StatelessWidget {
                     }),
                 TextButton(
                     onPressed: () => Get.to(() => ResetPassPage()),
-                    child: const Text("forgot Password?",
+                    child: const Text("ลืมรหัสผ่าน?",
                         style: TextStyle(
                             color: AppColor.orange,
                             fontSize: 16,
@@ -59,14 +59,14 @@ class LoginPage extends StatelessWidget {
               ]),
               const SizedBox(height: 5),
               Button.buttonLong(
-                  "Sign In", () => loginController.signInWithEmail()),
+                  "เข้าสู่ระบบ", () => loginController.signInWithEmail()),
               Row(children: [
                 Expanded(
                     child: Container(
                         margin: const EdgeInsets.only(left: 50.0, right: 10.0),
                         child: const Divider(
                             color: AppColor.orange, height: 36, thickness: 2))),
-                const Text("OR", style: Font.white18B),
+                const Text("หรือ", style: Font.white18B),
                 Expanded(
                     child: Container(
                         margin: const EdgeInsets.only(left: 10.0, right: 50.0),
@@ -81,10 +81,10 @@ class LoginPage extends StatelessWidget {
                             () => loginController.signInWithGoogle(), "g"))),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text("Don't have an account?", style: Font.white18),
+                const Text("ยังไม่มีบัญชี?", style: Font.white18),
                 TextButton(
                     onPressed: () => Get.to(() => RegisterPage()),
-                    child: const Text("SignUp",
+                    child: const Text("ลงทะเบียน",
                         style: TextStyle(
                             color: AppColor.green,
                             fontSize: 16,

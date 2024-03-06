@@ -141,6 +141,7 @@ class MyMenuController extends GetxController with StateMixin {
       foodCal.clear();
       foodBarcode.clear();
       await getdatafood();
+      Get.back();
     } else {
       Get.dialog(
           WidgetAll.dialog(FontAwesomeIcons.triangleExclamation,

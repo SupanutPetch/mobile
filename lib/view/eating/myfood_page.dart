@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:project_mobile/view/eating/scanfood_page.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:project_mobile/constant/color.dart';
@@ -41,9 +42,9 @@ class MyFoodPage extends StatelessWidget {
                             shadowColor: const MaterialStatePropertyAll(
                                 AppColor.black))))),
             IconButton(
-                onPressed: () =>
-                    Get.dialog(addFood(Obx(() => dropdown(controller)))),
-                icon: const Icon(FontAwesomeIcons.plus, color: AppColor.green))
+                onPressed: () => Get.to(() => const ScanFood()),
+                icon: const Icon(FontAwesomeIcons.barcode,
+                    color: AppColor.orange))
           ]),
           Expanded(
               child: GetBuilder<MyMenuController>(
@@ -62,9 +63,23 @@ class MyFoodPage extends StatelessWidget {
                                 SizedBox(height: 2.h),
                                 const Center(
                                     child: Text("ไม่พบข้อมูล",
-                                        style: Font.white18))
+                                        style: Font.white18)),
+                                IconButton(
+                                    onPressed: () => Get.dialog(addFood(
+                                        Obx(() => dropdown(controller)))),
+                                    icon: const Icon(FontAwesomeIcons.plus,
+                                        color: AppColor.green))
                               ]);
-                  }))
+                  })),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: AppColor.orange),
+              onPressed: () => controller.addFood(),
+              child: Column(children: [
+                SizedBox(height: 1.h),
+                Icon(Icons.fastfood, color: AppColor.white, size: 20.sp),
+                SizedBox(height: 1.h),
+                const Text("เพิ่มเมนูอาหาร", style: Font.white18)
+              ]))
         ])));
   }
 
@@ -97,7 +112,7 @@ class MyFoodPage extends StatelessWidget {
 
   Widget addFood(dynamic dropdown) {
     return Obx(() => AlertDialog(
-            backgroundColor: AppColor.platinum,
+            backgroundColor: AppColor.black,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: SizedBox(
@@ -107,7 +122,7 @@ class MyFoodPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        const Text("เพิ่มเมนู", style: Font.black18B),
+                        const Text("เพิ่มเมนู", style: Font.white18B),
                         const Spacer(),
                         IconButton(
                             onPressed: () => Get.back(),
@@ -125,15 +140,15 @@ class MyFoodPage extends StatelessWidget {
                           children: [
                             SizedBox(
                                 height: 1.h,
-                                child: Obx(
-                                  () => Checkbox(
-                                      activeColor: AppColor.green,
-                                      checkColor: AppColor.white,
-                                      value: controller.material.value,
-                                      onChanged: ((value) =>
-                                          controller.checkMaterial(value!))),
-                                )),
-                            const Text("เพิ่มส่วนผสม?")
+                                child: Obx(() => Checkbox(
+                                    side:
+                                        const BorderSide(color: AppColor.white),
+                                    activeColor: AppColor.white,
+                                    checkColor: AppColor.green,
+                                    value: controller.material.value,
+                                    onChanged: ((value) =>
+                                        controller.checkMaterial(value!))))),
+                            const Text("เพิ่มส่วนผสม?", style: Font.white18)
                           ]),
                       controller.material.isTrue
                           ? Button.button("เพิ่มส่วนผสม", () {})
@@ -151,7 +166,7 @@ class MyFoodPage extends StatelessWidget {
 
   Widget textfield(String titel, TextEditingController textEditingController) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(titel),
+      Text(titel, style: Font.white18),
       Container(
           height: 5.h,
           width: 60.w,
@@ -191,42 +206,43 @@ class MyFoodPage extends StatelessWidget {
                     shadowColor: Colors.black,
                     color: AppColor.platinum,
                     child: Slidable(
-                      closeOnScroll: true,
-                      endActionPane: ActionPane(
-                          extentRatio: 0.25,
-                          motion: const StretchMotion(),
-                          children: [
-                            SlidableAction(
-                                onPressed: (BuildContext context) {
-                                  controller.deleteMenu(index);
-                                },
-                                icon: Icons.delete,
-                                label: 'ลบ'.tr,
-                                backgroundColor: Colors.redAccent,
-                                foregroundColor: Colors.white,
-                                autoClose: true)
-                          ]),
-                      child: ListTile(
-                          title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("หมวดหมู่ : ${list[index].foodCategory!}",
-                                    style: Font.black16),
-                                Text("ชื่ออาหาร : ${list[index].foodName!}",
-                                    style: Font.black16)
-                              ]),
-                          subtitle: Row(children: [
-                            Text("ปริมาณ : ${list[index].foodQuantity!}",
-                                style: Font.black16),
-                            SizedBox(width: 2.w),
-                            Text("จำนวนแคลอรี่ : ${list[index].foodCal!}",
-                                style: Font.black16)
-                          ]),
-                          trailing: IconButton(
-                              onPressed: () => Get.back(),
-                              icon: const Icon(FontAwesomeIcons.plus,
-                                  color: AppColor.green))),
-                    ))
+                        closeOnScroll: true,
+                        endActionPane: ActionPane(
+                            extentRatio: 0.25,
+                            motion: const StretchMotion(),
+                            children: [
+                              SlidableAction(
+                                  onPressed: (BuildContext context) {
+                                    controller.deleteMenu(index);
+                                  },
+                                  icon: Icons.delete,
+                                  label: 'ลบ'.tr,
+                                  backgroundColor: Colors.redAccent,
+                                  foregroundColor: Colors.white,
+                                  autoClose: true)
+                            ]),
+                        child: ListTile(
+                            title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      "หมวดหมู่ : ${list[index].foodCategory!}",
+                                      style: Font.black16),
+                                  Text("ชื่ออาหาร : ${list[index].foodName!}",
+                                      style: Font.black16)
+                                ]),
+                            subtitle: Row(children: [
+                              Text("ปริมาณ : ${list[index].foodQuantity!}",
+                                  style: Font.black16),
+                              SizedBox(width: 2.w),
+                              Text("จำนวนแคลอรี่ : ${list[index].foodCal!}",
+                                  style: Font.black16)
+                            ]),
+                            trailing: IconButton(
+                                onPressed: () =>
+                                    controller.addfooditem(index, list[index]),
+                                icon: const Icon(FontAwesomeIcons.plus,
+                                    color: AppColor.orange)))))
               ]));
         });
   }

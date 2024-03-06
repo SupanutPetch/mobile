@@ -13,7 +13,7 @@ class ScanFood extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Scan BarCode'.tr, style: Font.white20B),
+            title: Text('สแกนบาร์โค้ด'.tr, style: Font.white20B),
             backgroundColor: AppColor.black,
             automaticallyImplyLeading: false,
             centerTitle: true,
@@ -29,25 +29,25 @@ class ScanFood extends StatelessWidget {
                 onTap: () => Get.back())),
         backgroundColor: AppColor.black,
         body: Stack(children: [
-          GetBuilder<ListFoodController>(
-            init: ListFoodController(),
-            initState: (controller) {},
-            builder: (controller) {
-              return MobileScanner(
-                  startDelay: false,
-                  controller: controller.cameraController,
-                  onDetect: (barcode) => controller.qrDetect(context, barcode));
-            },
-          ),
           Center(
               child: Container(
-                  width: Get.width * 0.5,
-                  height: Get.width * 0.5,
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white38, width: 4.0),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(24.0)))))
+            width: Get.width * 0.8,
+            height: Get.width * 0.5,
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: AppColor.orange, width: 4.0),
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: GetBuilder<ListFoodController>(
+                init: ListFoodController(),
+                initState: (controller) {},
+                builder: (controller) {
+                  return MobileScanner(
+                      startDelay: false,
+                      controller: controller.cameraController,
+                      onDetect: (barcode) =>
+                          controller.qrDetect(context, barcode));
+                }),
+          ))
         ]));
   }
 }

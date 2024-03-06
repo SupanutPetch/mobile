@@ -19,7 +19,7 @@ class BottomBarController extends GetxController with StateMixin {
   }
 
   final List<Widget> pages = <Widget>[
-    const ExercisePage(),
+    ExercisePage(),
     HomeFoodPage(),
     HomePage(),
     GoalPage(),

@@ -197,13 +197,16 @@ class ListFoodController extends GetxController with StateMixin {
   qrDetect(BuildContext context, BarcodeCapture barcode) async {
     if (barcode.barcodes.isNotEmpty) {
       if (barcode.barcodes[0].rawValue != null) {
+        scanCode.value = barcode.barcodes[0].rawValue.toString();
         cameraController.stop();
-        await checkQrcode(context, barcode.barcodes[0].rawValue.toString());
+        await checkQrcode();
       } else {
         return;
       }
     }
   }
 
-  checkQrcode(BuildContext context, String codeRAW) {}
+  checkQrcode() {
+    debugPrint(scanCode.value);
+  }
 }

@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:project_mobile/constant/font.dart';
 import 'package:project_mobile/constant/color.dart';
 import 'package:project_mobile/controller/basic_controller.dart';
+import 'package:project_mobile/controller/exercise/exercise_controller.dart';
 import 'package:project_mobile/controller/food/listfood_controller.dart';
 import 'package:project_mobile/controller/goal_controller.dart';
 import 'package:project_mobile/controller/home_controller.dart';
@@ -61,19 +62,34 @@ class HomePage extends StatelessWidget {
                           ]),
                           SizedBox(height: 5.h),
                           const Text("เป้าหมายแต่ละวัน", style: Font.white20B),
-                          cardData(
-                              controller.foodImage ?? "",
-                              "การกินอาหาร",
-                              "แคลอรี่การกินวันนี้ ${ListFoodController.totelCalEat}",
-                              "เป้าหมาย ${GoalController.goalData[0].goalCal ?? ""}",
-                              () => Get.to(() => const NavigationBarPage())),
+                          GoalController.goalData.isNotEmpty
+                              ? cardData(
+                                  controller.foodImage ?? "",
+                                  "การกินอาหาร",
+                                  "แคลอรี่การกินวันนี้  : ${ListFoodController.totelCalEat}",
+                                  "เป้าหมาย : ${GoalController.goalData[0].goalCal}",
+                                  () => Get.to(() => const NavigationBarPage()))
+                              : cardData(
+                                  controller.foodImage ?? "",
+                                  "การกินอาหาร",
+                                  "แคลอรี่การกินวันนี้  : ${ListFoodController.totelCalEat}",
+                                  "คุณยังไม่ได้ตั้งเป้าหมาย",
+                                  () =>
+                                      Get.to(() => const NavigationBarPage())),
                           SizedBox(height: 5.h),
-                          cardData(
-                              controller.exerciseImage ?? "",
-                              "ออกกำลังกาย",
-                              "แคลอรี่ออกกำลังกายวันนี้",
-                              "เป้าหมาย",
-                              () => Get.to(() => const ListPosesPage()))
+                          GoalController.goalData.isNotEmpty
+                              ? cardData(
+                                  controller.exerciseImage ?? "",
+                                  "ออกกำลังกาย",
+                                  "แคลอรี่ออกกำลังกายวันนี้ : ${ExerciseController.totelCalBurn}",
+                                  "เป้าหมาย : ${GoalController.goalData[0].goalBurn}",
+                                  () => Get.to(() => ListPosesPage()))
+                              : cardData(
+                                  controller.exerciseImage ?? "",
+                                  "ออกกำลังกาย",
+                                  "แคลอรี่ออกกำลังกายวันนี้ :",
+                                  "คุณยังไม่ได้ตั้งเป้าหมาย",
+                                  () => Get.to(() => ListPosesPage()))
                         ])))),
         onLoading: Scaffold(
             backgroundColor: AppColor.black,

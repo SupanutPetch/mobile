@@ -173,7 +173,10 @@ class GoalController extends GetxController with StateMixin {
           'goalEndDate': DateFormat.yMd()
               .format(DateTime.now().add(Duration(days: goalDay.value)))
         });
-        await firestore.collection("UserData").doc(auth.currentUser!.uid).set({
+        await firestore
+            .collection("UserData")
+            .doc(auth.currentUser!.uid)
+            .update({
           "userWeight": weight.value.toString(),
           "userHigh": height.value.toString(),
           "userActivity": selectActivity.value

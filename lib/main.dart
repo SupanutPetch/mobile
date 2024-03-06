@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColor.black),
           initialRoute: "/",
           getPages: [
-            GetPage(name: "/ExercisePage", page: () => const ExercisePage()),
+            GetPage(name: "/ExercisePage", page: () => ExercisePage()),
             GetPage(name: "/HomeFoodPage", page: () => HomeFoodPage()),
             GetPage(name: "/GoalPage", page: () => GoalPage()),
             GetPage(name: "/ProfilePage", page: () => ProfilePage()),

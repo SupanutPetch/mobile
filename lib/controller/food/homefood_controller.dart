@@ -58,7 +58,7 @@ class HomeFoodController extends GetxController with StateMixin {
 
   getdata() async {
     if (GoalController.goalData.isNotEmpty) {
-      data.value = await <CircularStackEntry>[
+      data.value = <CircularStackEntry>[
         CircularStackEntry([
           CircularSegmentEntry(
               (100 - ListFoodController.totelCalEat.value.toDouble()) *
@@ -66,7 +66,7 @@ class HomeFoodController extends GetxController with StateMixin {
                   100,
               checkcolor()),
           CircularSegmentEntry(GoalController.goalData[0].goalCal! * 360 / 100,
-              AppColor.platinum),
+              AppColor.platinum)
         ]),
       ].obs;
       Get.forceAppUpdate();

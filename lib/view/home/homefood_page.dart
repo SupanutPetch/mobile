@@ -32,11 +32,8 @@ class HomeFoodPage extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       child: Text("การรับประทานอาหาร", style: Font.white18B)),
                   Obx(() => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            goalEat(),
-                            eatfood(),
-                          ])),
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [goalEat(), eatfood()])),
                   const Text("ประวัติการรับประทานอาหาร", style: Font.white18B),
                   Center(child: goalData()),
                   Obx(() => ListFoodController.calEat.isNotEmpty
@@ -62,7 +59,7 @@ class HomeFoodPage extends StatelessWidget {
             width: 90.w,
             decoration: BoxDecoration(
                 color: AppColor.platinum,
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(30)),
             child: GetBuilder<ListFoodController>(
                 init: ListFoodController(),
                 initState: (data) {},

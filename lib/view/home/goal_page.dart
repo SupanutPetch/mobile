@@ -25,7 +25,9 @@ class GoalPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  containerGoal(),
+                  GoalController.goalData.isNotEmpty
+                      ? containerGoal()
+                      : const SizedBox(),
                   SizedBox(height: 2.h),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
