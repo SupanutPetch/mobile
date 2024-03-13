@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/model/goal_model.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/model/goal_model.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class GoalController extends GetxController with StateMixin {
@@ -131,12 +131,13 @@ class GoalController extends GetxController with StateMixin {
     }
   }
 
-  var selectActivity = "sedentary".obs;
+  var selectActivity = "ทำงานแบบนั่งอยู่กับที่".obs;
   final List<String> activityLevel = [
-    "sedentary",
-    "lightlyActive",
-    "moderatelyActive",
-    "veryActive",
+    "ทำงานแบบนั่งอยู่กับที่",
+    "ออกกำลังกาย 1-3 วันต่อสัปดาห์",
+    "ออกกำลังกายปานกลาง 3-5 วันต่อสัปดาห์",
+    "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์",
+    "นักกีฬา"
   ];
 
   calculate() async {
@@ -211,7 +212,7 @@ class GoalController extends GetxController with StateMixin {
     if (weightDifference < 0) {
       weightDifference = weightDifference * -1;
       var dailyCal = weightDifference * 7700 / double.parse(goalDay.toString());
-      if (activityLevel != "extraActive") {
+      if (activityLevel != "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์") {
         var teddActivity = bmr * 1.725;
         burnCal.value = teddActivity - bmr;
         var check = dailyCal - burnCal.value;
@@ -252,7 +253,7 @@ class GoalController extends GetxController with StateMixin {
                         ])
                   ]))));
       if (exercise) {
-        if (activityLevel != "extraActive") {
+        if (activityLevel != "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์") {
           var teddActivity = bmr * 1.725;
           burnCal.value = teddActivity - tdee;
           return teddActivity +
@@ -296,7 +297,7 @@ class GoalController extends GetxController with StateMixin {
                       ])
                 ]))));
     if (exercise) {
-      if (activityLevel != "extraActive") {
+      if (activityLevel != "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์") {
         var teddActivity = bmr * 1.725;
         burnCal.value = teddActivity - tdee;
         return teddActivity + (weightDifference * 7700 / goalDay);
@@ -328,19 +329,19 @@ class GoalController extends GetxController with StateMixin {
   double calculateTDEE(double bmr, String activityLevel) {
     double activityLevelFactor = 0.0;
     switch (activityLevel) {
-      case "sedentary":
+      case "ทำงานแบบนั่งอยู่กับที่":
         activityLevelFactor = 1.2;
         break;
-      case "lightlyActive":
+      case "ออกกำลังกาย 1-3 วันต่อสัปดาห์":
         activityLevelFactor = 1.375;
         break;
-      case "moderatelyActive":
+      case "ออกกำลังกายปานกลาง 3-5 วันต่อสัปดาห์":
         activityLevelFactor = 1.55;
         break;
-      case "veryActive":
+      case "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์":
         activityLevelFactor = 1.725;
         break;
-      case "extraActive":
+      case "นักกีฬา":
         activityLevelFactor = 1.9;
         break;
     }

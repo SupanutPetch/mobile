@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/view/eating/listfood_page.dart';
-import 'package:project_mobile/view/eating/myfood_page.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/view/eating/listfood_page.dart';
+import 'package:kitcal/view/eating/myfood_page.dart';
 
 class NavigationBarController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {

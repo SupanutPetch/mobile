@@ -2,13 +2,13 @@ import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/exercise/exercise_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/model/calexecise_model.dart';
-import 'package:project_mobile/view/exercise/listposes_page.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/exercise/exercise_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/model/calexecise_model.dart';
+import 'package:kitcal/view/exercise/listposes_page.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class ExercisePage extends StatelessWidget {
@@ -22,9 +22,10 @@ class ExercisePage extends StatelessWidget {
             child: SingleChildScrollView(
                 child: Column(children: [
           const Text("การออกกำลังกาย", style: Font.white18B),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [Obx(() => goalBurn()), Obx(() => exercise())]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Obx(() => goalBurn()),
+            Obx(() => exercise()),
+          ]),
           SizedBox(height: 2.h),
           const Text("ประวัติการออกกำลังกาย / ท่าออกกำลังกายที่แนะนำ",
               style: Font.white18),
@@ -125,8 +126,8 @@ class ExercisePage extends StatelessWidget {
   Widget exercise() {
     return GoalController.goalData.isNotEmpty
         ? SizedBox(
-            width: 170,
-            height: 180,
+            width: 150,
+            height: 150,
             child: Obx(() => AnimatedCircularChart(
                 edgeStyle: SegmentEdgeStyle.round,
                 labelStyle: Font.white20B,
@@ -140,8 +141,8 @@ class ExercisePage extends StatelessWidget {
   Widget goalBurn() {
     return GoalController.goalData.isNotEmpty
         ? SizedBox(
-            width: 170,
-            height: 170,
+            width: 150,
+            height: 150,
             child: Obx(() => AnimatedCircularChart(
                 edgeStyle: SegmentEdgeStyle.round,
                 labelStyle: Font.white20B,

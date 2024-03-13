@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/auth/resetpass_controller.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/auth/resetpass_controller.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class ResetPassPage extends StatelessWidget {
@@ -20,11 +20,11 @@ class ResetPassPage extends StatelessWidget {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset("lib/asset/iconapp.jpg", scale: 0.15.h),
           SizedBox(height: 5.h),
-          const Text("Reset Password", style: Font.white30B),
-          Textformfields.fieldBlank("Email", FontAwesomeIcons.envelope,
-              contrller.emailTextController, AppColor.green),
+          const Text("เปลี่ยนรหัสผ่านใหม่", style: Font.white30B),
+          Textformfields.fieldBlank("อีเมล", FontAwesomeIcons.envelope,
+              contrller.emailTextController, AppColor.orange),
           SizedBox(height: 3.h),
-          Button.buttonLong("Sent mail!", () => contrller.sentMailReset())
+          Button.button("ส่งเมล!", () => contrller.sentMailReset())
         ])));
   }
 }

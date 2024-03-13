@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/widget.dart';
 
 class RegisterController extends GetxController {
   RxBool obscure = true.obs;

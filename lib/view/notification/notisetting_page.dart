@@ -3,9 +3,9 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/noti_controller.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/noti_controller.dart';
 
 class NotiSettingPage extends StatelessWidget {
   const NotiSettingPage({super.key});

@@ -1,26 +1,49 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/view/home/bottombar.dart';
-import 'package:project_mobile/view/home/exercise_page.dart';
-import 'package:project_mobile/view/home/goal_page.dart';
-import 'package:project_mobile/view/home/homefood_page.dart';
-import 'package:project_mobile/view/home/profile_page.dart';
-import 'package:project_mobile/view/welcome/welcome_page.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/view/home/bottombar.dart';
+import 'package:kitcal/view/home/exercise_page.dart';
+import 'package:kitcal/view/home/goal_page.dart';
+import 'package:kitcal/view/home/homefood_page.dart';
+import 'package:kitcal/view/home/profile_page.dart';
+import 'package:kitcal/view/welcome/welcome_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/firebase_options.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await initNoti();
   if (FirebaseAuth.instance.currentUser != null &&
       FirebaseAuth.instance.currentUser!.uid.isNotEmpty) {
     await GetData.getdata();
   }
   runApp(const MyApp());
+}
+
+Future<void> initNoti() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  await messaging.requestPermission();
+  final tokel = await messaging.getToken();
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  debugPrint(tokel);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (message.notification != null) {}
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {});
+  RemoteMessage? initialMessage = await messaging.getInitialMessage();
 }
 
 class MyApp extends StatelessWidget {

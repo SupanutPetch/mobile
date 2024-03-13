@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:project_mobile/view/auth/login_page.dart';
+import 'package:kitcal/view/auth/login_page.dart';
 
 class SettingMenuController extends GetxController {
   List titles = [].obs;

@@ -7,15 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/model/calexecise_model.dart';
-import 'package:project_mobile/model/exercise_model.dart';
-import 'package:project_mobile/view/exercise/listposes_page.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/model/calexecise_model.dart';
+import 'package:kitcal/model/exercise_model.dart';
+import 'package:kitcal/view/exercise/listposes_page.dart';
+import 'package:kitcal/widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sizer/sizer.dart';
+import 'package:video_player/video_player.dart';
 
 class ExerciseController extends GetxController with StateMixin {
   var data = <CircularStackEntry>[].obs;
@@ -40,6 +43,8 @@ class ExerciseController extends GetxController with StateMixin {
   final PageController pageController = PageController(viewportFraction: 1);
   static RxList<CalExeciseModel> calExecise = <CalExeciseModel>[].obs;
   RxList<CalExeciseModel> recommend = <CalExeciseModel>[].obs;
+  late VideoPlayerController controllerVideo;
+  late Future<void> initializeVideoPlayerFuture;
 
   @override
   void onInit() async {
@@ -47,10 +52,8 @@ class ExerciseController extends GetxController with StateMixin {
     await getExerciseData();
     await getdata();
     await getExerciseDaily();
-    startAutoPageChange();
     change(null, status: RxStatus.success());
     super.onInit();
-    Timer.periodic(const Duration(seconds: 5), (_) => getdata());
     update();
   }
 
@@ -109,15 +112,6 @@ class ExerciseController extends GetxController with StateMixin {
           .reduce((value, element) => value + element);
       update();
     }
-  }
-
-  void startAutoPageChange() {
-    pageTimer = Timer.periodic(pageChangeDuration, (_) {
-      if (pageController.page == null) return;
-      final nextPage = (pageController.page!.toInt() + 1) % 2;
-      pageController.animateToPage(nextPage,
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
-    });
   }
 
   void search(String query) {
@@ -185,16 +179,74 @@ class ExerciseController extends GetxController with StateMixin {
     }
   }
 
-  viewDetail() {
-    return AlertDialog(
-        backgroundColor: AppColor.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        content: SizedBox(
-            height: 50.h,
-            width: 60.w,
-            child: const Column(
-              children: [],
-            )));
+  viewDetail(List<ExerciseModel> list, int index) async {
+    if (list.isNotEmpty) {
+      controllerVideo = VideoPlayerController.networkUrl(Uri.parse(
+          "https://www.youtube.com/watch?v=jzsT5gzn130&ab_channel=KikBeautyFit"));
+
+      Get.dialog(AlertDialog(
+          backgroundColor: AppColor.black,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          content: SizedBox(
+              height: 50.h,
+              width: 60.w,
+              child: ListView(
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    IconButton(
+                        onPressed: () => Get.back(),
+                        icon: const Icon(FontAwesomeIcons.xmark,
+                            color: Colors.red))
+                  ]),
+                  SizedBox(height: 5.h),
+                  Center(
+                      child:
+                          Text(list[index].nameExercise!, style: Font.white18)),
+                  SizedBox(height: 2.h),
+                  Image.network(list[index].imgExercise!),
+                  SizedBox(height: 2.h),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.only(right: 1.w),
+                            child: const Icon(FontAwesomeIcons.clock,
+                                color: AppColor.green)),
+                        Text(list[index * 2].setORtimeExercise!,
+                            style: Font.white16)
+                      ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Icon(FontAwesomeIcons.fireFlameSimple,
+                            color: Colors.redAccent),
+                        Text(list[index * 2].calExercise!, style: Font.white16)
+                      ]),
+                  SizedBox(height: 2.h),
+                  Text("ประโยชน์ : ${list[index].benefitsExercise!}",
+                      style: Font.white16),
+                  SizedBox(height: 2.h),
+                  const Text("รายละเอียดท่าออกกำลังกาย", style: Font.white16),
+                  SizedBox(height: 1.h),
+                  Text(list[index].detailExercise!, style: Font.white16),
+                  SizedBox(height: 2.h),
+                  const Text("วีดีโอการสอนท่าออกกำลังกาย", style: Font.white16),
+                  controllerVideo.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: controllerVideo.value.aspectRatio,
+                          child: VideoPlayer(controllerVideo),
+                        )
+                      : Center(
+                          child: LoadingAnimationWidget.threeRotatingDots(
+                          color: AppColor.orange,
+                          size: 20,
+                        ))
+                ],
+              ))));
+    }
   }
 
   calculateCelRemain() {
@@ -252,5 +304,11 @@ class ExerciseController extends GetxController with StateMixin {
         update();
       }
     });
+  }
+
+  Future refreshData() async {
+    await getExerciseData();
+    await getdata();
+    await getExerciseDaily();
   }
 }

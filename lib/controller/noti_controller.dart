@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable, avoid_print
 
 import 'package:get/get.dart';
-import 'package:project_mobile/model/noti_model.dart';
+import 'package:kitcal/model/noti_model.dart';
 
 class NotiController extends GetxController {
   RxList<NotiModel> notilist = <NotiModel>[].obs;

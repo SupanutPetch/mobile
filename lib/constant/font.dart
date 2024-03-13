@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_mobile/constant/color.dart';
+import 'package:kitcal/constant/color.dart';
 
 class Font {
   static const TextStyle white = TextStyle(color: AppColor.white);

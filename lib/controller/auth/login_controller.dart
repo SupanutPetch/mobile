@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:project_mobile/view/home/bottombar.dart';
+import 'package:kitcal/view/home/bottombar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project_mobile/model/user_model.dart';
+import 'package:kitcal/model/user_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginController extends GetxController {

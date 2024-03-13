@@ -3,15 +3,15 @@ import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/food/listfood_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/model/caleat_model.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/model/caleat_model.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/food/homefood_controller.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/food/homefood_controller.dart';
+import 'package:kitcal/widget.dart';
 
 class HomeFoodPage extends StatelessWidget {
   HomeFoodPage({super.key});
@@ -30,7 +30,9 @@ class HomeFoodPage extends StatelessWidget {
                     child: ListView(children: [
                   const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text("การรับประทานอาหาร", style: Font.white18B)),
+                      child: Center(
+                          child:
+                              Text("การรับประทานอาหาร", style: Font.white18B))),
                   Obx(() => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [goalEat(), eatfood()])),

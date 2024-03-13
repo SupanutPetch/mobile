@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/model/caleat_model.dart';
-import 'package:project_mobile/model/food_model.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/model/caleat_model.dart';
+import 'package:kitcal/model/food_model.dart';
+import 'package:kitcal/widget.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ListFoodController extends GetxController with StateMixin {
@@ -206,7 +206,13 @@ class ListFoodController extends GetxController with StateMixin {
     }
   }
 
-  checkQrcode() {
-    debugPrint(scanCode.value);
+  checkQrcode() async {
+    for (var food in foodData) {
+      if (food.foodBarcode!
+          .toLowerCase()
+          .contains(scanCode.value.toLowerCase())) {
+        update();
+      }
+    }
   }
 }

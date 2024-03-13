@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/welcome_controller.dart';
-import 'package:project_mobile/view/auth/login_page.dart';
-import 'package:project_mobile/view/auth/register_page.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/welcome_controller.dart';
+import 'package:kitcal/view/auth/login_page.dart';
+import 'package:kitcal/view/auth/register_page.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -35,7 +35,7 @@ class WelcomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Welcome Back",
+                Text("ยินดีต้อนรับ",
                     style: TextStyle(
                         fontSize: 5.h,
                         fontWeight: FontWeight.bold,
@@ -43,12 +43,13 @@ class WelcomePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(3.w, 0, 3.w, 0),
                   child: const Text(
-                      'It’s never too early or too late to work towards being the healthiest you',
+                      'ไม่มีคำว่าเร็วหรือสายเกินไปที่จะพยายามมีสุขภาพดีที่สุด',
                       style: Font.white18B),
                 ),
                 SizedBox(height: 0.5.h),
-                Button.button("Sign In", () => Get.off(() => LoginPage())),
-                Button.button("Sign Up", () => Get.to(() => RegisterPage())),
+                Button.button("เข้าสู่ระบบ", () => Get.off(() => LoginPage())),
+                Button.button(
+                    "สมัครสมาชิก", () => Get.to(() => RegisterPage())),
                 SizedBox(height: 3.h)
               ]),
         ]));

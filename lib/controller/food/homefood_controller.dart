@@ -4,10 +4,10 @@ import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/food/listfood_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/view/eating/navigationbar.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/view/eating/navigationbar.dart';
 
 class HomeFoodController extends GetxController with StateMixin {
   var data = <CircularStackEntry>[].obs;

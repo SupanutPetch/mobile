@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
 import '../../controller/auth/login_controller.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/view/auth/register_page.dart';
-import 'package:project_mobile/view/auth/resetpass_page.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/view/auth/register_page.dart';
+import 'package:kitcal/view/auth/resetpass_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatelessWidget {

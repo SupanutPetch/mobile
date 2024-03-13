@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/constant/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:project_mobile/controller/auth/register_controller.dart';
+import 'package:kitcal/controller/auth/register_controller.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -27,12 +27,14 @@ class RegisterPage extends StatelessWidget {
                   children: [
                     Image.asset("lib/asset/iconapp.jpg", scale: 0.15.h),
                     const Center(
-                        child:
-                            Text("Sign Up to Continue", style: Font.white30B)),
-                    Textformfields.fieldBlank("UserName", FontAwesomeIcons.user,
-                        controller.userNameTextController, AppColor.orange),
+                        child: Text("สมัครการใช้งาน", style: Font.white30B)),
                     Textformfields.fieldBlank(
-                        "Email",
+                        "ชื่อผู้ใช้งาน",
+                        FontAwesomeIcons.user,
+                        controller.userNameTextController,
+                        AppColor.orange),
+                    Textformfields.fieldBlank(
+                        "อีเมล",
                         FontAwesomeIcons.envelope,
                         controller.emailTextController,
                         AppColor.orange),
@@ -41,7 +43,7 @@ class RegisterPage extends StatelessWidget {
                         initState: (_) {},
                         builder: (_) {
                           return Textformfields.fieldPassWord(
-                              "Password",
+                              "รหัสผ่าน",
                               FontAwesomeIcons.lock,
                               _.obscure.value,
                               () => _.showPassword(),
@@ -49,7 +51,7 @@ class RegisterPage extends StatelessWidget {
                               true);
                         }),
                     Textformfields.fieldPassWord(
-                        "Re-Password",
+                        "ยืนยันรหัสผ่าน",
                         FontAwesomeIcons.lock,
                         true,
                         () => controller.showPassword(),
@@ -57,7 +59,7 @@ class RegisterPage extends StatelessWidget {
                         false),
                     SizedBox(height: 2.h),
                     Row(children: [
-                      const Text("birthday :  ", style: Font.white20B),
+                      const Text("วันเกิด :  ", style: Font.white20B),
                       ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppColor.platinum),
@@ -72,17 +74,17 @@ class RegisterPage extends StatelessWidget {
                           })
                     ]),
                     Row(children: [
-                      const Text("Gender :", style: Font.white18B),
+                      const Text("เพศ :", style: Font.white18B),
                       Obx(() => selectGender())
                     ]),
                     SizedBox(height: 1.h),
                     ElevatedButton(
                         onPressed: () => controller.signUp(),
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColor.green),
-                        child: const Text("Sign up",
+                            backgroundColor: AppColor.orange),
+                        child: const Text("สมัครสมาชิก",
                             style: TextStyle(
-                                color: AppColor.black,
+                                color: AppColor.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)))
                   ]))
@@ -97,13 +99,13 @@ class RegisterPage extends StatelessWidget {
           value: 0,
           groupValue: controller.selectedRadio.value,
           onChanged: (value) => controller.setSelectedGender(value!)),
-      const Text('man', style: Font.white18B),
+      const Text('ชาย', style: Font.white18B),
       Radio(
           activeColor: AppColor.orange,
           value: 1,
           groupValue: controller.selectedRadio.value,
           onChanged: (value) => controller.setSelectedGender(value!)),
-      const Text('woman', style: Font.white18B)
+      const Text('หญิง', style: Font.white18B)
     ]));
   }
 }

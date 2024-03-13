@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/controller/food/listfood_controller.dart';
-import 'package:project_mobile/model/caleat_model.dart';
-import 'package:project_mobile/model/food_model.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/model/caleat_model.dart';
+import 'package:kitcal/model/food_model.dart';
+import 'package:kitcal/widget.dart';
 
 class MyMenuController extends GetxController with StateMixin {
   RxList<FoodModel> myfood = <FoodModel>[].obs;

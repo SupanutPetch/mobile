@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/model/caleat_model.dart';
-import 'package:project_mobile/model/user_model.dart';
+import 'package:kitcal/model/caleat_model.dart';
+import 'package:kitcal/model/user_model.dart';
 
 class GetData extends GetxController {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;

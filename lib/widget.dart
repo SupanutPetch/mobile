@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/constant/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
@@ -18,7 +18,7 @@ class Textformfields {
             width: 95.w,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text("Email", style: Font.white16),
+              Text(title, style: Font.white16),
               TextFormField(
                   validator: (String? value) =>
                       value!.isEmpty ? "Please fill out information" : null,
@@ -74,7 +74,7 @@ class Textformfields {
             width: 95.w,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text("Password", style: Font.white16),
+              Text(title, style: Font.white16),
               TextFormField(
                   onSaved: (value) => value!.isNotEmpty
                       ? textEditingController.text = value.trim()
@@ -353,20 +353,20 @@ class WidgetAll {
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Textformfields.shotTextField(
-                    "Hight (cm.)", Font.white16, hight),
+                    "ส่วนสูง (ซม.)", Font.white16, hight),
                 Textformfields.shotTextField(
-                    "Weight (kg.)", Font.white16, weight)
+                    "น้ำหนัก (กก.)", Font.white16, weight)
               ]),
               SizedBox(height: 2.h),
               dropdown,
               SizedBox(height: 2.h),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Textformfields.shotTextField(
-                    "Target weight(kg.)", Font.white16, targetWeight),
-                Textformfields.shotTextField(" GoalDay", Font.white16, goalDay)
+                    "น้ำหนักที่ตั้งเป้า(กก.)", Font.white16, targetWeight),
+                Textformfields.shotTextField(" จำนวนวัน", Font.white16, goalDay)
               ]),
               const Spacer(),
-              Center(child: Button.button("Calcuater", () => function()))
+              Center(child: Button.button("คำนวน", () => function()))
             ])));
   }
 }

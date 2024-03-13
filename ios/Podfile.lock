@@ -55,6 +55,9 @@ PODS:
   - Firebase/Firestore (10.18.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.18.0)
+  - Firebase/Messaging (10.18.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.18.0)
   - Firebase/Storage (10.18.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.18.0)
@@ -64,6 +67,10 @@ PODS:
     - Flutter
   - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
+    - Flutter
+  - firebase_messaging (14.7.10):
+    - Firebase/Messaging (= 10.18.0)
+    - firebase_core
     - Flutter
   - firebase_storage (11.6.0):
     - Firebase/Storage (= 10.18.0)
@@ -94,6 +101,20 @@ PODS:
   - FirebaseFirestore/Base (10.18.0)
   - FirebaseFirestore/WithLeveldb (10.18.0):
     - FirebaseFirestore/Base
+  - FirebaseInstallations (10.22.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.18.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseStorage (10.18.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseAuthInterop (~> 10.0)
@@ -187,6 +208,9 @@ PODS:
     - SDWebImage/Core (= 5.18.10)
   - SDWebImage/Core (5.18.10)
   - SwiftyGif (5.4.4)
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
 
 DEPENDENCIES:
   - barcode_scanner (from `.symlinks/plugins/barcode_scanner/ios`)
@@ -194,12 +218,14 @@ DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `10.18.0`)
   - Flutter (from `Flutter`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
 
 SPEC REPOS:
   trunk:
@@ -213,6 +239,8 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseStorage
     - GoogleDataTransport
     - GoogleMLKit
@@ -244,6 +272,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   FirebaseFirestore:
@@ -257,6 +287,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   mobile_scanner:
     :path: ".symlinks/plugins/mobile_scanner/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
@@ -273,6 +305,7 @@ SPEC CHECKSUMS:
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
   firebase_auth: 8e9ec02991ca4659111cc671c84d0c010b6bfb26
   firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
+  firebase_messaging: 90e8a6db84b6e1e876cebce4f30f01dc495e7014
   firebase_storage: 2b932fa5461f4efac36a2dcfbe240898b190b5b1
   FirebaseAppCheckInterop: 69fc7d8f6a1cbfa973efb8d1723651de30d12525
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
@@ -281,6 +314,8 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: 1c044fd46e95036cccb29134757c499613f3f564
   FirebaseCoreInternal: 43c1788eaeee9d1b97caaa751af567ce11010d00
   FirebaseFirestore: 584e3f563142f63d20e9ec9c505370d674d44eba
+  FirebaseInstallations: 763814908793c0da14c18b3dcffdec71e29ed55e
+  FirebaseMessaging: 9bc34a98d2e0237e1b121915120d4d48ddcf301e
   FirebaseStorage: 8333c4b183764cdd170d9539a61322b71c23adff
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   google_sign_in_ios: 8115e3fbe097e6509beb819ed602d47369d9011f
@@ -304,6 +339,7 @@ SPEC CHECKSUMS:
   ScanbotBarcodeScannerSDK: fac0c9f5da6a2a9c3c08d9bfcca9fc8e93d2b570
   SDWebImage: fc8f2d48bbfd72ef39d70e981bd24a3f3be53fec
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
+  video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
 
 PODFILE CHECKSUM: 2cb0548cb6e07a6c7c468c5d6e05f3ad642194c4
 

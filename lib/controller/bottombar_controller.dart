@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/view/home/homefood_page.dart';
-import 'package:project_mobile/view/home/exercise_page.dart';
+import 'package:kitcal/view/home/homefood_page.dart';
+import 'package:kitcal/view/home/exercise_page.dart';
 
-import 'package:project_mobile/view/home/home_page.dart';
-import 'package:project_mobile/view/home/profile_page.dart';
+import 'package:kitcal/view/home/home_page.dart';
+import 'package:kitcal/view/home/profile_page.dart';
 import '../view/home/goal_page.dart';
 
 class BottomBarController extends GetxController with StateMixin {

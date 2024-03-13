@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/report/report_controller.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/report/report_controller.dart';
 import 'package:sizer/sizer.dart';
 
 class ReportPage extends StatelessWidget {

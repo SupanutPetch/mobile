@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/view/report/calendar_page.dart';
-import 'package:project_mobile/view/report/graph_page.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/view/report/calendar_page.dart';
+import 'package:kitcal/view/report/graph_page.dart';
 
 class ReportController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
@@ -34,7 +32,7 @@ class ReportController extends GetxController
   }
 
   final List<Widget> pages = [
-    const CalenderPage(),
+    CalendarPage(),
     const GraphPage(),
   ];
 }

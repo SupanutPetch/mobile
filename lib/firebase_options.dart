@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAdFHtYuRMYwW1mYnIOY52s85ZZz26eYCc',
-    appId: '1:600804380370:web:2102d30f33e1b149c7a70b',
-    messagingSenderId: '600804380370',
-    projectId: 'project-final-4beda',
-    authDomain: 'project-final-4beda.firebaseapp.com',
-    storageBucket: 'project-final-4beda.appspot.com',
-    measurementId: 'G-BLFF6XX38H',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBFWANVB5ulInPJqQT4zu-1fHURC_B1WdM',
     appId: '1:600804380370:android:dc489e6e0e2ebe80c7a70b',
@@ -67,19 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '600804380370',
     projectId: 'project-final-4beda',
     storageBucket: 'project-final-4beda.appspot.com',
-    iosClientId:
-        '600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com',
+    androidClientId: '600804380370-83mj4asvuooj1gkp4esfkeg878of5lk2.apps.googleusercontent.com',
+    iosClientId: '600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com',
     iosBundleId: 'com.flutterthailand.projectMobile',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCp4URPWsKvFPExs4ff7iJk471e9llCZB4',
-    appId: '1:600804380370:ios:8f357cb1a5b44cf4c7a70b',
-    messagingSenderId: '600804380370',
-    projectId: 'project-final-4beda',
-    storageBucket: 'project-final-4beda.appspot.com',
-    iosClientId:
-        '600804380370-ss8cg8sfsmr7285vjl0p3lbh0mhjscua.apps.googleusercontent.com',
-    iosBundleId: 'com.flutterthailand.projectMobile.RunnerTests',
   );
 }

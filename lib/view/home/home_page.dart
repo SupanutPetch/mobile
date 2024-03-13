@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/controller/exercise/exercise_controller.dart';
-import 'package:project_mobile/controller/food/listfood_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/controller/home_controller.dart';
-import 'package:project_mobile/view/eating/navigationbar.dart';
-import 'package:project_mobile/view/exercise/listposes_page.dart';
-import 'package:project_mobile/view/notification/noti_page.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/controller/exercise/exercise_controller.dart';
+import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/controller/home_controller.dart';
+import 'package:kitcal/view/eating/navigationbar.dart';
+import 'package:kitcal/view/exercise/listposes_page.dart';
+import 'package:kitcal/view/notification/noti_page.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: AppColor.black,
             body: SafeArea(
                 child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                                 ])
                           ]),
                           SizedBox(height: 5.h),
-                          const Text("เป้าหมายแต่ละวัน", style: Font.white20B),
+                          const Text("เป้าหมายในวันนี้", style: Font.white20B),
                           GoalController.goalData.isNotEmpty
                               ? cardData(
                                   controller.foodImage ?? "",

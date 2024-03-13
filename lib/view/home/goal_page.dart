@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/basic_controller.dart';
-import 'package:project_mobile/controller/goal_controller.dart';
-import 'package:project_mobile/widget.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/controller/goal_controller.dart';
+import 'package:kitcal/widget.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -145,7 +145,7 @@ class GoalPage extends StatelessWidget {
 
   Widget dropdown() {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      const Text("Activity", style: Font.white16),
+      const Text("กิจกรรม", style: Font.white16),
       Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

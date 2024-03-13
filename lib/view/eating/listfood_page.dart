@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:project_mobile/constant/color.dart';
-import 'package:project_mobile/constant/font.dart';
-import 'package:project_mobile/controller/food/listfood_controller.dart';
-import 'package:project_mobile/model/food_model.dart';
-import 'package:project_mobile/view/eating/scanfood_page.dart';
+import 'package:kitcal/constant/color.dart';
+import 'package:kitcal/constant/font.dart';
+import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/model/food_model.dart';
+import 'package:kitcal/view/eating/scanfood_page.dart';
 import 'package:sizer/sizer.dart';
 
 class ListFoodPage extends StatelessWidget {
