@@ -148,58 +148,57 @@ class GoalController extends GetxController with StateMixin {
       goalDay.value = int.tryParse(goalDayController.text) ?? 0;
       var date = DateTime.now();
       var dateformat = DateFormat("yyyyMMdd").format(date);
-      if (height.value != 0.0 &&
-          weight.value != 0.0 &&
-          targetWeight.value != 0 &&
-          goalDay.value != 0) {
-        double heightInMeter = height / 100;
-        double bmi = weight / (heightInMeter * heightInMeter);
-        double bmr = await calculateBMR(weight.value, height.value);
-        double tdee = calculateTDEE(bmr, selectActivity.value);
-        double weightDifference = targetWeight.value - weight.value;
-        double dailyCalories = await calculateDailyCalories(
-            tdee, weightDifference, bmr, goalDay.value, selectActivity.value);
-        await firestore
-            .collection("goalData")
-            .doc("${auth.currentUser!.uid}-$dateformat")
-            .set({
-          "goalBMI": bmi.toStringAsFixed(2),
-          "goalBMR": bmr.toStringAsFixed(2),
-          "goalTDEE": tdee.toStringAsFixed(2),
-          "goalCal": dailyCalories.toStringAsFixed(2),
-          "goalBurn": burnCal.value.toStringAsFixed(2),
-          "goalWeight": targetWeight.value.toStringAsFixed(2),
-          "goalDay": goalDay.value.toString(),
-          'goalStartDate': DateFormat.yMd().format(DateTime.now()),
-          'goalEndDate': DateFormat.yMd()
-              .format(DateTime.now().add(Duration(days: goalDay.value)))
-        });
-        await firestore
-            .collection("UserData")
-            .doc(auth.currentUser!.uid)
-            .update({
-          "userWeight": weight.value.toString(),
-          "userHigh": height.value.toString(),
-          "userActivity": selectActivity.value
-        });
-        debugPrint("dailyCalories : $dailyCalories");
-        debugPrint("weightDifference : $weightDifference");
-        debugPrint("BMI : ${bmi.toStringAsFixed(2)}");
-        debugPrint("BMR : ${bmr.toStringAsFixed(2)}");
-        debugPrint("TDEE : ${tdee.toStringAsFixed(2)}");
-        debugPrint("burnCal : ${burnCal.toStringAsFixed(2)}");
-        hightController.clear();
-        weightController.clear();
-        targetWeightController.clear();
-        goalDayController.clear();
-        await getdata();
-        update();
+      if (goalDay.value > 30) {
+        if (height.value != 0.0 &&
+            weight.value != 0.0 &&
+            targetWeight.value != 0 &&
+            goalDay.value != 0) {
+          double heightInMeter = height / 100;
+          double bmi = weight / (heightInMeter * heightInMeter);
+          double bmr = await calculateBMR(weight.value, height.value);
+          double tdee = calculateTDEE(bmr, selectActivity.value);
+          double weightDifference = targetWeight.value - weight.value;
+          double dailyCalories = await calculateDailyCalories(
+              tdee, weightDifference, bmr, goalDay.value, selectActivity.value);
+          await firestore
+              .collection("goalData")
+              .doc("${auth.currentUser!.uid}-$dateformat")
+              .set({
+            "goalBMI": bmi.toStringAsFixed(0),
+            "goalBMR": bmr.toStringAsFixed(0),
+            "goalTDEE": tdee.toStringAsFixed(0),
+            "goalCal": dailyCalories.toStringAsFixed(0),
+            "goalBurn": burnCal.value.toStringAsFixed(0),
+            "goalWeight": targetWeight.value.toStringAsFixed(0),
+            "goalDay": goalDay.value.toString(),
+            'goalStartDate': DateFormat.yMd().format(DateTime.now()),
+            'goalEndDate': DateFormat.yMd()
+                .format(DateTime.now().add(Duration(days: goalDay.value)))
+          });
+          await firestore
+              .collection("UserData")
+              .doc(auth.currentUser!.uid)
+              .update({
+            "userWeight": weight.value.toString(),
+            "userHigh": height.value.toString(),
+            "userActivity": selectActivity.value
+          });
+          hightController.clear();
+          weightController.clear();
+          targetWeightController.clear();
+          goalDayController.clear();
+          await getdata();
+          update();
+        } else {
+          Get.dialog(WidgetAll.dialogWithButton(
+              FontAwesomeIcons.triangleExclamation,
+              "Please provide accurate information.",
+              () => Get.back(),
+              "Close"));
+        }
       } else {
-        Get.dialog(WidgetAll.dialogWithButton(
-            FontAwesomeIcons.triangleExclamation,
-            "Please provide accurate information.",
-            () => Get.back(),
-            "Close"));
+        Get.dialog(WidgetAll.dialog(FontAwesomeIcons.xmark,
+            "วันที่ตั้งเป้าหมายต้องเกิน 30 วันขึ้นไป", Colors.redAccent));
       }
     } else {
       debugPrint("ยังไม่มีวันเกิด");
@@ -225,33 +224,36 @@ class GoalController extends GetxController with StateMixin {
       }
     } else if (weightDifference > 0) {
       bool exercise = await Get.dialog(AlertDialog(
-          content: SizedBox(
-              height: 20.h,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(FontAwesomeIcons.dumbbell,
-                        color: AppColor.orange, size: 25.sp),
-                    const Text("ต้องการออกกำลังกายไหม?", style: Font.black18),
-                    SizedBox(height: 2.h),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.platinum),
-                              onPressed: () => Get.back(result: true),
-                              child: Icon(FontAwesomeIcons.check,
-                                  color: AppColor.green, size: 25.sp)),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.platinum),
-                              onPressed: () => Get.back(result: false),
-                              child: Icon(FontAwesomeIcons.xmark,
-                                  color: Colors.red, size: 25.sp))
-                        ])
-                  ]))));
+          content: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SizedBox(
+                  height: 20.h,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.dumbbell,
+                            color: AppColor.orange, size: 25.sp),
+                        const Text("ต้องการออกกำลังกายไหม?",
+                            style: Font.black18),
+                        SizedBox(height: 2.h),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.platinum),
+                                  onPressed: () => Get.back(result: true),
+                                  child: Icon(FontAwesomeIcons.check,
+                                      color: AppColor.green, size: 25.sp)),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.platinum),
+                                  onPressed: () => Get.back(result: false),
+                                  child: Icon(FontAwesomeIcons.xmark,
+                                      color: Colors.red, size: 25.sp))
+                            ])
+                      ])))));
       if (exercise) {
         if (activityLevel != "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์") {
           var teddActivity = bmr * 1.725;
@@ -269,33 +271,35 @@ class GoalController extends GetxController with StateMixin {
       }
     }
     bool exercise = await Get.dialog(AlertDialog(
-        content: SizedBox(
-            height: 20.h,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(FontAwesomeIcons.dumbbell,
-                      color: AppColor.orange, size: 25.sp),
-                  const Text("ต้องการออกกำลังกายไหม?", style: Font.black18),
-                  SizedBox(height: 2.h),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColor.platinum),
-                            onPressed: () => Get.back(result: true),
-                            child: Icon(FontAwesomeIcons.check,
-                                color: AppColor.green, size: 25.sp)),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColor.platinum),
-                            onPressed: () => Get.back(result: false),
-                            child: Icon(FontAwesomeIcons.xmark,
-                                color: Colors.red, size: 25.sp))
-                      ])
-                ]))));
+        content: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SizedBox(
+                height: 20.h,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.dumbbell,
+                          color: AppColor.orange, size: 25.sp),
+                      const Text("ต้องการออกกำลังกายไหม?", style: Font.black18),
+                      SizedBox(height: 2.h),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColor.platinum),
+                                onPressed: () => Get.back(result: true),
+                                child: Icon(FontAwesomeIcons.check,
+                                    color: AppColor.green, size: 25.sp)),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColor.platinum),
+                                onPressed: () => Get.back(result: false),
+                                child: Icon(FontAwesomeIcons.xmark,
+                                    color: Colors.red, size: 25.sp))
+                          ])
+                    ])))));
     if (exercise) {
       if (activityLevel != "ออกกำลังกายหนัก 6-7 วันต่อสัปดาห์") {
         var teddActivity = bmr * 1.725;

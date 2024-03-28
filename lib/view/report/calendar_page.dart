@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kitcal/constant/color.dart';
 import 'package:kitcal/constant/font.dart';
-import 'package:kitcal/controller/exercise/exercise_controller.dart';
-import 'package:kitcal/controller/food/listfood_controller.dart';
 import 'package:kitcal/controller/goal_controller.dart';
 import 'package:kitcal/controller/report/calendar_controller.dart';
+import 'package:kitcal/model/caleat_model.dart';
+import 'package:kitcal/model/calexecise_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -19,53 +20,79 @@ class CalendarPage extends StatelessWidget {
     initializeDateFormatting('th', null);
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         body: SafeArea(
-            child: Column(children: [
-          headTitle(),
-          SizedBox(height: 2.h),
-          calander(),
-          SizedBox(height: 2.h),
-          Obx(() => datadaily())
-        ])));
+            child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(children: [
+            const Center(child: Text("รายงานย้อนหลัง", style: Font.white20)),
+            SizedBox(height: 5.h),
+            headTitle(),
+            SizedBox(height: 2.h),
+            calander(),
+            SizedBox(height: 2.h),
+            Obx(() => datadaily())
+          ]),
+        )));
   }
 
   Widget calander() {
     return Container(
         height: 40.h,
         decoration: BoxDecoration(
-            color: AppColor.platinum, borderRadius: BorderRadius.circular(15)),
+          color: AppColor.platinum,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Obx(() => TableCalendar(
-              rowHeight: 5.h,
-              locale: 'th_TH',
-              headerStyle: const HeaderStyle(formatButtonVisible: false),
-              calendarStyle: const CalendarStyle(
-                  selectedTextStyle: Font.white16B,
-                  todayTextStyle: Font.white16B,
-                  markerDecoration:
-                      BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                  selectedDecoration: BoxDecoration(
-                      color: AppColor.orange, shape: BoxShape.circle),
-                  todayDecoration: BoxDecoration(
-                      color: AppColor.green, shape: BoxShape.circle)),
-              currentDay: DateTime.now(),
-              firstDay: DateTime.utc(2010, 10, 16),
-              lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: controller.selectedDate.value,
-              selectedDayPredicate: (day) => controller.selected(day),
-              onDaySelected: (selectedDay, focusedDay) {
-                controller.selectedDate.value = selectedDay;
-                controller.getdata();
-              },
-              eventLoader: (day) {
-                return controller.eventsForDay(day);
-              },
-            )));
+            rowHeight: 5.h,
+            locale: 'th_TH',
+            headerStyle: const HeaderStyle(formatButtonVisible: false),
+            calendarStyle: const CalendarStyle(
+              selectedTextStyle: Font.white16B,
+              todayTextStyle: Font.white16B,
+              selectedDecoration: BoxDecoration(
+                color: AppColor.orange,
+                shape: BoxShape.circle,
+              ),
+              todayDecoration: BoxDecoration(
+                color: AppColor.green,
+                shape: BoxShape.circle,
+              ),
+            ),
+            currentDay: DateTime.now(),
+            firstDay: DateTime.utc(2010, 10, 16),
+            lastDay: DateTime.utc(2030, 3, 14),
+            focusedDay: controller.selectedDate.value,
+            selectedDayPredicate: (day) => controller.selected(day),
+            onDaySelected: (selectedDay, focusedDay) {
+              controller.selectedDate.value = selectedDay;
+              controller.getdata();
+            },
+            eventLoader: (day) {
+              return controller.eventsForDay(day);
+            },
+            calendarBuilders:
+                CalendarBuilders(markerBuilder: (context, date, events) {
+              return Container(
+                  margin: const EdgeInsets.only(bottom: 2),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: events.map((event) {
+                        return Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: (event as Event).color));
+                      }).toList()));
+            }))));
   }
 
   Widget datadaily() {
     return Container(
-        height: 25.h,
+        height: 30.h,
         width: 90.w,
         decoration: BoxDecoration(
             color: AppColor.platinum, borderRadius: BorderRadius.circular(15)),
@@ -87,8 +114,95 @@ class CalendarPage extends StatelessWidget {
                       "เป้าหมายการออกกำลังกาย : ${GoalController.goalData[0].goalBurn.toString()} แคลอรี่",
                       style: Font.black16),
                   Text("ออกกำลังกายไป ${controller.totelCalExecise} แคลอรี่",
-                      style: Font.black16)
+                      style: Font.black16),
+                  const Center(
+                      child: Text("รายการย้อนหลัง", style: Font.black16B)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColor.orange),
+                          onPressed: () =>
+                              Get.dialog(foodpast(controller.eatDailyList)),
+                          icon:
+                              const Icon(Icons.fastfood, color: AppColor.white),
+                          label: const Text("อาหาร", style: Font.white)),
+                      ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColor.orange),
+                          onPressed: () => Get.dialog(
+                              exercisepast(controller.execiseDailyList)),
+                          icon: const Icon(FontAwesomeIcons.dumbbell,
+                              color: AppColor.white),
+                          label: const Text("ออกกำลังกาย", style: Font.white))
+                    ],
+                  )
                 ])));
+  }
+
+  Widget foodpast(List<CalEatModel> list) {
+    return AlertDialog(
+        backgroundColor: AppColor.black,
+        content: SizedBox(
+            height: 70.h,
+            width: 100.w,
+            child: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return Column(children: [
+                    ListTile(
+                        title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("${list[index].food}", style: Font.white)
+                              ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text("จำนวนแคลอรี่ :", style: Font.white),
+                                Text("${list[index].cal}", style: Font.white)
+                              ]),
+                          const Divider(
+                              color: AppColor.orange, indent: 20, endIndent: 20)
+                        ]))
+                  ]);
+                })));
+  }
+
+  Widget exercisepast(List<CalExeciseModel> list) {
+    return AlertDialog(
+        backgroundColor: AppColor.black,
+        content: SizedBox(
+            height: 70.h,
+            width: 100.w,
+            child: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return Column(children: [
+                    ListTile(
+                        title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("${list[index].poses}", style: Font.white)
+                              ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text("จำนวนแคลอรี่ :", style: Font.white),
+                                Text("${list[index].burn}", style: Font.white)
+                              ]),
+                          const Divider(
+                              color: AppColor.orange, indent: 20, endIndent: 20)
+                        ]))
+                  ]);
+                })));
   }
 
   Widget headTitle() {

@@ -14,6 +14,8 @@ class ListFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(children: [

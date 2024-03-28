@@ -10,8 +10,8 @@ class NavigationBarController extends GetxController
   static const TextStyle fontBottomBar =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
   final List<Tab> myTabs = <Tab>[
-    const Tab(child: Text("ListMenu", style: Font.white18)),
-    const Tab(child: Text("MyMenu", style: Font.white18)),
+    const Tab(child: Text("รายการอาหาร", style: Font.white18)),
+    const Tab(child: Text("เมนูของฉัน", style: Font.white18)),
   ];
 
   late TabController controller;

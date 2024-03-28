@@ -10,6 +10,8 @@ class GraphPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(GraphController());
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(

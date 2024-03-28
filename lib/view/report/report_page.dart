@@ -10,6 +10,8 @@ class ReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ReportController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
       backgroundColor: AppColor.black,
       appBar: AppBar(
         elevation: 0,

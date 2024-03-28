@@ -11,6 +11,8 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BottomBarController());
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         body: Obx(() => controller.pages[controller.selectedIndex.value]),
         bottomNavigationBar: Obx(() => Theme(
               data: Theme.of(context).copyWith(

@@ -57,6 +57,8 @@ dependencies:
   video_player: ^2.8.3
   d_chart: ^2.6.9
   firebase_messaging: ^14.7.10
+  flutter_local_notifications: ^17.0.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

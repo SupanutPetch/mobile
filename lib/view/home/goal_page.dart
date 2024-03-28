@@ -19,75 +19,81 @@ class GoalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return controller.obx(
         (state) => Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBodyBehindAppBar: true,
             backgroundColor: AppColor.black,
             body: SafeArea(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  GoalController.goalData.isNotEmpty
-                      ? containerGoal()
-                      : const SizedBox(),
-                  SizedBox(height: 2.h),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(children: [
-                          containerIcon(
-                              "BMI : ${GoalController.goalData[0].goalBMI ?? ""}",
-                              FontAwesomeIcons.person,
-                              controller.changeColorBMI(
-                                  GoalController.goalData[0].goalBMI)),
-                          SizedBox(height: 0.5.h),
-                          Text(
-                              controller
-                                  .textBMI(GoalController.goalData[0].goalBMI),
-                              style: Font.white16)
+                child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 2.h),
+                    GoalController.goalData.isNotEmpty
+                        ? containerGoal()
+                        : const SizedBox(),
+                    SizedBox(height: 2.h),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(children: [
+                            containerIcon(
+                                "BMI : ${GoalController.goalData[0].goalBMI ?? ""}",
+                                FontAwesomeIcons.person,
+                                controller.changeColorBMI(
+                                    GoalController.goalData[0].goalBMI)),
+                            SizedBox(height: 0.5.h),
+                            Text(
+                                controller.textBMI(
+                                    GoalController.goalData[0].goalBMI),
+                                style: Font.white16)
+                          ]),
+                          Column(children: [
+                            containerIcon(
+                                "BMR : ${GoalController.goalData[0].goalBMR ?? ""}",
+                                FontAwesomeIcons.fireFlameSimple,
+                                Colors.redAccent),
+                            SizedBox(height: 0.5.h),
+                            const Text("การเผาผลาญขั้นพื้นฐาน",
+                                style: Font.white16)
+                          ])
                         ]),
-                        Column(children: [
-                          containerIcon(
-                              "BMR : ${GoalController.goalData[0].goalBMR ?? ""}",
-                              FontAwesomeIcons.fireFlameSimple,
-                              Colors.redAccent),
-                          SizedBox(height: 0.5.h),
-                          const Text("การเผาผลาญขั้นพื้นฐาน",
-                              style: Font.white16)
-                        ])
-                      ]),
-                  SizedBox(height: 2.h),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(children: [
-                          containerIcon(
-                              "TDEE : ${GoalController.goalData[0].goalTDEE ?? ""}",
-                              FontAwesomeIcons.personWalking,
-                              AppColor.green),
-                          SizedBox(height: 0.5.h),
-                          const Text("การเผาผลาญต่อวัน", style: Font.white16)
+                    SizedBox(height: 2.h),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(children: [
+                            containerIcon(
+                                "TDEE : ${GoalController.goalData[0].goalTDEE ?? ""}",
+                                FontAwesomeIcons.personWalking,
+                                AppColor.green),
+                            SizedBox(height: 0.5.h),
+                            const Text("การเผาผลาญต่อวัน", style: Font.white16)
+                          ]),
+                          Column(children: [
+                            containerIcon(
+                                "เหลือ : ${controller.differenceDate()} วัน",
+                                FontAwesomeIcons.hourglass,
+                                Colors.pink),
+                            SizedBox(height: 0.5.h),
+                            const Text("ระยะเวลา", style: Font.white16)
+                          ])
                         ]),
-                        Column(children: [
-                          containerIcon(
-                              "เหลือ : ${controller.differenceDate()} วัน",
-                              FontAwesomeIcons.hourglass,
-                              Colors.pink),
-                          SizedBox(height: 0.5.h),
-                          const Text("ระยะเวลา", style: Font.white16)
-                        ])
-                      ]),
-                  const Spacer(),
-                  Center(
-                      child: Button.button(
-                          "คำนวนเป้าหมาย",
-                          () => Get.dialog(WidgetAll.calculateGoal(
-                              controller.hightController,
-                              controller.weightController,
-                              Obx(() => dropdown()),
-                              controller.targetWeightController,
-                              controller.goalDayController,
-                              controller.calculate)))),
-                  SizedBox(height: 3.h)
-                ]))),
+                    const Spacer(),
+                    Center(
+                        child: Button.button(
+                            "คำนวนเป้าหมาย",
+                            () => Get.dialog(WidgetAll.calculateGoal(
+                                controller.hightController,
+                                controller.weightController,
+                                Obx(() => dropdown()),
+                                controller.targetWeightController,
+                                controller.goalDayController,
+                                controller.calculate)))),
+                    SizedBox(height: 3.h)
+                  ]),
+            ))),
         onLoading: Scaffold(
             backgroundColor: AppColor.black,
             body: Center(

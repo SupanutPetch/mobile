@@ -25,6 +25,8 @@ class HomeFoodPage extends StatelessWidget {
         color: AppColor.orange,
         child: controller.obx(
             (state) => Scaffold(
+                resizeToAvoidBottomInset: false,
+                extendBodyBehindAppBar: true,
                 backgroundColor: AppColor.black,
                 body: SafeArea(
                     child: ListView(children: [
@@ -36,9 +38,11 @@ class HomeFoodPage extends StatelessWidget {
                   Obx(() => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [goalEat(), eatfood()])),
-                  const Text("ประวัติการรับประทานอาหาร", style: Font.white18B),
+                  const Center(
+                      child: Text("ประวัติการรับประทานอาหาร",
+                          style: Font.white18B)),
                   Center(child: goalData()),
-                  Obx(() => ListFoodController.calEat.isNotEmpty
+                  Obx(() => HomeFoodController.calEat.isNotEmpty
                       ? Center(
                           child: Button.button(
                               "เพิ่มอาหาร", () => controller.gotolistfood()))
@@ -66,8 +70,8 @@ class HomeFoodPage extends StatelessWidget {
                 init: ListFoodController(),
                 initState: (data) {},
                 builder: (data) {
-                  return ListFoodController.calEat.isNotEmpty
-                      ? listdata(ListFoodController.calEat)
+                  return HomeFoodController.calEat.isNotEmpty
+                      ? listdata(HomeFoodController.calEat)
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +119,7 @@ class HomeFoodPage extends StatelessWidget {
     return GoalController.goalData.isNotEmpty
         ? SizedBox(
             width: 170,
-            height: 180,
+            height: 170,
             child: Obx(() => AnimatedCircularChart(
                   edgeStyle: SegmentEdgeStyle.round,
                   labelStyle: Font.white20B,
@@ -136,7 +140,7 @@ class HomeFoodPage extends StatelessWidget {
                   edgeStyle: SegmentEdgeStyle.round,
                   labelStyle: Font.white20B,
                   holeLabel:
-                      "เป้าหมาย \n${GoalController.goalData[0].goalCal}\n  แคลอรี่",
+                      "เป้าหมาย \n   ${GoalController.goalData[0].goalCal!.toStringAsFixed(0)}\n  แคลอรี่",
                   size: const Size(180, 180),
                   initialChartData: <CircularStackEntry>[
                     CircularStackEntry([

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +26,9 @@ class CalenderController extends GetxController with StateMixin {
   RxList<Event> events = <Event>[].obs;
   RxInt totelCalEat = 0.obs;
   RxInt totelCalExecise = 0.obs;
+  String? dateString;
+  RxList<CalEatModel> eatEvent = <CalEatModel>[].obs;
+  RxList<CalExeciseModel> execiseEvent = <CalExeciseModel>[].obs;
 
   @override
   void onInit() async {
@@ -35,6 +36,7 @@ class CalenderController extends GetxController with StateMixin {
     await getdata();
     await getEatDaily();
     await getExeciseDailyDaily();
+    await getevent();
     addEventToToday();
     change(null, status: RxStatus.success());
     super.onInit();
@@ -47,10 +49,52 @@ class CalenderController extends GetxController with StateMixin {
         selectedDate.value.day == day.day;
   }
 
-  void addEventToToday() {
-    DateTime today = DateTime.now();
-    String eventContent = 'test';
-    addEvent(today, eventContent, AppColor.orange);
+  addEventToToday() {
+    Set<String> addedDatesForEat = {};
+    Set<String> addedDatesForExercise = {};
+    for (var date in eatEvent) {
+      String dateString = date.date!;
+      if (dateString.isNotEmpty && !addedDatesForEat.contains(dateString)) {
+        String month = dateString.substring(0, 2);
+        String day = dateString.substring(2, 4);
+        String year = dateString.substring(4);
+        DateTime dateTime =
+            DateTime(int.parse(year), int.parse(month), int.parse(day));
+        int totalcal = 0;
+        for (var event in eatEvent) {
+          if (event.date == dateString) {
+            totalcal += int.parse(event.cal!);
+          }
+        }
+        addEvent(dateTime, 'eat', colorEventEat(totalcal));
+        addedDatesForEat.add(dateString);
+      }
+    }
+    for (var date in execiseEvent) {
+      String dateString = date.date!;
+      if (dateString.isNotEmpty &&
+          !addedDatesForExercise.contains(dateString)) {
+        String month = dateString.substring(0, 2);
+        String day = dateString.substring(2, 4);
+        String year = dateString.substring(4);
+        DateTime dateTime =
+            DateTime(int.parse(year), int.parse(month), int.parse(day));
+        int totalcal = 0;
+        for (var event in execiseEvent) {
+          if (event.date == dateString) {
+            totalcal += int.parse(event.burn!);
+          }
+        }
+        addEvent(dateTime, 'execise', colorEventExecise(totalcal));
+        addedDatesForExercise.add(dateString);
+      }
+    }
+    bool allDataProcessed = eatEvent.every((date) => date.date != '') &&
+        execiseEvent.every((date) => date.date != '');
+    if (!allDataProcessed &&
+        (addedDatesForEat.isNotEmpty || addedDatesForExercise.isNotEmpty)) {
+      addEventToToday();
+    }
   }
 
   void addEvent(DateTime date, String title, Color color) {
@@ -66,7 +110,64 @@ class CalenderController extends GetxController with StateMixin {
         .toList();
   }
 
-  loadEvents() {}
+  getevent() async {
+    await geteventEat();
+    await geteventExecise();
+  }
+
+  geteventEat() async {
+    QuerySnapshot querySnapshot = await GetData.firestore
+        .collection("UserData")
+        .doc(GetData.userData[0].userID!)
+        .collection("EatDaily")
+        .get();
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    eatEvent.assignAll(docs.map(
+      (data) {
+        return CalEatModel(
+            food: data["food"], cal: data["cal"], date: data["date"]);
+      },
+    ));
+  }
+
+  Color colorEventEat(int totalcal) {
+    int goalCalInt = int.parse((goalperDay[0].goalCal!.toStringAsFixed(0)));
+    if (totalcal < goalCalInt) {
+      return Colors.redAccent;
+    }
+    if (totalcal == goalCalInt) {
+      return AppColor.green;
+    } else {
+      return AppColor.orange;
+    }
+  }
+
+  Color colorEventExecise(int totalcal) {
+    int goalBurnInt = int.parse((goalperDay[0].goalBurn!.toStringAsFixed(0)));
+    if (totalcal < goalBurnInt) {
+      return Colors.redAccent;
+    }
+    if (totalcal == goalBurnInt) {
+      return AppColor.green;
+    } else {
+      return AppColor.orange;
+    }
+  }
+
+  geteventExecise() async {
+    QuerySnapshot querySnapshot = await GetData.firestore
+        .collection("UserData")
+        .doc(GetData.userData[0].userID!)
+        .collection("ExerciseDaily")
+        .get();
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    execiseEvent.assignAll(docs.map(
+      (data) {
+        return CalExeciseModel(
+            poses: data["poses"], burn: data["burn"], date: data["date"]);
+      },
+    ));
+  }
 
   getdata() async {
     WidgetAll.loading();
@@ -116,7 +217,6 @@ class CalenderController extends GetxController with StateMixin {
         .collection("EatDaily")
         .get();
     List<DocumentSnapshot> docs = querySnapshot.docs;
-
     for (var data in docs) {
       if (data["date"].toString().contains(date)) {
         eatDailyList.add(CalEatModel(

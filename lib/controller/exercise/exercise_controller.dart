@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:kitcal/main.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:kitcal/constant/color.dart';
 import 'package:kitcal/constant/font.dart';
@@ -17,6 +20,7 @@ import 'package:kitcal/model/exercise_model.dart';
 import 'package:kitcal/view/exercise/listposes_page.dart';
 import 'package:kitcal/widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -52,8 +56,12 @@ class ExerciseController extends GetxController with StateMixin {
     await getExerciseData();
     await getdata();
     await getExerciseDaily();
+    await checkExecise();
     change(null, status: RxStatus.success());
     super.onInit();
+    Timer.periodic(const Duration(seconds: 5), (_) async {
+      await getdata();
+    });
     update();
   }
 
@@ -181,71 +189,77 @@ class ExerciseController extends GetxController with StateMixin {
 
   viewDetail(List<ExerciseModel> list, int index) async {
     if (list.isNotEmpty) {
-      controllerVideo = VideoPlayerController.networkUrl(Uri.parse(
-          "https://www.youtube.com/watch?v=jzsT5gzn130&ab_channel=KikBeautyFit"));
-
+      controllerVideo =
+          VideoPlayerController.networkUrl(Uri.parse(list[index].vdoExercise!));
+      debugPrint("vdo : ${list[index].vdoExercise!}");
+      initializeVideoPlayerFuture = controllerVideo.initialize();
       Get.dialog(AlertDialog(
           backgroundColor: AppColor.black,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          content: SizedBox(
-              height: 50.h,
-              width: 60.w,
-              child: ListView(
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    IconButton(
-                        onPressed: () => Get.back(),
-                        icon: const Icon(FontAwesomeIcons.xmark,
-                            color: Colors.red))
-                  ]),
-                  SizedBox(height: 5.h),
-                  Center(
-                      child:
-                          Text(list[index].nameExercise!, style: Font.white18)),
-                  SizedBox(height: 2.h),
-                  Image.network(list[index].imgExercise!),
-                  SizedBox(height: 2.h),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(right: 1.w),
-                            child: const Icon(FontAwesomeIcons.clock,
-                                color: AppColor.green)),
-                        Text(list[index * 2].setORtimeExercise!,
-                            style: Font.white16)
+          content: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SizedBox(
+                  height: 50.h,
+                  width: 60.w,
+                  child: ListView(
+                    children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        IconButton(
+                            onPressed: () => Get.back(),
+                            icon: const Icon(FontAwesomeIcons.xmark,
+                                color: Colors.red))
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Icon(FontAwesomeIcons.fireFlameSimple,
-                            color: Colors.redAccent),
-                        Text(list[index * 2].calExercise!, style: Font.white16)
-                      ]),
-                  SizedBox(height: 2.h),
-                  Text("ประโยชน์ : ${list[index].benefitsExercise!}",
-                      style: Font.white16),
-                  SizedBox(height: 2.h),
-                  const Text("รายละเอียดท่าออกกำลังกาย", style: Font.white16),
-                  SizedBox(height: 1.h),
-                  Text(list[index].detailExercise!, style: Font.white16),
-                  SizedBox(height: 2.h),
-                  const Text("วีดีโอการสอนท่าออกกำลังกาย", style: Font.white16),
-                  controllerVideo.value.isInitialized
-                      ? AspectRatio(
-                          aspectRatio: controllerVideo.value.aspectRatio,
-                          child: VideoPlayer(controllerVideo),
-                        )
-                      : Center(
-                          child: LoadingAnimationWidget.threeRotatingDots(
-                          color: AppColor.orange,
-                          size: 20,
-                        ))
-                ],
-              ))));
+                      SizedBox(height: 5.h),
+                      Center(
+                          child: Text(list[index].nameExercise!,
+                              style: Font.white18)),
+                      SizedBox(height: 2.h),
+                      Image.network(list[index].imgExercise!),
+                      SizedBox(height: 2.h),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.only(right: 1.w),
+                                child: const Icon(FontAwesomeIcons.clock,
+                                    color: AppColor.green)),
+                            Text(list[index * 2].setORtimeExercise!,
+                                style: Font.white16)
+                          ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(FontAwesomeIcons.fireFlameSimple,
+                                color: Colors.redAccent),
+                            Text(list[index * 2].calExercise!,
+                                style: Font.white16)
+                          ]),
+                      SizedBox(height: 2.h),
+                      Text("ประโยชน์ : ${list[index].benefitsExercise!}",
+                          style: Font.white16),
+                      SizedBox(height: 2.h),
+                      const Text("รายละเอียดท่าออกกำลังกาย",
+                          style: Font.white16),
+                      SizedBox(height: 1.h),
+                      Text(list[index].detailExercise!, style: Font.white16),
+                      SizedBox(height: 2.h),
+                      const Text("วีดีโอการสอนท่าออกกำลังกาย",
+                          style: Font.white16),
+                      controllerVideo.value.isInitialized
+                          ? AspectRatio(
+                              aspectRatio: controllerVideo.value.aspectRatio,
+                              child: VideoPlayer(controllerVideo),
+                            )
+                          : Center(
+                              child: LoadingAnimationWidget.threeRotatingDots(
+                              color: AppColor.orange,
+                              size: 20,
+                            ))
+                    ],
+                  )))));
     }
   }
 
@@ -258,9 +272,9 @@ class ExerciseController extends GetxController with StateMixin {
       var result = goal - totelCal;
       if (result <= 0) {
         var totel = result * -1;
-        return "ปริมาณที่เกิน\n   ${totel.toStringAsFixed(2)}\n   แคลอรี่";
+        return "ปริมาณที่เกิน\n   ${totel.toStringAsFixed(0)}\n   แคลอรี่";
       } else {
-        return "   คงเหลือ\n   ${result.toStringAsFixed(2)}\n   แคลอรี่";
+        return "   คงเหลือ\n     ${result.toStringAsFixed(0)}\n   แคลอรี่";
       }
     } else {
       return "  คงเหลือ\n ${GoalController.goalData[0].goalBurn}\n   แคลอรี่";
@@ -281,6 +295,7 @@ class ExerciseController extends GetxController with StateMixin {
         ]),
       ].obs;
       Get.forceAppUpdate();
+      update();
     }
   }
 
@@ -310,5 +325,69 @@ class ExerciseController extends GetxController with StateMixin {
     await getExerciseData();
     await getdata();
     await getExerciseDaily();
+  }
+
+  Future<void> showNotificationExecise02() async {
+    final shared = await SharedPreferences.getInstance();
+    bool chackShared = shared.getBool('notisetting') ?? true;
+    if (chackShared == true) {
+      AndroidNotificationChannel channel = const AndroidNotificationChannel(
+        'high_importance_channel',
+        'High Importance Notifications',
+        description: 'This channel is used for important notifications.',
+        importance: Importance.high,
+      );
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: AndroidNotificationDetails(channel.id, channel.name,
+              channelDescription: channel.description,
+              icon: '@mipmap/iconapp'));
+      await flutterLocalNotificationsPlugin.show(
+        0,
+        'ใกล้ออกกำลังกายตามเป้าที่กำหนด',
+        'อีกนิดเดียวจะออกกำลังกายตามเป้าหมายที่กำหนดแล้วครับ',
+        platformChannelSpecifics,
+      );
+    }
+  }
+
+  checkExecise() async {
+    var totelCal =
+        double.parse(ExerciseController.totelCalBurn.value.toString());
+    var goal = GoalController.goalData[0].goalBurn!;
+    var result = goal - totelCal;
+    if (result == 0) {
+      await FirebaseMessaging.instance.subscribeToTopic("app");
+    } else if (result < 250) {
+      await Future.delayed(const Duration(seconds: 5));
+      await showNotificationExecise02();
+      await FirebaseMessaging.instance.unsubscribeFromTopic("app");
+    } else {
+      await Future.delayed(const Duration(seconds: 5));
+      await showNotificationExecise01();
+      await FirebaseMessaging.instance.unsubscribeFromTopic("app");
+    }
+  }
+
+  Future<void> showNotificationExecise01() async {
+    final shared = await SharedPreferences.getInstance();
+    bool chackShared = shared.getBool('notisetting') ?? true;
+    if (chackShared == true) {
+      AndroidNotificationChannel channel = const AndroidNotificationChannel(
+        'high_importance_channel',
+        'High Importance Notifications',
+        description: 'This channel is used for important notifications.',
+        importance: Importance.high,
+      );
+      NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: AndroidNotificationDetails(channel.id, channel.name,
+              channelDescription: channel.description,
+              icon: '@mipmap/iconapp'));
+      await flutterLocalNotificationsPlugin.show(
+        0,
+        'ออกกำลังกายน้อยกว่าที่กำหนด',
+        'ระวังเป้าหมายจะไม่สำเร็จหากไม่ออกกำลังกายตามเป้าหมายนะครับ',
+        platformChannelSpecifics,
+      );
+    }
   }
 }

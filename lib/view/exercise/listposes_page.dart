@@ -8,7 +8,6 @@ import 'package:kitcal/controller/exercise/exercise_controller.dart';
 import 'package:kitcal/model/exercise_model.dart';
 import 'package:kitcal/widget.dart';
 import 'package:sizer/sizer.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ListPosesPage extends StatelessWidget {
   ListPosesPage({super.key});
@@ -21,6 +20,8 @@ class ListPosesPage extends StatelessWidget {
         color: AppColor.orange,
         child: controller.obx(
             (state) => Scaffold(
+                resizeToAvoidBottomInset: false,
+                extendBodyBehindAppBar: true,
                 backgroundColor: AppColor.black,
                 body: SafeArea(
                     child: Column(children: [
@@ -47,14 +48,15 @@ class ListPosesPage extends StatelessWidget {
                                     shadowColor: const MaterialStatePropertyAll(
                                         AppColor.black)))))
                   ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        categoryIcon(
-                            FontAwesomeIcons.listCheck, "ทั้งหมด", true),
-                        categoryIcon(MdiIcons.genderMale, "ชาย", true),
-                        categoryIcon(FontAwesomeIcons.personDress, "หญิง", true)
-                      ]),
+                  const Text("รายการท่าออกกำลังกาย", style: Font.white20),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //     children: [
+                  //       categoryIcon(
+                  //           FontAwesomeIcons.listCheck, "ทั้งหมด", true),
+                  //       categoryIcon(MdiIcons.genderMale, "ชาย", true),
+                  //       categoryIcon(FontAwesomeIcons.personDress, "หญิง", true)
+                  //     ]),
                   SizedBox(height: 2.h),
                   Expanded(
                       child: GetBuilder<ExerciseController>(

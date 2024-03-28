@@ -132,7 +132,7 @@ class Textformfields {
       Text(titel, style: textStyle),
       Container(
           height: 5.h,
-          width: 30.w,
+          width: 25.w,
           decoration: BoxDecoration(
               color: AppColor.platinum,
               borderRadius: BorderRadius.circular(20)),
@@ -341,32 +341,47 @@ class WidgetAll {
     return AlertDialog(
         backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        content: SizedBox(
-            height: 45.h,
-            width: 50.h,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                IconButton(
-                    onPressed: () => Get.back(),
-                    icon: const Icon(FontAwesomeIcons.xmark, color: Colors.red))
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                Textformfields.shotTextField(
-                    "ส่วนสูง (ซม.)", Font.white16, hight),
-                Textformfields.shotTextField(
-                    "น้ำหนัก (กก.)", Font.white16, weight)
-              ]),
-              SizedBox(height: 2.h),
-              dropdown,
-              SizedBox(height: 2.h),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                Textformfields.shotTextField(
-                    "น้ำหนักที่ตั้งเป้า(กก.)", Font.white16, targetWeight),
-                Textformfields.shotTextField(" จำนวนวัน", Font.white16, goalDay)
-              ]),
-              const Spacer(),
-              Center(child: Button.button("คำนวน", () => function()))
-            ])));
+        content: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SizedBox(
+                height: 55.h,
+                width: 55.h,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        IconButton(
+                            onPressed: () => Get.back(),
+                            icon: const Icon(FontAwesomeIcons.xmark,
+                                color: Colors.red))
+                      ]),
+                      Center(
+                          child: Icon(Icons.emoji_flags,
+                              color: AppColor.orange, size: 10.h)),
+                      SizedBox(height: 2.h),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Textformfields.shotTextField(
+                                "ส่วนสูง (ซม.)", Font.white16, hight),
+                            Textformfields.shotTextField(
+                                "น้ำหนัก (กก.)", Font.white16, weight)
+                          ]),
+                      SizedBox(height: 2.h),
+                      dropdown,
+                      SizedBox(height: 2.h),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Textformfields.shotTextField(
+                                "น้ำหนักที่ตั้งเป้า(กก.)",
+                                Font.white16,
+                                targetWeight),
+                            Textformfields.shotTextField(
+                                " จำนวนวัน", Font.white16, goalDay)
+                          ]),
+                      const Spacer(),
+                      Center(child: Button.button("คำนวน", () => function()))
+                    ]))));
   }
 }

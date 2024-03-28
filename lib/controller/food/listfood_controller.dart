@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kitcal/controller/basic_controller.dart';
+import 'package:kitcal/controller/food/homefood_controller.dart';
+import 'package:kitcal/controller/food/myfood_controller.dart';
 import 'package:kitcal/model/caleat_model.dart';
 import 'package:kitcal/model/food_model.dart';
+import 'package:kitcal/view/eating/myfood_page.dart';
 import 'package:kitcal/widget.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ListFoodController extends GetxController with StateMixin {
+  final controller = Get.put(MyMenuController());
   MobileScannerController cameraController = MobileScannerController();
   RxList<FoodModel> foodData = <FoodModel>[].obs;
   final textSearch = TextEditingController();
@@ -20,30 +24,29 @@ class ListFoodController extends GetxController with StateMixin {
   RxBool drink = false.obs;
   RxBool fruit = false.obs;
   RxBool snacks = false.obs;
-  static RxList<CalEatModel> calEat = <CalEatModel>[].obs;
-  static RxInt totelCalEat = 0.obs;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
     await getdatafood();
-    await getEatDaily();
+
     change(null, status: RxStatus.success());
     super.onInit();
     update();
   }
 
   addfooditem(int index, FoodModel foodModel) async {
-    if (calEat.isNotEmpty) {
-      calEat[0].date != DateFormat('MMddyyyy').format(DateTime.now())
-          ? calEat.clear()
+    if (HomeFoodController.calEat.isNotEmpty) {
+      HomeFoodController.calEat[0].date !=
+              DateFormat('MMddyyyy').format(DateTime.now())
+          ? HomeFoodController.calEat.clear()
           : null;
     }
-    calEat.add(CalEatModel(
+    HomeFoodController.calEat.add(CalEatModel(
         food: foodModel.foodName,
         cal: foodModel.foodCal,
         date: DateFormat('MMddyyyy').format(DateTime.now())));
-    totelCalEat.value = calEat
+    HomeFoodController.totelCalEat.value = HomeFoodController.calEat
         .map((e) => int.parse(e.cal!))
         .reduce((value, element) => value + element);
     await GetData.firestore
@@ -58,29 +61,6 @@ class ListFoodController extends GetxController with StateMixin {
     });
     update();
     Get.back(result: true);
-  }
-
-  getEatDaily() async {
-    QuerySnapshot querySnapshot = await GetData.firestore
-        .collection("UserData")
-        .doc(GetData.auth.currentUser!.uid)
-        .collection("EatDaily")
-        .get();
-    List<DocumentSnapshot> docs = querySnapshot.docs;
-    calEat.assignAll(docs.map((data) {
-      if (data["date"] == DateFormat('MMddyyyy').format(DateTime.now())) {
-        return CalEatModel(
-            food: data["food"], cal: data["cal"], date: data["date"]);
-      } else {
-        return null;
-      }
-    }).whereType<CalEatModel>());
-    if (calEat.isNotEmpty) {
-      totelCalEat.value = calEat
-          .map((e) => int.parse(e.cal!))
-          .reduce((value, element) => value + element);
-      update();
-    }
   }
 
   selectCategory(String titel) {
@@ -211,6 +191,63 @@ class ListFoodController extends GetxController with StateMixin {
       if (food.foodBarcode!
           .toLowerCase()
           .contains(scanCode.value.toLowerCase())) {
+        if (HomeFoodController.calEat.isNotEmpty) {
+          HomeFoodController.calEat[0].date !=
+                  DateFormat('MMddyyyy').format(DateTime.now())
+              ? HomeFoodController.calEat.clear()
+              : null;
+        }
+        HomeFoodController.calEat.add(CalEatModel(
+            food: food.foodName,
+            cal: food.foodCal,
+            date: DateFormat('MMddyyyy').format(DateTime.now())));
+        HomeFoodController.totelCalEat.value = HomeFoodController.calEat
+            .map((e) => int.parse(e.cal!))
+            .reduce((value, element) => value + element);
+        await GetData.firestore
+            .collection("UserData")
+            .doc(GetData.auth.currentUser!.uid)
+            .collection("EatDaily")
+            .doc()
+            .set({
+          "food": food.foodName,
+          "cal": food.foodCal,
+          "date": DateFormat('MMddyyyy').format(DateTime.now())
+        });
+        update();
+        Get.back(result: true);
+        update();
+      }
+    }
+    for (var food in controller.myfood) {
+      if (food.foodBarcode!
+          .toLowerCase()
+          .contains(scanCode.value.toLowerCase())) {
+        if (HomeFoodController.calEat.isNotEmpty) {
+          HomeFoodController.calEat[0].date !=
+                  DateFormat('MMddyyyy').format(DateTime.now())
+              ? HomeFoodController.calEat.clear()
+              : null;
+        }
+        HomeFoodController.calEat.add(CalEatModel(
+            food: food.foodName,
+            cal: food.foodCal,
+            date: DateFormat('MMddyyyy').format(DateTime.now())));
+        HomeFoodController.totelCalEat.value = HomeFoodController.calEat
+            .map((e) => int.parse(e.cal!))
+            .reduce((value, element) => value + element);
+        await GetData.firestore
+            .collection("UserData")
+            .doc(GetData.auth.currentUser!.uid)
+            .collection("EatDaily")
+            .doc()
+            .set({
+          "food": food.foodName,
+          "cal": food.foodCal,
+          "date": DateFormat('MMddyyyy').format(DateTime.now())
+        });
+        update();
+        Get.back(result: true);
         update();
       }
     }

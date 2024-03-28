@@ -6,7 +6,7 @@ import 'package:kitcal/controller/auth/register_controller.dart';
 import 'package:kitcal/controller/basic_controller.dart';
 import 'package:kitcal/controller/profile_controller.dart';
 import 'package:kitcal/view/notification/notisetting_page.dart';
-import 'package:kitcal/view/report/report_page.dart';
+import 'package:kitcal/view/report/calendar_page.dart';
 import 'package:kitcal/widget.dart';
 import 'package:kitcal/constant/font.dart';
 import 'package:kitcal/constant/color.dart';
@@ -19,6 +19,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(children: [
@@ -58,8 +60,8 @@ class ProfilePage extends StatelessWidget {
                 trailing: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios,
                         color: AppColor.orange),
-                    onPressed: () => Get.to(() => const ReportPage()))),
-            onTap: () => Get.to(() => const ReportPage()),
+                    onPressed: () => Get.to(() => CalendarPage()))),
+            onTap: () => Get.to(() => CalendarPage()),
           ),
           SizedBox(height: 1.h),
           InkWell(
@@ -92,83 +94,90 @@ class ProfilePage extends StatelessWidget {
     return AlertDialog(
         backgroundColor: AppColor.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        content: SizedBox(
-            height: 80.h,
-            width: 80.w,
-            child: ListView(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                IconButton(
-                    onPressed: () => Get.back(),
-                    icon: const Icon(FontAwesomeIcons.xmark, color: Colors.red))
-              ]),
-              GetBuilder<ProfileController>(
-                  init: ProfileController(),
-                  initState: (data) {},
-                  builder: (data) {
-                    return GetData.userData[0].userImageURL!.isNotEmpty
-                        ? Obx(() => Center(
-                              child: SizedBox(
-                                  height: 11.h,
-                                  width: 25.w,
-                                  child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          GetData.userData[0].userImageURL!))),
-                            ))
-                        : data.urlImg.value == ''
-                            ? SizedBox(
-                                height: 11.h,
-                                width: 25.w,
-                                child: const CircleAvatar(
-                                    backgroundColor: AppColor.black,
-                                    child: Icon(Icons.account_circle,
-                                        color: AppColor.orange, size: 100)))
-                            : Obx(() => SizedBox(
-                                height: 11.h,
-                                width: 25.w,
-                                child: CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(data.urlImg.value))));
-                  }),
-              SizedBox(height: 1.h),
-              Button.buttonwithicon("เปลี่ยนรูปประจำตัว",
-                  () => controller.changeIMG(), FontAwesomeIcons.camera),
-              SizedBox(height: 2.h),
-              texteditProfile("ชื่อ", controller.namecontroller,
-                  controller.namecontroller.text),
-              texteditProfile("เมล", controller.mailcontroller,
-                  GetData.userData[0].userEmail ?? "Email"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  texteditProfileshot("น้ำหนัก", controller.weightcontroller,
-                      GetData.userData[0].userWeight!),
-                  texteditProfileshot("ส่วนสูง", controller.heightcontroller,
-                      GetData.userData[0].userHigh!),
-                ],
-              ),
-              Row(children: [
-                const Text("วันเกิด :  ", style: Font.white20B),
-                ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.platinum),
-                    label: Obx(() => Text(
-                        DateFormat.yMd()
-                            .format(rescontroller.selectedDate.value),
-                        style: Font.black18B)),
-                    icon: const Icon(FontAwesomeIcons.calendarDays,
-                        color: AppColor.orange),
-                    onPressed: () {
-                      rescontroller.selectDate(context);
-                    })
-              ]),
-              Row(children: [
-                const Text("เพศ :", style: Font.white18B),
-                Obx(() => selectGender())
-              ]),
-              Obx(() => dropdown()),
-              SizedBox(height: 2.h),
-              Button.button("Save", () => controller.editProfile())
-            ])));
+        content: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SizedBox(
+                height: 80.h,
+                width: 80.w,
+                child: ListView(children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    IconButton(
+                        onPressed: () => Get.back(),
+                        icon: const Icon(FontAwesomeIcons.xmark,
+                            color: Colors.red))
+                  ]),
+                  GetBuilder<ProfileController>(
+                      init: ProfileController(),
+                      initState: (data) {},
+                      builder: (data) {
+                        return GetData.userData[0].userImageURL!.isNotEmpty
+                            ? Obx(() => Center(
+                                  child: SizedBox(
+                                      height: 11.h,
+                                      width: 25.w,
+                                      child: CircleAvatar(
+                                          backgroundImage: NetworkImage(GetData
+                                              .userData[0].userImageURL!))),
+                                ))
+                            : data.urlImg.value == ''
+                                ? SizedBox(
+                                    height: 11.h,
+                                    width: 25.w,
+                                    child: const CircleAvatar(
+                                        backgroundColor: AppColor.black,
+                                        child: Icon(Icons.account_circle,
+                                            color: AppColor.orange, size: 100)))
+                                : Obx(() => SizedBox(
+                                    height: 11.h,
+                                    width: 25.w,
+                                    child: CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(data.urlImg.value))));
+                      }),
+                  SizedBox(height: 1.h),
+                  Button.buttonwithicon("เปลี่ยนรูปประจำตัว",
+                      () => controller.changeIMG(), FontAwesomeIcons.camera),
+                  SizedBox(height: 2.h),
+                  texteditProfile("ชื่อ", controller.namecontroller,
+                      controller.namecontroller.text),
+                  texteditProfile("เมล", controller.mailcontroller,
+                      GetData.userData[0].userEmail ?? "Email"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      texteditProfileshot(
+                          "น้ำหนัก",
+                          controller.weightcontroller,
+                          GetData.userData[0].userWeight!),
+                      texteditProfileshot(
+                          "ส่วนสูง",
+                          controller.heightcontroller,
+                          GetData.userData[0].userHigh!),
+                    ],
+                  ),
+                  Row(children: [
+                    const Text("วันเกิด :  ", style: Font.white20B),
+                    ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.platinum),
+                        label: Obx(() => Text(
+                            DateFormat.yMd()
+                                .format(rescontroller.selectedDate.value),
+                            style: Font.black18B)),
+                        icon: const Icon(FontAwesomeIcons.calendarDays,
+                            color: AppColor.orange),
+                        onPressed: () {
+                          rescontroller.selectDate(context);
+                        })
+                  ]),
+                  Row(children: [
+                    const Text("เพศ :", style: Font.white18B),
+                    Obx(() => selectGender())
+                  ]),
+                  Obx(() => dropdown()),
+                  SizedBox(height: 2.h),
+                  Button.button("บันทึก", () => controller.editProfile())
+                ]))));
   }
 
   Widget texteditProfile(

@@ -12,7 +12,20 @@
           "package_name": "com.flutterthailand.project_mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "600804380370-83mj4asvuooj1gkp4esfkeg878of5lk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterthailand.project_mobile",
+            "certificate_hash": "ecb11e066fb6b383d0493a26f44b068e7ba291a3"
+          }
+        },
+        {
+          "client_id": "600804380370-5h09vlpc13a702kme0s7krm4psj68j55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBFWANVB5ulInPJqQT4zu-1fHURC_B1WdM"
@@ -20,7 +33,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600804380370-5h09vlpc13a702kme0s7krm4psj68j55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterthailand.projectMobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600804380370:android:54fd15e4a863f9dec7a70b",
+        "android_client_info": {
+          "package_name": "com.flutterthailand.project_web"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600804380370-5h09vlpc13a702kme0s7krm4psj68j55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFWANVB5ulInPJqQT4zu-1fHURC_B1WdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600804380370-5h09vlpc13a702kme0s7krm4psj68j55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "600804380370-0ctt29e00son5nt563j572q8r6uqec0n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterthailand.projectMobile"
+              }
+            }
+          ]
         }
       }
     }

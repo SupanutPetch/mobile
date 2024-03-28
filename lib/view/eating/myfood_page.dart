@@ -18,6 +18,8 @@ class MyFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         backgroundColor: AppColor.black,
         body: SafeArea(
             child: Column(children: [
@@ -73,7 +75,8 @@ class MyFoodPage extends StatelessWidget {
                   })),
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: AppColor.orange),
-              onPressed: () => controller.addFood(),
+              onPressed: () =>
+                  Get.dialog(addFood(Obx(() => dropdown(controller)))),
               child: Column(children: [
                 SizedBox(height: 1.h),
                 Icon(Icons.fastfood, color: AppColor.white, size: 20.sp),
@@ -115,45 +118,47 @@ class MyFoodPage extends StatelessWidget {
             backgroundColor: AppColor.black,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            content: SizedBox(
-                height: 90.h,
-                width: 60.w,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        const Text("เพิ่มเมนู", style: Font.white18B),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: () => Get.back(),
-                            icon: const Icon(FontAwesomeIcons.xmark,
-                                color: Colors.red))
-                      ]),
-                      Row(children: [dropdown]),
-                      SizedBox(height: 2.h),
-                      textfield('ชื่อเมนู', controller.foodName),
-                      textfield('ปริมาณ', controller.foodQuantity),
-                      textfield('จำนวนแคลอรี่', controller.foodCal),
-                      textfield('บาร์โค้ด (ถ้ามี)', controller.foodBarcode),
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                height: 1.h,
-                                child: Obx(() => Checkbox(
-                                    side:
-                                        const BorderSide(color: AppColor.white),
-                                    activeColor: AppColor.white,
-                                    checkColor: AppColor.green,
-                                    value: controller.material.value,
-                                    onChanged: ((value) =>
-                                        controller.checkMaterial(value!))))),
-                            const Text("เพิ่มส่วนผสม?", style: Font.white18)
+            content: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SizedBox(
+                    height: 60.h,
+                    width: 60.w,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            const Text("เพิ่มเมนู", style: Font.white18B),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () => Get.back(),
+                                icon: const Icon(FontAwesomeIcons.xmark,
+                                    color: Colors.red))
                           ]),
-                      controller.material.isTrue
-                          ? Button.button("เพิ่มส่วนผสม", () {})
-                          : const SizedBox()
-                    ])),
+                          Row(children: [dropdown]),
+                          SizedBox(height: 2.h),
+                          textfield('ชื่อเมนู', controller.foodName),
+                          textfield('ปริมาณ', controller.foodQuantity),
+                          textfield('จำนวนแคลอรี่', controller.foodCal),
+                          textfield('บาร์โค้ด (ถ้ามี)', controller.foodBarcode),
+                          // Row(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     children: [
+                          //       SizedBox(
+                          //           height: 1.h,
+                          //           child: Obx(() => Checkbox(
+                          //               side:
+                          //                   const BorderSide(color: AppColor.white),
+                          //               activeColor: AppColor.white,
+                          //               checkColor: AppColor.green,
+                          //               value: controller.material.value,
+                          //               onChanged: ((value) =>
+                          //                   controller.checkMaterial(value!))))),
+                          //       const Text("เพิ่มส่วนผสม?", style: Font.white18)
+                          //     ]),
+                          controller.material.isTrue
+                              ? Button.button("เพิ่มส่วนผสม", () {})
+                              : const SizedBox()
+                        ]))),
             actionsAlignment: MainAxisAlignment.end,
             actions: [
               ElevatedButton(

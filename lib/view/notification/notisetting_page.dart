@@ -12,8 +12,10 @@ class NotiSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-            title: Text('setting notifications'.tr, style: Font.white20B),
+            title: Text('ตั้งค่าการแจ้งเตือน'.tr, style: Font.white20B),
             backgroundColor: AppColor.black,
             centerTitle: true,
             elevation: 0,
@@ -36,7 +38,7 @@ class NotiSettingPage extends StatelessWidget {
                       child: Row(children: [
                         Padding(
                             padding: EdgeInsets.all(1.5.w),
-                            child: Text('allow notifications'.tr,
+                            child: const Text('เปิดการแจ้งเตือน',
                                 style: Font.white18B)),
                         const Spacer(),
                         GetX<NotiController>(

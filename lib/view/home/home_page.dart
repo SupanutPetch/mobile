@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kitcal/controller/food/homefood_controller.dart';
+import 'package:kitcal/controller/noti_controller.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:kitcal/constant/font.dart';
 import 'package:kitcal/constant/color.dart';
 import 'package:kitcal/controller/basic_controller.dart';
 import 'package:kitcal/controller/exercise/exercise_controller.dart';
-import 'package:kitcal/controller/food/listfood_controller.dart';
 import 'package:kitcal/controller/goal_controller.dart';
 import 'package:kitcal/controller/home_controller.dart';
 import 'package:kitcal/view/eating/navigationbar.dart';
@@ -15,21 +16,27 @@ import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   final controller = Get.put(HomeController());
+  final noticontroller = Get.put(NotiController());
   HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return controller.obx(
         (state) => Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 toolbarHeight: 4.h,
                 automaticallyImplyLeading: false,
                 actions: [
-                  IconButton(
+                  Obx(() => IconButton(
                       onPressed: () => Get.to(() => NotiPage()),
-                      icon: Icon(Icons.notifications_none_outlined,
-                          size: 3.5.h, color: AppColor.white)),
+                      icon: noticontroller.notilist.isEmpty
+                          ? Icon(Icons.notifications_none_outlined,
+                              size: 3.5.h, color: AppColor.white)
+                          : Icon(Icons.notifications_active,
+                              size: 3.5.h, color: AppColor.orange))),
                   SizedBox(width: 4.w)
                 ]),
             backgroundColor: AppColor.black,
@@ -66,13 +73,13 @@ class HomePage extends StatelessWidget {
                               ? cardData(
                                   controller.foodImage ?? "",
                                   "การกินอาหาร",
-                                  "แคลอรี่การกินวันนี้  : ${ListFoodController.totelCalEat}",
+                                  "แคลอรี่การกินวันนี้  : ${HomeFoodController.totelCalEat}",
                                   "เป้าหมาย : ${GoalController.goalData[0].goalCal}",
                                   () => Get.to(() => const NavigationBarPage()))
                               : cardData(
                                   controller.foodImage ?? "",
                                   "การกินอาหาร",
-                                  "แคลอรี่การกินวันนี้  : ${ListFoodController.totelCalEat}",
+                                  "แคลอรี่การกินวันนี้  : ${HomeFoodController.totelCalEat}",
                                   "คุณยังไม่ได้ตั้งเป้าหมาย",
                                   () =>
                                       Get.to(() => const NavigationBarPage())),

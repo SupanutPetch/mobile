@@ -12,6 +12,8 @@ class NavigationBarPage extends StatelessWidget {
     final controller = Get.put(NavigationBarController());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,

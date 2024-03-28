@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kitcal/constant/color.dart';
 import 'package:kitcal/controller/basic_controller.dart';
-import 'package:kitcal/controller/food/listfood_controller.dart';
+import 'package:kitcal/controller/food/homefood_controller.dart';
+
 import 'package:kitcal/model/caleat_model.dart';
 import 'package:kitcal/model/food_model.dart';
 import 'package:kitcal/widget.dart';
@@ -47,7 +48,7 @@ class MyMenuController extends GetxController with StateMixin {
   }
 
   addfooditem(int index, FoodModel foodModel) async {
-    ListFoodController.calEat.add(CalEatModel(
+    HomeFoodController.calEat.add(CalEatModel(
         food: foodModel.foodName,
         cal: foodModel.foodCal,
         date: DateFormat('MMddyyyy').format(DateTime.now())));

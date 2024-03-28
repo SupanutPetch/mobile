@@ -15,6 +15,8 @@ class NotiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
             title: Text('การแจ้งเตือน'.tr, style: Font.white20B),
             automaticallyImplyLeading: false,
@@ -32,7 +34,7 @@ class NotiPage extends StatelessWidget {
                 onTap: () => Get.back()),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: notiController.clearNoti,
                   icon: Icon(FontAwesomeIcons.trashCan,
                       size: 15.sp, color: AppColor.orange)),
               SizedBox(width: 3.w)
@@ -55,8 +57,7 @@ class NotiPage extends StatelessWidget {
                                     child: Card(
                                         clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
-                                        color: const Color.fromARGB(
-                                            255, 0, 68, 100),
+                                        color: AppColor.platinum,
                                         shadowColor: Colors.black,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -69,9 +70,12 @@ class NotiPage extends StatelessWidget {
                                                 children: [
                                                   SlidableAction(
                                                       onPressed: (BuildContext
-                                                          context) {},
+                                                          context) {
+                                                        notiController
+                                                            .deleteNoti(index);
+                                                      },
                                                       icon: Icons.delete,
-                                                      label: 'Delete'.tr,
+                                                      label: 'ลบ'.tr,
                                                       backgroundColor: Colors
                                                           .red
                                                           .withOpacity(0.75),
@@ -102,22 +106,32 @@ class NotiPage extends StatelessWidget {
   Widget notidata(var shownotilist) {
     return ListTile(
         onTap: () {},
+        leading: SizedBox(
+            height: 5.h,
+            width: 10.w,
+            child: const CircleAvatar(
+                backgroundImage: AssetImage(
+              "lib/asset/iconApp.png",
+            ))),
         title: Text(shownotilist.titel ?? '',
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white, fontSize: 12.sp)),
+            style: TextStyle(
+                color: Colors.black87,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.bold)),
         subtitle:
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(shownotilist.body ?? '',
               softWrap: true,
-              style: TextStyle(color: Colors.white60, fontSize: 12.sp)),
+              style: TextStyle(color: Colors.black87, fontSize: 12.sp)),
           SizedBox(height: 3.sp),
           Row(children: [
-            Icon(Icons.access_time, color: Colors.white60, size: 12.sp),
+            Icon(Icons.access_time, color: Colors.black38, size: 12.sp),
             SizedBox(width: 3.sp),
             Text(
               shownotilist.date ?? '',
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.white54, fontSize: 8.sp),
+              style: TextStyle(color: Colors.black38, fontSize: 8.sp),
             )
           ])
         ]));
